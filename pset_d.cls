@@ -148,9 +148,8 @@
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem*{thm*}{Theorem}
 \newtheorem*{lem*}{Lemma}
-\theoremstyle{definition}
-\newtheorem{claim}[thm]{claim}
-\newtheorem*{claim*}{claim}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem*{claim*}{Claim}
 
 \renewcommand{\qedsymbol}{\small{\ensuremath{\boxtimes}}
 

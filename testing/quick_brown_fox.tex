@@ -1,0 +1,52 @@
+% The purpose of this document is to test every aspect of my class file in as concise a manner as possible.
+% TODO a lot of it is missing...
+\documentclass{../pset_d}
+\newbbsym{\P}{P}
+
+\course{Math 1729}
+\psnum{12}
+\author{Arun Debray}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+\item %1
+The quick brown fox jumps over the lazy dog.
+\begin{thm}
+If \(\iota:\Z\inj\Q\) is the canonical injection, then \(\iota\) is an epimorphism which is not surjective.
+\end{thm}
+Over \(\C\), all irreducible polynomials have degree \(1\), and over \(\R\), they all have degree \(1\) or \(2\).
+However, over \(\F_p\), they may have any positive degree. This makes life in \(\P\F_p\) more interesting.
+\begin{lem}
+There is a bijection \(\N\to\N\times\N\).
+\end{lem}
+\begin{claim}
+\(\Q\) is dense in \(\R\).
+\end{claim}
+\begin{claim*}
+\(\overline\Q\) is dense in \(\C\).
+\end{claim*}
+The derivative is defined by
+\begin{equation}
+\label{deriv}
+	\dfr{f}{x} = \lim_{\e\to 0} \frac{f(x+\e) - f(x)}{\e},
+\end{equation}
+and the partial derivative by
+\begin{equation}
+	\pfr{\vp}{x_i} = \lim_{\e\to 0} \frac{\vp(\vec x+\e \vec\alpha_i) - \vp(\vec x)}{\e}.
+\end{equation}
+Notice the similarities to \eqref{deriv}.
+\item And now we test delimiters.
+\[\int_a^b f(x)\ud x = \lim_{n\to\infty}\paren*[\Bigg]{\paren{\frac{b-a}{n}}\sum_{j=1}^n f\paren*{x_j^*}}.\]
+In one dimension,
+\begin{equation}
+\abs*{\sum_{i=1}^n x_i} \le \sum_{i=1}^n \abs{x_i}.
+\end{equation}
+In multiple dimensions,
+\begin{equation}
+\norm*{\sum_{i=1}^n \vec x_i} \le \sum_{i=1}^n\norm{\vec x_i}.
+\end{equation}
+\end{enumerate}
+\end{document}

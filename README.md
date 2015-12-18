@@ -12,7 +12,7 @@ I've ported my existing code for problem sets into this `.cls` file, but I still
 features (most notably, I want to tweak the `enumerate` environment to fix a few things that made my
 documents less readable; these improvements are the major reason I decided to write this).
 
-I also need to test this code; I'm sure there are things I did wrong, but I haven't tried them yet.
+I also need to finish testing this code; I've done a little testing, but not nearly enough.
 
 There are also various smaller TODOs scattered throughout my document.
 

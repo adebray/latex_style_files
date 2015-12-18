@@ -8,15 +8,16 @@
 
 % Some package options
 % 1. Option `boldsets' replaces \mathbb N, Z, Q, R, ... with \mathbf. `bbsets` (default) uses \mathbb.
-\DeclareOption{boldsets}{\newcommand{\m@thbb}{\mathbf}}
-\DeclareOption{bbsets}{\newcommand{\m@thbb}{\mathbb}
+\newcommand{\m@thbb}{\@empty}
+\DeclareOption{boldsets}{\renewcommand{\m@thbb}{\mathbf}}
+\DeclareOption{bbsets}{\renewcommand{\m@thbb}{\mathbb}}
 % 2. Option `rmdiff' (default) typesets the d in \int f(x) dx upright; `itdiff` sets it in italic.
-\DeclareOption{rmdiff}{\newcommand{\df@nt}{\mathrm}}
-\DeclareOption{itdiff}{\newcommand{\df@nt}{\mathnormal}
+\DeclareOption{rmdiff}{}
+\DeclareOption{itdiff}{\def\df@nt{}}
 % 3. Option `thminenum' (default) numbers theorems inside problem numbers, e.g. Theorem 27.1; `thmalone' numbers
 % them independently, e.g. Theorem 1.
-\DeclareOption{thminenum}{\def\thm@enum{}}
-\DeclareOption{thmalone}{}
+\DeclareOption{thminenum}{}
+\DeclareOption{thmalone}{\def\thm@enum{}}
 % 4. Option `eqninenum' numbers equations inside problem numbers, e.g. (27.1); `eqnsymbol' (default) tags them with
 % dingbats, e.g. (*), (§), etc.
 \DeclareOption{eqninenum}{\def\eqn@enum{}}
@@ -28,10 +29,16 @@
 % Other options can be handed off to the amsart class (e.g. fontsize)
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{amsart}}
 
-\ExecuteOptions{bbsets, rmdiff, thminenum, eqnalone, twosided}
+\ExecuteOptions{bbsets}
+\ExecuteOptions{rmdiff}
+\ExecuteOptions{thmienum}
+\ExecuteOptions{eqnalone}
+\ExecuteOptions{twosided}
 \ProcessOptions\relax
 
 \LoadClass[reqno]{amsart}
+
+\typeout{\m@thbb}
 
 % This allows us to use characters like é and ö directly, rather than having to write \'e and \"o
 \RequirePackage[utf8]{inputenc}
@@ -48,18 +55,14 @@
 \newcommand{\c@urse}{\@empty}
 \newcommand{\psn@m}{\@empty}
 \newcommand{\d@e}{\@empty}
-\newcommand{\t@tle}{\@empty}
-\let\@oldtitle\title   % preserves original amsart definitions
-\let\@oldauthor\author
+\let\@oldauthor\author % preserves original amsart definitions
 \renewcommand{\author}[1]{\renewcommand{\@uthor}{#1}}
-\newcommand*{\course}[1]{\renewcommand{\c@urse}{#1}}
+\newcommand*{\course}[1]{\renewcommand{\c@urse}{\MakeUppercase{#1}}}
 \newcommand*{\psnum}[1]{\renewcommand{\psn@m}{#1}}
 \renewcommand*{\date}[1]{\renewcommand{\d@e}{#1}}
-\renewcommand*{\title}[1]{\renewcommand{\t@tle}{#1}}
 
 % Format title based on amsart's native title command
-% TODO: will I need to place this in \AtBeginDocument?
-\@oldtitle{\c@urse Homework \psn@m}
+\title{\c@urse{} Homework \psn@m}
 \@oldauthor{\@uthor\\\d@e}
 
 % The header is primarily for keeping the document organized, e.g. if the pages are separated, it should be easy to
@@ -73,11 +76,11 @@
 \pagestyle{fancy}
 \fancyfoot[C]{\footnotesize{\thepage}}
 \fancyhead[L,R]{}
-\ifdef\@nesided
+\ifdefined\@nesided
 	\fancyhead[C]{\he@der}
 \else
 	\fancyhead[CO]{\he@der}
-\endif
+\fi
 
 \renewcommand{\headrulewidth}{0pt}
 
@@ -128,7 +131,12 @@
 % Use \ud for integrals, e.g. \int f(x) \ud x, and \d to override spacing, e.g. \int f(x,y) \ud x\wedge\d y.
 % \dfr{f}{x} typesets df/dx, and \pfr{f}{x} typesets partial f/partial x.
 % TODO: better macros for higher partial derivatives.
-\renewcommand{\d}{\df@nt{d}}
+% TODO: I would like the spacing to look nicer for itdiff
+\ifdefined\df@nt
+	\renewcommand{\d}{d}
+\else
+	\renewcommand{\d}{\mathrm d}
+\fi
 \newcommand{\ud}{\,\d}
 \newcommand*{\dfr}[2]{\frac{\d #1}{\d #2}}
 \newcommand*{\pfr}[2]{\frac{\partial #1}{\partial #2}}
@@ -139,10 +147,10 @@
 
 % Theorems: numbered (thm, lem) and unnumbered (thm*, lem*) versions are provided. If `\thm@enum` is defined, i.e.
 % if the `thminenum' option was passed, theorems are numbered within problems.
-\ifdef\thm@enum
-	\newtheorem{thm}{Theorem}[enumi]
-\else
+\ifdefined\thm@enum
 	\newtheorem{thm}{Theorem}
+\else
+	\newtheorem{thm}{Theorem}[enumi]
 \fi
 % everything else follows from that definition
 \newtheorem{lem}[thm]{Lemma}
@@ -151,10 +159,10 @@
 \newtheorem{claim}[thm]{Claim}
 \newtheorem*{claim*}{Claim}
 
-\renewcommand{\qedsymbol}{\small{\ensuremath{\boxtimes}}
+\renewcommand{\qedsymbol}{\small{\ensuremath{\boxtimes}}}
 
 % equation numbering
-\ifdef\eqn@enum
+\ifdefined\eqn@enum
 	\numberwithin{equation}{enumi} % TODO in the end, it might not be numberwithin vs.
 	%\renewcommand{\theequation}{\itemname . \arabic{equation}} (so that it's easier to say \item{A.1} without
 	% counters

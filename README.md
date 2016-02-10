@@ -8,14 +8,12 @@ examples).
 
 ### Current Status
 
-I've ported my existing code for problem sets into this `.cls` file, but I still need to add a few
-features (most notably, I want to tweak the `enumerate` environment to fix a few things that made my
-documents less readable; these improvements are the major reason I decided to write this).
+At this point, I'm using this class for problem sets with no huge snafus. There are a couple of
+things I still want to fix: specifically, I would like the ability to define custom problem numbers
+such as `\item[2.A.]` and have the class automatically handle things like equation numbering within
+that item or `\ref`s to that item; this is currently not in place. There are also various smaller
+TODOs scattered throughout my document.
 
-I also need to finish testing this code; I've done a little testing, but not nearly enough.
-
-There are also various smaller TODOs scattered throughout my document.
-
-Finally, I would like to provide some examples: some minimal examples of how to use the class, and some
-richer examples of what problem sets look like in this template, including demonstrating various class
-options.
+I would also like to provide some more examples: some minimal examples of how to use the class,
+and some richer examples of what problem sets look like in this template, including demonstrating
+various class options.

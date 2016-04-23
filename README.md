@@ -12,7 +12,7 @@ At this point, I'm using this class for problem sets with no huge snafus. There 
 things I still want to fix: specifically, I would like the ability to define custom problem numbers
 such as `\item[2.A.]` and have the class automatically handle things like equation numbering within
 that item or `\ref`s to that item; this is currently not in place. There are also various smaller
-TODOs scattered throughout my document.
+TODOs scattered throughout the file.
 
 I would also like to provide some more examples: some minimal examples of how to use the class,
 and some richer examples of what problem sets look like in this template, including demonstrating

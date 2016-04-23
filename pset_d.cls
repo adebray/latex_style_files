@@ -135,7 +135,8 @@
 % \dfr{f}{x} typesets df/dx, and \pfr{f}{x} typesets ∂f/∂x.
 % Some packages that I use often (e.g. font packages) overwrite \d, and therefore this class needs to define \d
 % after it's overwritten, so \AtBeginDocument to postpones these definitions.
-% TODO: better macros for higher partial derivatives.
+% TODO: better macros for higher partial derivatives. One clear example would be \pfr[3]{f}{x} for the third
+% derivative with respect to x.
 % TODO: I would like the spacing to look nicer for itdiff
 \AtBeginDocument{
 	\ifdefined\df@nt
@@ -182,6 +183,33 @@
 \ifdefined\eqn@enum
 	\numberwithin{equation}{enumi}
 \else
+	% If you use symbols to number equations, there's a good chance you may want to number at least ten equations.
+	% However, if you do that, the default implementation of fnsymbol throws an error; it only supports up to nine
+	% symbols. This code extends it to allow more symbols, up to 24. If you have more than 24 equations, it's
+	% likely a good idea to switch to numbering them, as that will confuse your reader less; however, equation
+	% numbering is not yet working the way I like it to (see above).
+
+	\def\@fnsone{*}
+	\def\@fnstwo{\dagger}
+	\def\@fnsthree{\ddagger}
+	\def\@fnsfour{\mathsection}
+	\def\@fnsfive{\natural}
+	\def\@fnssix{\asymp} % these are a little arbitrary, but I liked them better than the default choices
+	\def\@fnsseven{\clubsuit}
+	\def\@fnseight{\lozenge}
+	
+	\newcommand{\@dbl}[1]{#1 #1}
+	\newcommand{\@tpl}[1]{#1 #1 #1}
+
+	\renewcommand{\@fnsymbol}[1]{\ensuremath {\ifcase #1\or
+	\@fnsone\or \@fnstwo\or \@fnsthree\or \@fnsfour\or
+	\@fnsfive\or \@fnssix\or \@fnsseven\or \@fnseight\or
+	\@dbl\@fnsone\or \@dbl\@fnstwo\or \@dbl\@fnsthree\or \@dbl\@fnsfour\or 
+	\@dbl\@fnsfive\or \@dbl\@fnssix\or \@dbl\@fnsseven\or \@dbl\@fnseight\or 
+	\@tpl\@fnsone\or \@tpl\@fnstwo\or \@tpl\@fnsthree\or \@tpl\@fnsfour\or 
+	\@tpl\@fnsfive\or \@tpl\@fnssix\or \@tpl\@fnsseven\or \@tpl\@fnseight
+	\else \@ctrerr \fi }}
+
 	\renewcommand{\theequation}{\fnsymbol{equation}}
 \fi
 
@@ -195,9 +223,27 @@
 % updated). This is the current major thing I want to fix in this package.
 \RequirePackage{enumitem}
 
+\def\thisitem{\empty}
+
 \setlist{parsep=1.5ex, listparindent=0cm}
 \setlist[enumerate, 1]{label=\textbf{\arabic*.},
-					   ref={\arabic*},
+					   %\textbf{\protect\thisitem.},
+					   %ref={\protect\thisitem},
+					   ref=\arabic{enumi},
 					   leftmargin=0cm,
 					   parsep=2ex
 					  }
+
+% let's see if this works (won't work for nested items, yet)
+% adapted from http://tex.stackexchange.com/a/97437/55879
+% TODO this causes the description environment to fail horribly
+% \let\@olditem\item
+% \renewcommand{\item}[1][]{%
+% 	%\stepcounter{enumi}
+% 	\if\relax\detokenize{#1}\relax
+% 		\def\thisitem{\arabic{enumi}}%
+% 	\else
+% 		\def\thisitem{#1}%
+% 	\fi
+% 	\@olditem%
+% }

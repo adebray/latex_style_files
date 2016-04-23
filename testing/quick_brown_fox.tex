@@ -13,6 +13,7 @@
 
 \begin{enumerate}
 \item %1
+\label{first}
 The quick brown fox jumps over the lazy dog.
 \begin{thm}
 If \(\iota:\Z\inj\Q\) is the canonical injection, then \(\iota\) is an epimorphism which is not surjective;
@@ -43,7 +44,7 @@ and the partial derivative by
 	\pfr{\vp}{x_i} = \lim_{\e\to 0} \frac{\vp(\vec x+\e \vec\alpha_i) - \vp(\vec x)}{\e}.
 \end{equation}
 Notice the similarities to \eqref{deriv}.
-\item And now we test delimiters.
+\item[A] And now we test delimiters. \label{second}
 \[\int_a^b f(x)\ud x = \lim_{n\to\infty}\paren*[\Bigg]{\paren{\frac{b-a}{n}}\sum_{j=1}^n f\paren*{x_j^*}}.\]
 In one dimension,
 \begin{equation}
@@ -57,10 +58,10 @@ In an inner product space, \(\norm{\vec x}^2 = \ang{\vec x,\vec x}\). Thus, in \
 sequence converging to \(x\), then \(\ang{x"m-x"n,x"m-x"n}\to 0\) as \(m,n\to\infty\).
 \item This item will test that I've set my \verb+itemize+ and \verb+enumerate+ environments correctly: one of the
 biggest reasons I wanted to fix my problem set template was that paragraphs in nested enumeration environments
-have no indentation or extra space by default, and this makes more textual arguments look bad.
+have no indentation or extra space by default, and this makes more textual arguments look bad. I'll also reference
+problems~\ref{first} and \ref{second} here.
 
-Here, paragraphs are indented by default, but not the one right after the \verb+\item+ command. I'd like to replace
-that with extra whitespace.
+Paragraphs are no longer indented by default; this is replaced with extra whitespace, which I think looks better.
 \begin{enumerate}
 	\item This is the next level of indentation. I expect to use it a lot, e.g.\ when one problem comes with
 	multiple subparts. As such, I would like it to look good.
@@ -83,5 +84,16 @@ that with extra whitespace.
 		\item And another bullet point, for completeness.
 	\end{itemize}
 \end{enumerate}
+\item Here's a bunch more equations.
+\begin{align}
+	\label{345}
+	3^2 + 4^2 &= 5^2\\
+	5^2 + 12^2 &= 13^2\\
+	\label{724}
+	7^2 + 24^2 &= 25^2\\
+	8^2 + 15^2 &= 17^2\\
+	9^2 + 40^2 &= 41^2.
+\end{align}
+Reference to \eqref{345} and to \eqref{724}.
 \end{enumerate}
 \end{document}

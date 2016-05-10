@@ -1,0 +1,113 @@
+\input{xy_macros}
+\input{letters}
+\input{theorems}
+% there will be more files here.
+
+\numberwithin{equation}{section}
+
+\newcommand{\term}{\emph}
+
+% Often, I find myself making a theorem, definition, etc. that's purely a combination
+% of statements, either bulleted or numbered. In that case, using \hfill typesets each
+% item uniformly. It would probably be best to make this into a custom enumitem
+% environment, especially if I want to refer to specific items (e.g. 12.2.1 inside
+% Theorem 12.2).
+% Usage: \begin{comp}{thm}{enumerate}
+%			\item
+% 		 \end{comp}
+% sets up an enumerate environment inside a theorem.
+\NewDocumentEnvironment{comp}{mm}{%
+	\csname #1\endcsname\hfill
+	\csname #2\endcsname
+}{
+	\csname end#2\endcsname
+	\csname end#1\endcsname
+}
+
+% other shortcuts I use for live-TeXing
+\newcommand{\vp}{\varphi}
+\newcommand{\e}{\varepsilon}
+\newcommand{\inj}{\hookrightarrow}
+\newcommand{\surj}{\twoheadrightarrow}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\pt}{\mathrm{pt}}
+% Use \ud for things that need additional space, e.g. f(x) dx (in integrals or for
+% differential forms). \d is for things that don't (e.g. after a wedge, or just dx on
+% its own).
+\newcommand{\ud}{\,\mathrm{d}}
+\renewcommand{\d}{\mathrm d} % TODO \AtBeginDocument
+% TODO accept optional argument for higher derivatives
+\newcommand{\dfr}[2]{\frac{\mathrm d #1}{\mathrm d #2}}
+\newcommand{\pfr}[2]{\frac{\partial #1}{\partial #2}}
+
+% This allows \paren{...} to replace \left(...\right) (and similarly for \bkt). For
+% \ang, \set, \abs, and \norm, I find myself using autoexpansion less often.
+% This code, along with some other shortcuts, is duplicated in my problem set template;
+% perhaps I should have them include a common file?
+\DeclarePairedDelimiter\paren{(}{)}
+\DeclarePairedDelimiter\ang{\langle}{\rangle}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\bkt{[}{]}
+\DeclarePairedDelimiter\set{\{}{\}}
+% Swap paren* and paren, etc., so that the normal version resizes by default.
+% Meanwhile, one can use \paren*[\Big]{...} to customize the size easily.
+\makeatletter
+	\let\oldparen\paren
+	\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+	\let\oldbkt\bkt
+	\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+\makeatother
+
+% This allows a"1 as a shortcut for a^{(1)} and a"{10} as a shortcut for a^{(10)}.
+\catcode`\"=13
+\newcommand{"}[1]{^{(#1)}}
+
+% Now, for a bunch of field-specific commands. I may split these into separate files
+
+% Algebra
+\DeclareMathOperator{\Ann}{Ann}
+\DeclareMathOperator{\Cliff}{Cliff}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Frac}{Frac}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Hom}{Hom}
+\renewcommand{\Im}{\operatorname{Im}} % also complex analysis
+\DeclareMathOperator{\ker}{ker}
+\DeclareMathOperator{\Mat}{Mat}
+\newcommand{\op}{^{\cat{op}}} % for the opposite of a category
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\spa}{span}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Sym}{Sym}
+\newcommand{\T}{^{\mathrm T}} % tranpose TODO where does the \! go?
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\bl}{--} % maybe I can define this more cleanly
+
+% Algebraic Geometry
+\DeclareMathOperator{\Proj}{Proj}
+\DeclareMathOperator{\QCoh}{QCoh}
+\DeclareMathOperator{\res}{res} % also complex analysis
+\DeclareMathOperator{\Spec}{Spec}
+
+% Algebraic Topology
+\newcommand{\Gr}{\mathrm{Gr}} % Grassmannian -- perhaps move to letters.tex
+\newcommand{\hdr}{H_{\text{\rm dR}}}
+\newcommand{\KO}{\mathit{KO}} % should I add reduced K and KO?
+\newcommand{\wH}{\widetilde H}
+
+% Complex analysis
+% note: Re and Im changes are technically style changes, but almost everyone uses this notation
+\renewcommand{\Re}{\operatorname{Re}}
+
+% Topology
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\crit}{crit}
+\DeclareMathOperator{\curl}{curl}
+\renewcommand{\div}{\operatorname{div}}
+\DeclareMathOperator{\ind}{ind}
+\DeclareMathOperator{\supp}{supp}
+
+% TODO: to be continued

@@ -1,0 +1,52 @@
+% The personal style choices I make for my lecture notes
+% One tantalizing idea is to make multiple style files representing several different
+% styles (e.g. I would prefer to use a different style for lecture notes and other
+% notes that I write).
+
+\RequirePackage{fancyhdr}
+\RequirePackage{titlesec}
+\RequirePackage[dotinlabels]{titletoc}
+
+% Set colors for hyperref
+\hypersetup{
+	colorlinks,
+	linkcolor={red!50!black},
+	citecolor={green!50!black},
+	urlcolor={blue!80!black}
+}
+
+% Custom section titles
+% I really want to not depend on titlesec, as it's frustrating to use. However,
+% this setup is stable.
+\titleformat{\section}[frame]
+  {\normalfont}
+  {\filright
+   \footnotesize
+   \enspace Episode \Roman{section}.\enspace}
+  {8pt}
+  {\Large\bfseries\filcenter}
+\titlecontents{section}[1.5em]{}{\contentslabel{2.3em}}{\hspace*{-2.3em}}{\hfill\contentspage}
+
+% Fancy headers
+% TODO this doesn't work like I want it to, and I don't know how to fix it.
+\renewcommand{\sectionmark}[1]{\markleft\thesection. #1}
+
+\fancyhf{}
+\fancyhead[RO,LE]{\small\thepage}
+\fancyhead[LO]{\small\slshape\nouppercase{\leftmark}}
+\fancyhead[RE]{\small\slshape M390C (Algebraic Geometry) Lecture Notes}
+\setlength{\headheight}{11.0pt}
+\pagestyle{fancy}
+
+% Ornament to divide different parts of a section without introducing a new subsection
+\newcommand{\orbreak}{
+\begin{center}
+	\adforn{17}\;\(\cdot\)\;\adforn{18}
+	\vspace{0.2cm}
+\end{center}
+}
+
+% some other stylistic changes
+\renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}
+\def\qedsymbol{{\small{\ensuremath{\boxtimes}}}}
+\renewcommand{\emptyset}{\varnothing}

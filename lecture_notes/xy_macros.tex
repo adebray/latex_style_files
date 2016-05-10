@@ -1,0 +1,46 @@
+% some shortcuts that simplify live-TeXing using XY.
+
+% Forces all XY entries to be typeset with displaymath, which is much more
+% common for me
+\everyentry={\displaystyle}
+
+% Short exact sequences: write
+% \shortexact[f][g]{A}{B}{C} for:
+%
+%		 f    g
+% 0 -> A -> B -> C -> 0,
+\DeclareDocumentCommand{\shortexact}{O{} O{} mmmm}{
+\xymatrix{
+	0\ar[r] & #3\ar[r]^-{#1} & #4\ar[r]^-{#2} & #5\ar[r] & 0#6
+}}
+% exactly the same, but for 0 -> A -> B -> C
+\DeclareDocumentCommand{\leftexact}{O{} O{} mmmm}{
+\xymatrix{
+	0\ar[r] & #3\ar[r]^-{#1} & #4\ar[r]^-{#2} & #5 #6
+}}
+% ... and the same, for A -> B -> C -> 0
+\DeclareDocumentCommand{\rightexact}{O{} O{} mmmm}{
+\xymatrix{
+	#3\ar[r]^-{#1} & #4\ar[r]^-{#2} & #5\ar[r] & 0#6
+}}
+
+% Double right arrow, which I found myself writing a lot (e.g. equalizer, kernel,
+% or cokernel diagrams)
+% usage:
+% X\dblarrow[r][f][g] & Y
+%   f
+% X => Y
+%   g
+\DeclareDocumentCommand{\dblarrow}{O{} O{} O{}}{
+	\ar@<0.4ex>[#1]^-{#2}\ar@<-0.4ex>[#1]_-{#3}
+}
+% Note: it would be a useful exercise to figure out how to define this so it can
+% be used as \dblarrow[r]^f_g.
+
+% TODO: do I want these going in the other direction?
+% Source: http://tug.org/pipermail/xy-pic/2001-July/000015.html
+\newcommand{\pullbackcorner}[1][dr]{\save*!/#1+1.2pc/#1:(1,-1)@^{|-}\restore}
+\newcommand{\pushoutcorner}[1][dr]{\save*!/#1-1.2pc/#1:(-1,1)@^{|-}\restore}
+
+
+% TODO more? Especially triangles and squares.

@@ -1,0 +1,22 @@
+% Setting up some theorem environments
+
+% It's good practice to label everything in documents, so I've provisionally
+% made definitions numbered with everything else (so per section). I'm still
+% technically testing this, though.
+
+\newtheorem{thm}[equation]{Theorem}
+\newtheorem{lem}[equation]{Lemma}
+\newtheorem{cor}[equation]{Corollary}
+\newtheorem{prop}[equation]{Proposition}
+\theoremstyle{definition}
+\newtheorem{ex}[equation]{Exercise}
+\newtheorem{exm}[equation]{Example}
+\newtheorem{defn}[equation]{Definition}
+\newtheorem*{claim}{Claim}
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{fct}{Fact}
+\newtheorem*{note}{Note}
+
+% Another possibility: "definition-theorems" as used in universal properties
+% I will probably also want starred theorems (propositions, subsections, etc.).

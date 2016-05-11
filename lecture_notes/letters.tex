@@ -7,7 +7,9 @@
 \newcommand{\E}{\mathbb E} % expected value, family of operads
 \newcommand{\F}{\mathbb F} % finite fields
 \newcommand{\G}{\mathbb G} % additive/multiplicative groups
-\newcommand{\H}{\mathbb H} % quaternions, upper half-plane
+\AtBeginDocument{ % some fonts redefine this (e.g. charter)
+	\renewcommand{\H}{\mathbb H} % quaternions, upper half-plane
+}
 \newcommand{\N}{\mathbb N} % natural numbers
 \renewcommand{\P}{\mathbb P} % probability, projective space
 \newcommand{\Q}{\mathbb Q} % rational numbers
@@ -23,28 +25,29 @@
 \newcommand{\cM}{\mathcal M} % moduli space
 
 % \mathfrak -- Lie algebras, open covers, prime ideals
-% TODO some of these may already be defined
 \newcommand{\p}{\mathfrak p} % prime ideal
 \newcommand{\q}{\mathfrak q} % another prime ideal
 \newcommand{\m}{\mathfrak m} % maximal ideal
 \newcommand{\fg}{\mathfrak g} % general Lie algebra
 \newcommand{\gl}{\mathfrak{gl}} % general linear Lie algebra
-\newcommand{\sl}{\mathfrak{sl}} % special linear
-\newcommand{\sp}{\mathfrak{sp}} % symplectic
-\newcommand{\o}{\mathfrak o} % orthogonal
-\newcommand{\so}{\mathfrak so} % special orthogonal
-\newcommand{\u}{\mathfrak u} % unitary
-\newcommand{\su}{\mathfrak su} % special unitary
+\renewcommand{\sl}{\mathfrak{sl}} % special linear
+\renewcommand{\sp}{\mathfrak{sp}} % symplectic
+\newcommand{\fo}{\mathfrak o} % orthogonal
+\newcommand{\so}{\mathfrak{so}} % special orthogonal
+\newcommand{\fu}{\mathfrak u} % unitary
+\newcommand{\su}{\mathfrak{su}} % special unitary
 \newcommand{\fU}{\mathfrak U} % open covers, à la Bott-Tu
 
 % \mathrm -- usually Lie groups
-\newcommand{\GL}{\mathrm GL} % general linear
-\newcommand{\SL}{\mathrm SL} % special linear
-\newcommand{\O}{\mathrm O} % orthogonal
+\newcommand{\GL}{\mathrm{GL}} % general linear
+\newcommand{\SL}{\mathrm{SL}} % special linear
+\AtBeginDocument{ % redefined by mathdesign
+	\renewcommand{\O}{\mathrm O} % orthogonal
+}
 \newcommand{\SO}{\mathrm{SO}} % special orthogonal
 \newcommand{\U}{\mathrm U} % unitary
 \newcommand{\SU}{\mathrm{SU}} % special unitary
-\newcommand{\Sp}{\mathrm Sp} % symplectic
+\newcommand{\Sp}{\mathrm{Sp}} % symplectic
 \newcommand{\Spin}{\mathrm{Spin}} % spin
 \newcommand{\PGL}{\mathrm{PGL}} % projective general linear
 \newcommand{\PSL}{\mathrm{PSL}} % projective special linear
@@ -70,9 +73,11 @@
 \newcommand{\Mod}{\cat{Mod}} % modules (over a ring)
 \newcommand{\Alg}{\cat{Alg}} % algebras (over a ring)
 \newcommand{\Vect}{\cat{Vect}} % vector spaces (over a field)
-\newcommand{\Top}{\cat{Top}} % topological space
+\AtBeginDocument{ % sometimes already defined (e.g. in kpfonts)
+	\def\Top{\cat{Top}} % topological space
+}
 % TODO what other categories of topological/geometric objects do I need?
-\newcommand{\LocRing}{\cat{LocRing} % locally ringed spaces
+\newcommand{\LocRing}{\cat{LocRing}} % locally ringed spaces
 \newcommand{\AffSch}{\cat{AffSch}} % affine schemes
 \newcommand{\Sch}{\cat{Sch}} % schemes
 \newcommand{\Man}{\cat{Man}} % manifolds

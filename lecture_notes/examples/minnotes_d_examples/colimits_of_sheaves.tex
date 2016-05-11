@@ -1,0 +1,202 @@
+\begin{quote}\textit{
+	``I didn't give it a good notation because I didn't like it.''
+}\end{quote}
+Recall that last time, we defined sheafification, which can be thought of projecting presheaves onto sheaves in a
+particularly nice way. This allows us to forget the difference between sheaves and presheaves, so to speak; we'll
+use this to understand colimits of sheaves.
+\begin{exm}% would be nice to say what x, i_* are...
+First, a quick digression, since we got confused last time, on the espace étalé of a skyscraper sheaf. Directly
+from the sheaf axioms, one can show that if \(\sF\) is a \(\fC\)-valued sheaf, then \(\sF(\emptyset)\) is the
+terminal object (a point for \(\Set\), \(0\) for \(\Ab\), and so on). This follows from abstract nonsense: the
+empty product \(\prod_\emptyset S\) is necessarily the terminal object (there's more to think through here). This
+is what motivates the definition of the skyscraper sheaf \(i_*S = i_{x,*}S\) in Example~\ref{skys}. For
+simplicity, assume \(x\in X\) is a closed point.
+
+Now, let's construct its espace étalé \(\pi:Y_{i_*S}\to X\); for any \(y\in X\), \(\pi^{-1}(y)\) is the stalk of
+\((i_*S)\) at \(y\), which is \(S\) if \(y = x\) or the terminal object \(*\) otherwise. Thus, \(Y_{i_*S}\) is as a
+set a copy of \(X\), but with \(S\) over the basepoint \(x\) instead of a single point; then, we glue each of these
+points of \(S\) to the rest of \(Y_{i_*S}\) as if they were all \(x\). The result is \(X\) with multiple
+basepoints, so to speak, and is not at all Hausdorff. However, as topological spaces, we have a pullback diagram
+\[\xymatrix{
+	(U\setminus\set x)\times S\ar[r]\ar[d] & U\times S\ar[d]\\
+	U\setminus\set x\ar[r] & Y_{i_*S}.
+}\]
+\end{exm}
+We can also use the espace étalé to define sheafification: the sheafification \(\sF\sh\) is just the sheaf of
+sections of \(Y_\sF\).
+\subsection*{Kernels and Cokernels.}
+Before discussing limits and colimits more generally, let's focus on kernels and cokernels. Let \(\vp:\sF\to\sG\)
+be a morphism of sheaves of abelian groups on a space \(X\), and for every open \(U\subset X\), define
+\((\ker\vp)(U) = \ker(\vp|_U)\). It's easy to check that this is a presheaf, and a little more work to check that
+it's a sheaf, too. And this is actually the kernel in \(\Ab_X\), in that it satisfies the universal property:
+it fits into the diagram
+\[\xymatrix{
+	\ker\vp\ar[r]\ar[d] & \sF\ar[d]^\vp\\
+	0\ar[r] & \sG,
+}\]
+and any other sheaf \(\mathscr H\) that fits into the same place in the above diagram has a unique map to
+\(\ker\vp\).
+
+Likewise, a morphism in \(\Ab_X\) is injective (meaning a monomorphism) exactly when
+\(\vp|_U:\sF(U)\to\sG(U)\) is injective for all open \(U\subset X\).
+
+Cokernels are a little more interesting. The sheaf assigning \(U\mapsto\coker(\vp|_U)\) is a presheaf, and is the
+cokernel in the category of presheaves, but it is \emph{not} the cokernel in the category of sheaves; it fails to
+satisfy the universal property. This is where some of the interesting nuances of sheaf theory pop up.
+\begin{exm}
+\label{notcoker}
+We'll let \(X = \C\), and let \(\sO\) be the sheaf of holomorphic functions and \(\sO^*\) be the sheaf of
+``invertible,'' i.e.\ nonvanishing, holomorphic functions (an abelian group under multiplication). The exponential
+map \(f(z)\mapsto e^{f(z)}\) sends holomorphic functions to nonvanishing holomorphic functions, and commutes with
+restriction, so it's a morphism \(\exp:\sO\to\sO^*\) in \(\Ab_\C\).
+
+If a function maps to \(1\) in \(\sO^*\), then it must be an integer multiple of \(2\pi i\), so it must be locally
+constant, Thus, it's constant on each connected component of the given open set. Thus, \(\ker(\exp) = 2\pi
+i\underline\Z\): the constant sheaf, not the constant presheaf. This agrees with what we just learned about
+kernels.
+
+Then, \(\Im(\exp)(U)\) is the \(f^*\in\sO^*(U)\) such that \(f = e^{2\pi i g}\) for some \(g\in\sO(U)\). That is,
+\(\log f\) must have a well-defined branch on \(U\). In particular, if \(U = \C^*\) and \(f = z\), then
+\(f\not\in\Im(\exp(U)\). This is a problem: \(\C^*\) can be covered by simply connected open sets on which the
+logarithm exists, but the gluing axiom fails.
+
+However, since \(\exp:\sO\to\sO^*\) is surjective on simply connected open sets, then it's surjective on the level
+of stalks, even though it's not surjective as a map of sheaves. In other words, we want the sequence
+\[\shortexact[j][\exp]{\underline\Z}{\sO}{\sO^*}{}\]
+%\[\xymatrix{
+%	0\ar[r] &\underline\Z\ar[r]^j &\sO\ar[r]^\exp & \sO^{*}\ar@{-->}[r] & 0
+%}\]
+to be a short exact sequence of sheaves, but if we naïvely define the cokernel like the kernel, it isn't. This
+means that \emph{to define the sheaf cokernel, we sheafify the presheaf cokernel}. In this case, the sheafification
+of the presheaf cokernel \(\coker(j)\) stitches together the stalks, but on stalks \(\exp\) is surjective, so since
+a sheaf is completely determined by stalks, this is just \(\sO^*\) again, which jives with the idea of
+surjectivity. In the same way, we get that \(\coker(\exp) = 0\), as one would expect.
+\end{exm}
+In other words, a surjective map of sheaves (categorically, an epimorphism), is surjectivity on stalks, but
+\emph{not} surjectivity on all open subsets. Injectivity is equivalent to injectivity on stalks and on open
+subsets, though.
+
+Since sheafification preserves colimits, this can be generalized: the colimit of a diagram of sheaves is the
+sheafification of the presheaf colimit (which is just the colimit on every open set).
+\begin{exm}
+This next example is in some sense the same example. Let \(X\) be a smooth manifold, \(\sF\) be the sheaf of
+smooth maps to \(S^1\), \(C^\infty\) be the smooth maps to \(\R\) (so just the smooth functions), and
+\(\underline\Z\) is the constant sheaf (which is also smooth maps to \(\Z\), since \(\Z\) is discrete); each of
+these is a sheaf of abelian groups.
+
+We'd like to understand that \(S^1 = \R/\Z\). This comes from the sequence
+\[\xymatrix{
+	0\ar[r] & \underline\Z\ar[r] & C^\infty\ar[r] & \sF\ar[r] & 0,
+}\]
+which is short exact. The injectivity of \(\underline\Z\inj C^\infty\) comes from the fact that every map to \(\Z\)
+can be lifted to a smooth map to \(\R\), and surjectivity comes from the fact that germs of functions can be
+lifted on a small neighborhood, so it's surjective on stalks. However, there are open subsets where functions can't
+be lifted: if \(X = S^1\), then the identity map \(S^1\to S^1\) can't be lifted to a map to \(\R\). Thus, this is
+surjective, even though it's not so on the level of open sets.
+\end{exm}
+\begin{exm}
+Our next example will be the de Rham complex. Let \(X\) be a smooth manifold. Let \(\underline\R\) denote the
+constant sheaf on \(\R\) (locally constant functions) and \(\Omega^1\) denote the sheaf of one-forms on \(X\). The
+exterior derivative gives us an exact sequence
+\[\xymatrix{
+	0\ar[r] & \underline\R\ar[r] & C^\infty\ar[r]^{\d} & \Omega^1\ar[r]^{\d} & \Omega^2\ar[r]^{\d} &\dots
+}\]
+However, this is not in general short exact; if \(\Omega_{\text{cl}}^1\) denotes the space of closed one-forms,
+then the Poincaré lemma just states that the following sequence is short exact.
+\[\xymatrix{
+	0\ar[r] & \underline\R\ar[r] & C^\infty\ar[r]^{\d} & \Omega_{\text{cl}}^1\ar[r] & 0
+}\]
+In other words, even considering something very simple about short exact sequences of sheaves gives us cohomology.
+This can be used to define sheaf cohomology, though we won't return to that anytime soon.
+
+In fact, Example~\ref{notcoker} is a special case of this, since \(\d z/z\in\Omega^1(\C^*)\) is a closed form
+that's not exact.
+\end{exm}
+\subsection*{Ringed Space.}
+Anyways, we were going to talk about schemes, right? These are not just topological spaces, but ringed spaces:
+topological spaces with a notion of a ring of functions.
+\begin{defn}
+A \term{ringed space} is the data \((X,\sO_X)\), where \(X\) is a topological space and \(\sO_X\) is a sheaf of
+rings on \(X\).
+\end{defn}
+The motivating examples are a topological space with continuous functions to \(\R\) (since these form a ring), or a
+smooth manifold with the sheaf \(C^\infty\), or an analytic manifold with \(C^\omega\) (analytic functions).  Thus,
+there are definitely different notions of ``function'' on a manifold, but the ringed space structure means knowing
+what kinds of functions (geometric structure) is.
+
+We'd also like to know how to evaluate functions on a ringed space. For an arbitrary \(x\in U\) and
+\(f\in\sO_X(U)\), it's not clear how to define \(f(x)\); we have stalks, but then what? In each of our examples
+(continuous functions, smooth functions, analytic functions, holomorphic functions, etc.), the stalks \(\sO_{X,x}\)
+aren't just rings, but local rings,\footnote{Recall that a \term{local ring} is a ring with a unique maximal
+ideal.} with the maximal ideal \(\m_x\) of functions which vanish at \(x\). \(\m_x\) is unique, because if
+\(f\in\sO_{X,x}\setminus\m_x\), then \(f(x)\ne 0\), so it's nonzero on a neighborhood of \(x\), and therefore
+invertible in that subset! Thus, \(f\in\sO_{X,x}^\times\), so \(\m_x\) must be unique.
+
+The point is, evaluating at \(x\) is exactly quotienting by \(\m_x\), producing an element of \(\R\). The sheaves
+we care about have local rings for stalks, which is what makes this evaluation work. We'll turn this into a
+definition of something much more useful than a ringed space.
+\begin{defn}
+A \term{locally ringed space} is a ringed space \((X,\sO_X)\) such that for every \(x\in X\), the stalk
+\(\sO_{X,x}\) is a local ring.
+\end{defn}
+Thus, all of our basic examples are locally ringed spaces, and in general, given an \(f\in\sO_X(U)\), we can define
+\(V(f) = \set{x\in U: f(x) = 0}\), and this will end up being a closed set.
+
+Schemes are particular examples of locally ringed spaces. We'll have to define how to produce a sheaf of functions,
+which we'll probably do next time, but we're almost there. One major takeaway is that schemes behave somewhat like
+these examples we already have.
+
+We also need to define morphisms. An isomorphism is evident: \((X,\sO_X)\cong (Y,\sO_Y)\) is the data of a
+homeomorphism \(f:X\to Y\) that identifies the sheaves, i.e.\ for all open \(U\subset Y\), there's an isomorphism
+\(f_*: \sO_Y(U)\to \sO_X(f^{-1}(U))\).
+
+It's less obvious how to define morphisms in general; clearly, we need a continuous \(f:X\to Y\), and we want to
+compare \(\sO_X\) and \(\sO_Y\). Functions pull back (because the preimage of an open set is open); in the examples
+we had before, we checked that the pullbacks of continuous (smooth, etc.) functions were continuous (smooth, etc.).
+More generally, given an open \(U\subset Y\), we have the two rings \(\sO_Y(U)\) and \(\sO_X(f^{-1}(U))\), and we
+want the pullback of functions \(f_*:\sO_Y(U)\to\sO_X(f^{-1}(U))\) to be a ring homomorphism. This is exactly how
+we defined the pushforward of a sheaf.
+\begin{defn}
+A \term{morphism of ringed spaces} is a pair \((f,f^\sharp): (X,\sO_X)\to (Y,\sO_Y)\) in which
+\begin{itemize}
+	\item \(f:X\to Y\) is continuous, and
+	\item \(f^\sharp: \sO_Y\to f_*\sO_X\) is a morphism in \(\Ring_Y\).
+\end{itemize}
+\end{defn}
+That is: for every open subset, we can pull functions back into that open subset. But we can say that more
+concisely with the sheaf theory we have developed.
+
+It's worth remembering that nilpotents on affine schemes give us functions that aren't determined by their values
+(well, we do have to set up the structure of a locally ringed space first, but we'll get there), so a function
+isn't quite a bunch of values at points; it's something that we care to pull back.
+
+This is cool, but we care about ringed spaces. What about these maximal ideals? They tell us what it means for a
+function to vanish. Back in the world of smooth functions, if \(\vp(y) = 0\) and \(x\in f^{-1}(y)\), then
+\((f^*\vp)(x) = \vp(f(x))\) had better be \(0\) too. This is not preserved by morphisms of ringed spaces (since
+evaluation isn't defined for germs of functions on ringed spaces), so we need an additional axiom.
+
+If \((f,f^\sharp)\) is a morphism of ringed spaces, passing to colimits induces a map \(\sO_{Y,y}\to\sO_{X,x}\),
+whenever \(f(x) = y\) (this is generally true for a map of sheaves, thanks to the property of colimits). Then, we
+want this map to send \(\m_y\to\m_x\). 
+\begin{defn}
+A morphism \((f,f^\sharp):(X,\sO_X)\to(Y,\sO_Y)\) is a morphism of locally ringed spaces if for every \(x\in X\),
+\(y\in Y\) such that \(f(x) = y\), the induced map \(f^\sharp_x: \sO_{Y,y}\to\sO_{X,x}\) maps \(\m_y\) into
+\(\m_x\).
+\end{defn}
+This is actually all the data that we'll need to define schemes: schemes are a full subcategory of locally ringed
+spaces; specifically, they are the ones that are locally isomorphic to \((\Spec R, \sO_{\Spec R})\) (as soon as we
+define the locally ringed space structure on \(\Spec R\)), i.e.\ there are actual isomorphisms on an open cover.
+
+Does this look weird? It's actually not unfamiliar: a smooth manifold is a locally ringed space that's locally
+isomorphic to \((\R^n,C^\infty)\). This encodes a lot of information; in particular, a continuous map of manifolds
+is smooth iff it pulls smooth functions back to smooth functions. In the same way, a topological manifold is a
+locally ringed space locally isomorphic to \((\R^n,C)\) (the sheaf of continuous functions). All the structure of
+an atlas is encapsulated in this notion of locally ringed spaces.
+
+This notion is extremely general. For example, we can define a complex analytic manifold to be a locally ringed
+space locally isomorphic to \((U\subset\C^n, \operatorname{Hol})\) (since small discs in \(\C^n\) aren't
+necessarily biholomorphic to all of \(\C^n\)). In all of the cases we've seen, though, \(\sO_X(U)\) is always a
+subset of set maps \(U\to\R\) (or \(\C\)), and in particular functions are determined by their values. This is
+something that will not be true for schemes.
+
+Next time, we will define \(\Spec R\), as a scheme.

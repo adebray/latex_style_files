@@ -1,9 +1,13 @@
-\input{xy_macros}
-\input{letters}
-\input{theorems}
+\input{\@pwd/xy_macros}
+\input{\@pwd/letters}
+\input{\@pwd/theorems}
 % there will be more files here.
 
 \numberwithin{equation}{section}
+
+% This could be considered a stylistic choice, but works much better with how I use
+% subsections as subject changes in a lecture.
+\setcounter{tocdepth}{1}
 
 \newcommand{\term}{\emph}
 
@@ -31,14 +35,19 @@
 \newcommand{\surj}{\twoheadrightarrow}
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\pt}{\mathrm{pt}}
+
 % Use \ud for things that need additional space, e.g. f(x) dx (in integrals or for
 % differential forms). \d is for things that don't (e.g. after a wedge, or just dx on
 % its own).
-\newcommand{\ud}{\,\mathrm{d}}
-\renewcommand{\d}{\mathrm d} % TODO \AtBeginDocument
-% TODO accept optional argument for higher derivatives
-\newcommand{\dfr}[2]{\frac{\mathrm d #1}{\mathrm d #2}}
-\newcommand{\pfr}[2]{\frac{\partial #1}{\partial #2}}
+% Some packages that I use often (e.g. font packages) overwrite \d, and therefore this
+% class needs to define \d after it's overwritten, which is why I use \AtBeginDocument.
+\AtBeginDocument{
+	\newcommand{\ud}{\,\mathrm{d}}
+	\renewcommand{\d}{\mathrm d} % TODO \AtBeginDocument
+	% TODO accept optional argument for higher derivatives
+	\newcommand{\dfr}[2]{\frac{\mathrm d #1}{\mathrm d #2}}
+	\newcommand{\pfr}[2]{\frac{\partial #1}{\partial #2}}
+}
 
 % This allows \paren{...} to replace \left(...\right) (and similarly for \bkt). For
 % \ang, \set, \abs, and \norm, I find myself using autoexpansion less often.
@@ -60,8 +69,10 @@
 \makeatother
 
 % This allows a"1 as a shortcut for a^{(1)} and a"{10} as a shortcut for a^{(10)}.
+\AtBeginDocument{\catcode`\"=13}
 \catcode`\"=13
-\newcommand{"}[1]{^{(#1)}}
+\newcommand*{"}[1]{^{(#1)}}%
+\catcode`\"12
 
 % Now, for a bunch of field-specific commands. I may split these into separate files
 
@@ -75,14 +86,15 @@
 \DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\Hom}{Hom}
 \renewcommand{\Im}{\operatorname{Im}} % also complex analysis
-\DeclareMathOperator{\ker}{ker}
+%\DeclareMathOperator{\ker}{ker}
 \DeclareMathOperator{\Mat}{Mat}
 \newcommand{\op}{^{\cat{op}}} % for the opposite of a category
 \DeclareMathOperator{\sign}{sign}
 \DeclareMathOperator{\spa}{span}
 \DeclareMathOperator{\Stab}{Stab}
 \DeclareMathOperator{\Sym}{Sym}
-\newcommand{\T}{^{\mathrm T}} % tranpose TODO where does the \! go?
+%TODO better name (conflicts w/ circle group)
+%\newcommand{\T}{^{\mathrm T}} % tranpose TODO where does the \! go?
 \DeclareMathOperator{\Tor}{Tor}
 \DeclareMathOperator{\bl}{--} % maybe I can define this more cleanly
 

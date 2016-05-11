@@ -21,6 +21,7 @@ tweak the style. Here's what exists now:
 - The `lecture_notes` directory contains some style files for lecture notes. This is still a work in progress, but
   the end goal is to have something similar: a style file that's easy to use, with documented options and examples.
   I have a customized lecture notes style, but I also want to have a more minimal one, which only includes the many
-  shortcuts I define for live-TeXing.
+  shortcuts I define for live-TeXing. Right now, there's a `minnotes_d` class that includes a lot of macros, but
+  few style changes; it has been tested with a few examples.
 - Right now, these two do not share any code. That is something I would like to fix, but first I should get
   everything up and running.

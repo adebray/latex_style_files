@@ -31,5 +31,5 @@ Given this, I think I'll need the following layout:
 
 ### Current Status
 
-I've written some of the supporting files, but none of the class files that you can include into a
-document. Once I do that, I will have to add examples and test my code. This is a work in progress.
+I've written most of the supporting files and `minnotes_d.cls`, then tested it with examples. I have
+not made progress on `notes_d.cls`.

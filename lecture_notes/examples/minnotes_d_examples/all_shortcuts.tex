@@ -1,0 +1,46 @@
+% Goal: test all shortcuts and make sure they work, esp. in different fonts that
+% might redefine things
+% I don't currently have theorems or xy macros, but these are less likely to be
+% overwritten/cause problems
+
+\documentclass{../../minnotes_d}
+\title{A Fistful of Shortcuts}
+\author{Arun Debray\\\today}
+\begin{document}
+\maketitle
+
+A \term{prime number} is a natural number divisible only by $1$ and itself.
+
+Quick shortcuts: \verb+\vp+: $\vp$. Let $\e\to 0$. We have $\Z\inj\Q$ and $\C\cong\R^2\surj\R$. This map is
+homotopic to $\id:\pt\to\pt$.
+
+Some calculus: $f(x)\ud x$, but no $\d y$. Partial derivatives:
+\[\dfr{f}{t}\text{ and }\pfr{g}{x}.\]
+Delimiters: $\paren{a,b}$, $\ang{a,b}$, $\abs{a-b}$, $\norm{a-b}$, $\bkt{a,b}$, and $\set{a,b}$.
+
+Quote: $a"1,\dotsc,a"{10}$.
+
+Now, for a parade of math operators.
+\begin{description}
+	\item[Algebra] $\Ann_A M$, $\Cliff(V)$, $\coker(\vp)$, $\End(V)$, $\Ext(\Z/m,\Z/n)$, $\Frac(R)$,
+	$\Gal(\overline\Q/\Q)$, $\Hom(A,B)$, $\Im(\vp)$, $\Mat_n(\R)$, $\fC\op$, $\sign(\sigma)$, $\spa\set{x,y}$,
+	$\Stab_G x$, $\Sym^2 M$, $\Tor(\Z/m,\bl)$.
+	\item[Algebraic Geometry] $\Proj R$, $\QCoh(X)$, $\res_U^V(f)$, and $\Spec k[x]$.
+	\item[Algebraic Topology] $\hdr^i(\Gr_k(\R^n))$, $\wH^0(\pt)$, $\KO(S^2)$.
+	\item[Complex Analysis] $\Re(z)$, $\Im(z)$.
+	\item[Topology] $\codim Y$, $\crit(f)$, $\curl\vec v$, $\div\vec v$, $\ind\vec v$, and $\supp f$.
+\end{description}
+Now, for a bunch of letters.
+\begin{description}
+	\item[Blackboard Bold] $\A^n$, $\C$, $\D$, $\E[x]$, $\F_p$, $\G_m$, $\H$, $\N$, $\P^n$, $\Q$, $\R$, $\S$, $\T$,
+	$\Z$, $\RP$, $\CP$.
+	\item[Calligraphic] $\cA$, $\cM_{g,n}$.
+	\item[Fraktur] $\p,\q\subset R$, $k[x]/\m$, $\fg$, $\gl_n$, $\sl_n$, $\sp_n$, $\fo_n$, $\so_n$, $\fu_n$,
+	$\su_n$, $U\in\fU$.
+	\item[Roman] $\GL_n(\R)$, $\SL_n(\R)$, $\O_n$, $\SO_n$, $\U_n$, $\SU_n$, $\Sp_n$, $\Spin_n$, $\PGL_2(\C)$,
+	$\PSL_2(\Z)$.
+	\item[Script] $f:\sF\to\sG$, $g:\sH\to\sI$, $\sL\otimes_{\sO_X}\sM$.
+	\item[Sans serif] $\fC$, $\fD$, $\Set$, $\Grp$, $\Gpd$, $\Ab$, $\Ring$, $\Mod_A$, $\Alg_k$, $\Vect_k$, $\Top$,
+	$\LocRing$, $\AffSch$, $\Sch$, $\Man$, $\Fun$.
+\end{description}
+\end{document}

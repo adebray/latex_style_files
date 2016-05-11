@@ -1,0 +1,207 @@
+\begin{quote}\textit{
+	``There was a mistranslation in Grothendieck's quote, `the rising sea:' he was actually talking about raising
+	an \(X\)-wing fighter out of a swamp using the Force.''
+	% the force-alg-geo analogy works surprisingly well
+	% it's a little bit more like a religion
+	% Kylo Ren is Lurie, ...
+}\end{quote}
+There are a lot of things that go under the scheme of algebraic geometry, but in this class we're going to use the
+slogan ``algebra = geometry;'' we'll try to understand algebraic objects in terms of geometry and vice versa.
+
+There are two main bridges between algebra and geometry: to a geometric object we can associate algebra via
+functions, and the reverse construction might be less familiar, the notion of a spectrum. This is very similar to
+the notion of the spectrum of an operator.
+
+We will follow the textbook of Ravi Vakil,
+\href{http://math.stanford.edu/~vakil/216blog/FOAGdec2915public.pdf}{\textit{The Rising Sea}}. There's also a
+course website.\footnote{\url{https://www.ma.utexas.edu/users/benzvi/teaching/alggeom/syllabus.html}.} The
+prerequisites will include some commutative algebra, but not too much category theory; some people in the class
+might be bored. Though we're not going to assume much about algebraic sets, basic algebraic geometry, etc., it will
+be helpful to have seen it.
+
+Let's start. Suppose \(X\) is a space; then, there's generally a notion of \(\C\)-valued functions on it, and this
+space might be \(F(X)\). For example, if \(X\) is a smooth manifold, we have \(C^\infty(X)\), and if \(X\) is a
+complex manifold, we have the holomorphic functions \(\operatorname{Hol}(X)\).\footnote{The best examples here are
+Riemann surfaces; when the professor imagines a ``typical'' or example algebraic variety, he sees a Riemann
+surface.} Another category of good examples is \term{algebraic sets}, \(X\subset\C^n\) that is given by the common
+zero set of a bunch of polynomials: \(X = \{f_1(x) =\dotsb= f_k(x) = 0\}\) for some
+\(f_1,\dots,f_k\in\C[x_1,\dots,x_n]\). These have a natural notion of function, \term{polynomial functions}, which
+are polynomials in \(\C[x_1,\dots,x_n]\) restricted to \(X\), If \(I(X)\) is the functions vanishing on \(X\), then
+these functions are given by \(\C[x_1,\dots,x_n]/I\).
+
+The point is, on all of our spaces, the functions have a natural ring structure.\footnote{In this class, all rings
+will be commutative and have a \(1\). Ring homomorphisms will send \(1\) to \(1\).} In fact, there's more: the
+constant functions are a map \(\C\to F(X)\), and since \(\C\) is a field, this map is injective. This means
+\(F(X)\) is a \(\C\)-algebra, i.e.\ it is a \(\C\)-vector space with a commutative, \(\C\)-linear multiplication.
+
+One of the things Grothendieck emphasized is that one should never look at a space (or an anything) on its own, but
+consider it along with maps between spaces. For example, given a map \(\pi:X\to Y\) of spaces, we always have a
+\term{pullback} homomorphism \(\pi^*: F(Y)\to F(X)\): if \(f:Y\to\C\), then its pullback is \(\pi^*y(x) =
+y(\pi(x))\). This tells us that we have a \term{functor} from spaces to commutative rings.
+\subsection*{Categories and Functors.}
+This is all done in Vakil's book, but in case you haven't encountered any categories in the streets, let's revisit
+them.
+\begin{defn}
+A \term{category} \(\fC\) consists of a set\footnote{This is wrong. But if you already know that, you know that
+worrying about set-theoretic difficulties is a major distraction here, and not necessary for what we're doing, so
+we're not going to worry about it.} of \term{objects} \(\operatorname{Ob}\fC\); if \(X\in\operatorname{Ob}\fC\), we
+just say \(X\in\fC\). We also have for every \(X,Y\in\fC\) the set \(\Hom_\fC(X,Y)\) of \term{morphisms}. For every
+\(X,Y,Z\in\fC\), there's a \term{composition map} \(\Hom_\fC(X,Y)\times\Hom_\fC(Y,Z)\to\Hom_\fC(Y,Z)\) and a unit
+\(1_X\in\Hom_\fC(X,X) = \operatorname{End}_\fC(X)\) satisfying a bunch of axioms that make this behave like
+associative function composition.
+\end{defn}
+To be precise, we want categories to behave like monoids, for which the product is associative and unital. In fact,
+a category with one object is a monoid. Thus, we want morphisms of categories to act like morphisms of monoids:
+they should send composition to composition.
+\begin{defn}
+A \term{functor} \(F:\fC\to\fD\) is a function \(F:\operatorname{Ob}\fC\to\operatorname{Ob}\fD\) with an
+induced map on the morphisms:
+\begin{itemize}
+	\item If the map acts as \(\Hom_\fC(X,Y)\to\Hom_{\fD}(F(X),F(Y))\), \(F\) is called a \term{covariant}
+	functor.
+	\item If it sends \(\Hom_\fC(X,Y)\to\Hom_{\fD}(F(Y),F(X))\), then \(F\) is \term{contravariant}.
+\end{itemize}
+\end{defn}
+When we say ``functor,'' we always mean a covariant functor, and here's the reason. Recall that for any monoid
+\(A\) there's the \term{opposite monoid} \(A^{\text{op}}\) which has the same set, but reversed multiplication:
+\(f\cdot_{\text{op}} g = g\cdot f\). Similarly, given a category \(\fC\), there's an \term{opposite category}
+\(\fC\op\) with the same objects, but \(\Hom_{\fC\op}(X,Y) = \Hom_{\fC}(Y,X)\). Then, a contravariant functor
+\(\fC\to\fD\) is really a covariant functor \(\fC\op\to\fD\). Hence, in this class, we'll just refer to
+functors, with opposite categories where needed.
+\begin{ex}
+Show that a functor \(\fC\op\to\fD\) induces a functor \(\fC\to\fD\op\).
+\end{ex}
+
+When presented a category, you should always ask what the morphisms are; on the other hand, if someone tells you
+``the category of smooth manifolds,'' they probably mean that the morphisms are smooth functions.
+
+Now, we see that pullback is a functor \(F:\mathsf{Spaces}\to\mathsf{Ring}\op\). One of the major goals of this
+class is to define a category of spaces on which this functor is an equivalence. This might not make sense,
+\emph{yet}. This is the seed of ``algebra = geometry.''
+\begin{defn} % TODO: pretty functor diagram!
+Let \(F,G:\fC\rightrightarrows\fD\) be functors. A \term{natural transformation} \(\eta:F\Rightarrow G\) is a
+collection of maps: for every \(X\in\fC\), there's a map \(\eta_X:F(X)\to G(X)\) satisfying a consistency
+condition: for every \(f:X\to Y\) in \(\fC\), there's a commutative diagram
+\[\xymatrix{
+	F(X)\ar[r]^{\eta_X}\ar[d]_{F(f)} & G(X)\ar[d]^{G(f)}\\
+	F(Y)\ar[r]^{\eta_Y} & G(Y)
+}\]
+\end{defn}
+That is, a natural transformation relates the objects and the morphisms, and reflects the structure of the
+category.
+\begin{defn}
+A natural transformation \(\eta\) is a \term{natural isomorphism} if for every \(X\in\fC\), the induced
+\(\eta_X\in\Hom_{\fD}(F(X),G(X))\) is an isomorphism.
+\end{defn}
+This is equivalent to having a natural inverse to \(\eta\).
+
+So one might ask, what is the notion for which two categories are ``the same?'' One might naïvely suggest two
+functors whose composition is the identity functor, but this is bad. The set of objects isn't very useful: it
+doesn't capture the structure of the category. In general, asking for equality of objects is worse than asking for
+isomorphism of objects. Here's the right notion of sameness.
+\begin{defn}
+Let \(\fC\) and \(\fD\) be categories. Then, a functor \(F:\fC\to\fD\) is an \term{equivalence of
+categories} if there's a functor \(G:\fD\to\fC\) such that there are natural isomorphisms \(FG\to\id_{\mathsf
+D}\) and \(GF\to\id_{\fC}\).
+\end{defn}
+This is a very useful notion, and as such it will be useful to see an equivalence that is not an isomorphism.
+\begin{ex}
+Let \(k\) be a field, and let \(\fD = \mathsf{fdVect}_k\), the category of finite-dimensional vector spaces
+and linear maps, and let \(\fC\) be the category whose objects are \(\Z_{\ge 0}\), the natural numbers, with an
+object denoted \(\ang n\), and with \(\Hom(\ang n,\ang m) = \Mat_{m\times n}\). This is a category with composition
+given by matrix multiplication.
+
+Let \(F:\fC\to\fD\) send \(\ang n\mapsto k^n\), and with the standard realization of matrices as linear maps.
+Show that \(F\) is an equivalence of categories.
+\end{ex}
+This category \(\fC\) has only some vector spaces, but for those spaces, it has all of the morphisms.
+\begin{defn}
+Let \(F:\fC\to\fD\) be a functor.
+\begin{itemize}
+	\item \(F\) is \term{faithful} if all of the maps \(\Hom_\fC(X,Y)\inj \Hom_\fD(F(X),F(Y))\) are injective.
+	\item \(F\) is \term{fully faithful} if all of these maps are isomorphsism.
+	\item \(F\) is \term{essentially surjective} if every \(X\in\fD\) is isomorphic to \(F(Z)\) for some
+	\(Z\in\fC\).
+\end{itemize}
+\end{defn}
+The following theorem will also be a useful tool.
+\begin{thm}
+A functor \(F:\fC\to\fD\) is an equivalence iff it is fully faithful and essentially surjective.
+\end{thm}
+So, to restate, we want a category of spaces that is the opposite category to the category of rings; this is what
+Grothendieck had in mind. In fact, let's peek a few weeks ahead and make a curious definition:
+\begin{defn}
+The \term{category of affine schemes} is \(\mathsf{Rings}\op\).
+\end{defn}
+Of course, we'll make these into actual geometric objects, but categorically, this is all that we need.
+
+Recall that if \(f:M\to N\) is a set-theoretic map of manifolds, then \(f\) is smooth iff its pullback sends
+\(C^\infty\) functions on \(N\) to \(C^\infty\) functions on \(M\). The first step in this direction is the
+following theorem, sometimes called \term{Gelfand duality}.
+\begin{thm}[Gelfand-Naimark]
+The functor \(X\mapsto C^0(X)\) (the ring of continuous functions) defines an equivalence between the category of
+compact Hausdorff spaces and the (opposite) category of commutative \(C^*\)-algebras.
+\end{thm}
+This is an algebro-geometric result: it identifies a category of spaces with the opposite category of a category of
+algebraic objects.
+
+However, we need to think harder than Gelfand duality in terms of compact, complex manifolds or in terms of
+algebraic spaces: for example, for \(X = \C\P^1\), \(\operatorname{Hol}(X) = \C\): the only holomorphic functions
+are constant. The issue is that there are no partitions of unity in the holomorphic or algebraic world. This means
+we'll need to keep track of local data too, which will lead into the next few lectures' discussions on \term{sheaf
+theory}.
+
+Returning to the example of algebraic sets, suppose \(X\) and \(Y\) are algebraic sets. What is the set of their
+morphisms? We decided the ring of functions was the polynomial functions \(Y\to\C\), so we want maps \(X\to Y\) to
+be those whose pullbacks send polynomial functions to polynomial functions. To be precise, the \term{ideal of
+\(X\)} is \(I(X) = \{f\in\C[x_1,\dots,x_n]\mid f|_X = 0\}\), defining a map \(I\) from algebraic subsets of
+\(\C^n)\) to ideals in \(\C[x_1,\dots,x_n]\). There's also a reverse map \(V\),\footnote{\(V\) stands for
+``vanishing,'' ``variety,'' or maybe ``vendetta.''} sending an ideal \(I\) to \(V(I) = \{x\in\C^n\mid f(x) =
+0\text{ for all } f\in I\}\). From classical commutative algebra, it's a fact that this is finitely generated, so
+it's the vanishing locus of a finite number of polynomials, and therefore in fact an algebraic set.
+
+The dictionary between algebraic sets and ideals of \(\C[x_1,\dots,x_n]\) is one of many versions of the
+Nullstellensatz (more or less German for the ``zero locus theorem''): if \(J\) is an ideal, \(I(V(J)) = \sqrt J\),
+its radical.
+\begin{defn}
+Let \(R\) be a ring and \(J\subset R\) be an ideal. Then, the \term{radical} of \(J\) is \(\sqrt J = \{r\in R\mid
+r^n\in J\text{ for some } n > 0\}\). One says that \(J\) is \term{radical} if \(J = \sqrt J\).
+\end{defn}
+What this says is that \(J\) is radical iff \(R/J\) has no nonzero nilpotents.\footnote{Recall that if \(R\) is a
+ring, an \(r\in R\) is \term{nilpotent} if \(r^n = 0\) for some \(n\).} Why are these kinds of ideals relevant? If
+\(X\subset\C^n\) and \(f\) vanishes on \(X\), then so does \(f^n\) for all \(n\). That is, radicals encode the
+geometric property of vanishing, which is why \(I(X)\) is a radical ideal.
+
+This is an outline of what classical algebraic geometry studies: it starts by defining algebraic subsets, and
+establishing a bijection between algebraic subsets of \(\C^n\) and radical ideals of \(\C[x_1,\dots,x_n]\). This
+isn't yet an equivalence of categories. Radical ideals correspond to finitely generated \(\C\)-algebras with no
+(nonzero) nilpotents: an ideal \(I\) corresponds to the \(\C\)-algebra \(\C[x_1,\dots,x_n]/I\).
+
+This is all what the course is \emph{not} about; we're going to replace the category of finitely generated,
+nilpotent-free \(\C\)-algebras with the category of \emph{all} rings, but we want to keep some of the same
+intuition. This involves generalizing in a few directions at once, but we'll try to write down a dictionary; the
+defining principle is to identify spaces \(X\) with rings \(R = F(X)\), their ring of functions.
+
+A point \(x\in X\) is a map \(i_x:x\to X\), so we get a pullback \(i_x^*:F(X)\to\C\) given by evaluation at \(x\).
+Let \(\m_x = \ker(i_x^*)\); since \(\C\) is a field, this is a maximal ideal.\footnote{Recall that an ideal
+\(I\subset R\) is \term{maximal} iff \(R/I\) is a field. This is about the level of commutative algebra that we'll
+be assuming.} If \(k\) is a field and \(R\) is a \(k\)-algebra, then \(R/I\) is also a \(k\)-algebra, so in
+particular if \(I\) is maximal, then \(k\inj R/I\) is a map of fields, and therefore a field extension.  Thus, if
+\(k\) is algebraically closed (e.g.\ we're studying \(\C\)) and \(R\) is a finitely generated \(k\)-algebra, then
+maximal ideals of \(R\) are in bijection with homomorphisms \(R\to k\).
+
+Thus, given a ring \(R\), we'll associate a set \(\MSpec(R)\), the set of maximal ideals of \(R\), such that \(R\)
+should be its ring of functions. To do this, we'll say that an \(r\in R\) is a ``function'' on \(\MSpec(R)\) by
+acting on an \(\m_x\subset R\) as \(r\bmod\m_x\). This is a ``number,'' since it's in a field, but the notion may
+be different at every point in \(\MSpec(R)\)! For example, if \(R = \Z\), then \(\MSpec(\Z)\) is the set of primes,
+and \(n\in\Z\) is a function which at \(2\) is \(n\bmod 2\), at \(3\) is \(n\bmod 3\), and so on.
+
+A perhaps nicer example is when \(R = \R[x]\), which has maximal ideals \((x-t)\) for all \(t\in\R\). Here,
+evaluation sends \(f(x)\mapsto f(x)\bmod (x-t) = f(t)\). That is, this is really evaluation, and here the quotient
+field is \(\R\). So these look like good old real-valued functions, but these aren't all the maximal ideals:
+\((x^2+1)\) is also a maximal ideal, and \(\R[x]/(x^2+1) \cong \C\). Then, we do get a kind of evaluation again,
+but we have to identify points and their complex conjugates.
+
+So we'll have to find a good notion of geometry which generalizes from \(\C\)-algebras to \(k\)-algebras for any
+field \(k\), to any commutative rings. We'll also have to think about nilpotents: we threw them away by thinking
+about zero sets, but they play a huge role in ring theory.

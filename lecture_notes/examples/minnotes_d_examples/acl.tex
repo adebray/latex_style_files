@@ -1,0 +1,204 @@
+Today and the next few lectures, we're going to have a change of pace, developing some more fundamental properties
+of schemes before using them to talk more about quasicoherent sheaves, differentials, etc. Today, for example,
+we'll talk about affine covers, and what properties can be checked affine-locally. This will enable us to turn our
+story about differentials from one about rings and modules to one about schemes and quasicoherent sheaves.
+\begin{defn}
+An \term{affine open} of a scheme \(X\) is an open subset \(U\) that is isomorphic to \(\Spec A\) for some ring
+\(A\).
+\end{defn}
+The intersection of affine opens may not be itself open. For example, let \(X = \A^2\amalg_{\A^2\setminus 0}\A^2\),
+the \term{plane with two opens} (we've already done this with a line, and this isn't very different). The
+intersection of the two copies of \(\A^2\), which are both affine opens, is \(\A^2\setminus 0\), which we know is
+not affine.
+
+One can define what it means for a scheme to be separated, which is analogous to the Hausdorff condition on
+manifolds, and will guarantee that the intersection of affine opens is affine.
+\begin{prop}
+\label{affineintersprop}
+Let \(X\) be a scheme and \(\Spec A,\Spec B\subset X\) be affine opens. Then, \(\Spec A\cap\Spec B\) is a union of
+open subsets that are distinguished open subsets for both \(\Spec A\) and \(\Spec B\).
+\end{prop}
+\begin{proof}
+Suppose \(p\in\Spec A\cap\Spec B\). Then, there's an \(f\in A\) such that \(p\in\Spec A_f\subset\Spec A\cap\Spec
+B\), and therefore a \(g\in B\) such that \(p\in\Spec B_g\subset\Spec A_f\subset\Spec A\cap\Spec B\).
+
+The claim is that \(\Spec B_g\) is a distinguished open in \(\Spec A\). Restriction defines a map \(B = \sO_X(\Spec
+B)\to\sO_X(\Spec A_f) = A_f\); let \(\widetilde g\) be the image of \(g\) under this map. Then, the points of
+\(\Spec A_f\) where \(g\) vanishes are the same as the same points where \(\widetilde g\) vanishes (which is
+exactly what restriction does). Thus, \(\Spec B_g = \Spec (A_f)_{\widetilde g} = \Spec A_{f\widetilde g}\).
+\end{proof}
+One way to think of this is that a distinguished open of a distinguished open is distinguished in the original
+scheme.
+
+We'll use this to prove an extremely useful lemma, the affine communication lemma. This is sometimes called the ACL
+(not to be confused with the Austin City Limits music festival nor the anterior cruciate ligament in your knee,
+though these are both great things too).
+\begin{lem}[Affine communication lemma]
+\label{ACL}
+Suppose \(P\) is a property\footnote{Formally, a \term{property} is a subset of the set of affine opens of \(X\);
+more generally, one could do this in a way independent of the scheme \(X\) by considering the set of all affine
+open embeddings \(\Spec A\inj X\) over all schemes \(X\); a general property is a subset of this huge set. Examples
+will be Noetherianness, reducedness, etc.}
+enjoyed by some affine opens of a scheme \(X\), such that:
+\begin{enumerate}
+	\item\label{resthyp} The property is preserved by restriction: if \(\Spec A\in P\), then for all \(f\in A\),
+	\(\Spec A_f\in P\).
+	\item\label{gluehyp} The property is preserved by finite gluing: if \(A = (f_1,\dotsc,f_n)\) and \(\Spec
+	A_{f_i}\in P\) for all \(i\), then \(\Spec A\in P\).
+	\item\label{coverhyp} There is a cover of \(X\) by affine opens that satisfy \(P\).
+\end{enumerate}
+Then, every affine open subset of \(X\) is in \(P\).
+\end{lem}
+\begin{defn}
+If \(P\) is a property of affine opens that satisfies the hypotheses of Lemma~\ref{ACL}, then we'll call \(P\) an
+\term{affine-local} property.
+\end{defn}
+We'll generally use this to prove things about a scheme using only a particular cover, rather than having to check
+all affine opens. Another nice fact about affine-local properties is that any open subset \(U\subset X\) (not just
+affine opens) inherits any affine-local property of \(X\). Many of these properties will ultimately be geometric,
+and we'll give a long list of them.
+\begin{proof}[Proof of Lemma~\ref{ACL}]
+The proof is actually trivial: the perfect lemma is non-obvious, extremely useful, and easy to prove.
+
+Suppose \(\Spec A\subset X\) is open. There's a cover \(\fU\) of \(X\) by affine opens \(\Spec B_i\in P\) by
+hypothesis \eqref{coverhyp}. By Proposition~\ref{affineintersprop}, \(\Spec B_i\cap\Spec A\) can be covered by open
+subsets which are distinguished opens of both \(\Spec A\) and \(X\), and by hypothesis~\eqref{resthyp}, each of
+these has property \(P\). Thus, there's a cover of \(\Spec A\) by distinguished opens \(\Spec A_f\in P\).
+Since \(\Spec A\) is quasicompact, then we may assume this cover is finite, so by hypothesis~\eqref{gluehyp},
+\(\Spec A\in P\).
+\end{proof}
+There's a lot of verifications that various properties are affine-local; we'll skip over some of these.
+
+The following proposition is Exercises 5.3.G and 5.3.H in Vakil's notes. Recall that a ring is reduced if it has no
+nilpotents other than \(0\).
+\begin{prop}
+Let \(A\) be a ring and \(f_1,\dotsc,f_n\) generate \(A\).
+\begin{enumerate}
+	\item \(A\) is reduced iff \(A_{f_i}\) is reduced for all \(i\).
+	\item\label{noethaffloc} \(A\) is Noetherian iff \(A_{f_i}\) is Noetherian for all \(i\).
+	\item\label{fgloc} If \(B\) is another ring and \(B\to A\) gives \(A\) the structure of a \(B\)-algebra, then
+	\(A\) is finitely generated over \(B\) iff each \(A_{f_i}\) is finitely generated over \(B\).
+\end{enumerate}
+\end{prop}
+This means that the analogoues of these properties for schemes are affine-local.
+\begin{proof}[Proof of items~\eqref{noethaffloc} and \eqref{fgloc}]
+Though we'll only prove one of these, most of the proofs of these things go the same way. There are a few
+exceptions, however.
+
+First, suppose \(A\) is Noetherian, and let \(I_1\subsetneqq I_2\subsetneqq I_3\subsetneqq\dotsb\) be an ascending
+chain of ideals in \(A_f\). Let \(\iota:A\inj A_f\) be the canonical inclusion, and let \(J_i =
+\iota^{-1}(I_i)\).\footnote{If \(A\) is an integral domain, we can think of this as \(I_i\cap A\subset A\subset A_f\),
+but this isn't always true in general.} Then, \(J_1\subset J_2\subset J_3\subset\dotsb\). Inside \(A_f\), there
+must be some \(x/f^N\in I_{n+1}\ I_n\), and therefore, by clearing denominators, \(x\in J_{n+1}\setminus J_n\), so
+\(A\) isn't Noetherian.
+
+In the other direction, we'll also prove the contrapositive. Suppose \(J_1\subsetneqq J_2\subsetneqq
+J_3\subsetneqq\dotsb\) be an ascending chain of ideals in \(A\), and for each \(i\), let \(I_{i,j}\) be the
+localization of \(J_j\) at \(f_i\). Then, for all \(j\), there's some \(i\) for which \(I_{i,j}\subsetneqq
+I_{i,j+1}\). The idea is that since the \(f_i\) generate \(A\), then \(A\inj\prod_{i=1}^n A_{f_i}\) sending
+\(r_i\mapsto (r_i)_{i=1}^n\). If \(r_j\in J_{j+1}\setminus J_j\), then \(r_j\subset I_{i,j}\) for al \(i\), but it
+can't be in all of the \(I_{i,j+1}\). There's a little more to say here, but it's kind of annoying.
+
+For~\eqref{fgloc} let \(r_1,\dotsc,r_n\) be generators of \(A\) as a \(B\)-algebra. Then, \(A_f\) is generated by
+\(\set{r_1,\dotsc,r_n,1/f}\), so it's clearly finitely generated. Conversely, since the \(f_i\) generate \(A\),
+then \(1 = \sum r_if_i\) for some \(r_i\in A\). If \(A_{f_i}\) is generated by a finite set
+\(\set{s_{ij}/f_j^{k_j}}\), with the \(s_{ij}\in A\), then (again, there's something to check here) \(A\) is
+generated by \(\set{f_i, r_i, s_{ij}}\), which is a finite set.
+\end{proof}
+\begin{defn}
+A scheme \(X\) is \term{reduced} if for all open subsets \(U\subset X\), \(\sO_X(U)\) is a reduced ring.
+\end{defn}
+Since \(\sO_X(U)\inj\prod_{x\in U}\sO_{X,x}\) as rings, this is equivalent to \(\sO_{X,x}\) being reduced for all
+\(x\in X\).
+
+One could also define an affine scheme \(\Spec A\) to be reduced if \(A\) is a reduced ring; then, our definition
+is equivalent to affine opens of \(X\) being reduced, and hence, by Lemma~\ref{ACL}, there's a cover of \(X\) by
+reduced affine opens. That is, we've proven the following.
+\begin{cor}
+The following are equivalent for a scheme \(X\).
+\begin{enumerate}
+	\item \(X\) is reduced.
+	\item For every \(x\in X\), \(\sO_{X,x}\) is reduced as a ring.
+	\item All affine opens of \(X\) are reduced.
+	\item There exists a cover of \(X\) by reduced affine opens.
+\end{enumerate}
+\end{cor}
+The naïve definition of reducedness would be for \(\Gamma(\sO_X)\) to be a reduced ring; however, this is
+\emph{not} equivalent. One example is the ``first-order neighborhood of \(\P^1\)'' in the total space \(\sO(1)\).
+Using split square-zero extensions, \(\sO_{\P^1}\oplus\sO(-1)\) is a ring, so we can define the scheme
+\(X = \Spec(\sO_{\P^1}\oplus\sO(-1))\). This has no nonconstant global functions, so \(\Gamma(\sO_X)\) is reduced;
+however, locally, the functions on the first-order neighborhood looks like \(k[\e]/(\e^2)\), which is not reduced.
+This is why we used the definition that we did.
+
+One moral is that, on non-affine schemes, global ring-theoretic properties may be badly behaved, so it's better to
+use local ones.
+\begin{defn}
+Let \(X\) be a scheme.
+\begin{itemize}
+	\item \(X\) is \term{locally Noetherian} if there's a cover \(\fU\) by affine opens \(X = \bigcup_{i\in I}
+	\Spec A_i\) such that each \(A_i\) is a Noetherian ring.
+	\item \(X\) is \term{Noetherian} if it's quasicompact and locally Noetherian.
+\end{itemize}
+\end{defn}
+Hence, if \(X\) is Noetherian, we can choose the cover \(\fU\) to be finite. Moreover, by Lemma~\ref{ACL}, if \(X\)
+is locally Noetherian, \emph{all} affine open subsets of \(X\) are Noetherian.
+
+Noetherianness is a very nice property, which is good because lots of schemes you and I might care about are
+Noetherian. It's a strong ``finite-dimensionality'' condition. The following property is one nice example.
+\begin{prop}
+\label{noethnice}
+If \(X\) is a Noetherian scheme, it's also Noetherian as a topological space, and therefore all open subsets of
+\(X\) are quasicompact.
+\end{prop}
+Hence, for Noetherian schemes, the quasicompactness propagates, which is nice.
+\begin{defn}
+A scheme \(X\) is \term{quasiseparated} (abbreviated QS) if the intersection of any two quasicompact opens of \(X\)
+is itself quasicompact.
+\end{defn}
+This means that the intersection of two affines may not be affine, but is a finite union of affines. This is not
+just nice, but something that's scary to not have. Affine schemes are clearly QS, but so are locally Noetherian
+schemes, because all quasicompact open subsets \(U\) of a locally Noetherian scheme \(X\) are Noetherian, so by
+Proposition~\ref{noethnice}, any open subset of \(U\) is also quasicompact.
+
+The QS condition is not a restriction, because almost all schemes you will come across will be quasiseparated;
+instead, it's a signal that QS is used in a proof.
+\begin{exm}
+There are schemes that are not quasiseparated, however; if \(\A_k^\infty = \Spec k[x_1,x_2,\dotsc]\), then
+\(\A_k^\infty\setminus 0\) isn't quasiseparated (not quasicompact).
+\end{exm}
+In some literature, ``scheme'' means ``quasicompact, quasiseparated scheme,'' and a scheme lacking these hypotheses
+is explicity noted to not satisfy them. There is a lot of interesting infinite-dimensional geometry (e.g.\
+classifying vector bundles), but we're not going to worry about them in this class.
+
+We'll use the acronym QCQS to denote ``quasicompact quasiseparated;'' a scheme \(X\) is QCQS iff there's a finite
+cover of \(X\) by affine opens, all of whose pairwise intersections are finite unions of affines. This is an
+extremely useful hypothesis in arguments where you want to glue a hypothesis that we know about affine opens of a
+QCQS scheme. It's not a particularly interesting geometric property, but is a ``reasonableness'' property, akin to
+paracompactness of manifolds, that is a technical ingredient in proofs.
+\subsection*{Properties of morphisms.}
+Let \(\pi:X\to Y\) be a map of schemes. The preceding discussion allows us to define lots of different nice
+properties that \(\pi\) could satisfy. In particular, we'll define a bunch of properties of \(\pi\) that can be
+determined affine-locally on both \(X\) and \(Y\) (since here they correspond to homomorphisms of rings in the
+opposite direction).
+
+To be precise, let \(\Spec B\subset Y\) be an affine open and \(\Spec A\subset\pi^{-1}(\Spec B)\), so \(\Spec A\)
+is an affine open subset of \(X\). Thus, \(A\) is a \(B\)-algebra.
+\begin{defn}
+\(\pi\) is \term{locally of finite type} if for every affine open \(\Spec B\subset Y\) and every affine open
+\(\Spec A\subset\pi^{-1}(\Spec B)\), \(A\) is finitely generated as a \(B\)-algebra.
+\end{defn}
+If \(X\) and \(Y\) are Noetherian, this is equivalent to such \(A\) being finitely presented as a \(B\)-algebra; in
+general, the two may be different, and if \(A\) is finitely presented as a \(B\)-algebra, one says \(\pi\) is
+\term{locally of finite presentation}. We're not going to use this very much.
+
+By the affine communication lemma, \(\pi\) is locally of finite type iff for all affine opens \(\Spec B\) of \(Y\),
+\(\pi^{-1}(\Spec B)\) can be covered by affine opens \(\Spec A_i\) such that \(A_i\) is a finitely generated
+\(B\)-algebra, which is easier to check.
+
+Now, we can generalize a few properties of schemes to properties of morphisms.
+\begin{comp}{defn}{itemize}
+	\item \(\pi\) is \term{quasicompact} (resp.\ \term{quasiseparated}) if for all affine opens \(\Spec B\subset
+	Y\), \(\pi^{-1}(\Spec B)\) is quasicompact (resp.\ quasiseparated).
+	\item \(\pi\) is \term{affine} if for all affine opens \(\Spec B\subset Y\), \(\pi^{-1}(\Spec B)\) is affine.
+\end{comp}
+We'll prove these satisfy the hypotheses of Lemma~\ref{ACL}; this will make them extremely useful.

@@ -1,0 +1,236 @@
+\begin{quote}\textit{
+	``To this end, we're going to give a crash course in category theory over the next few lectures; the door is
+	over there.''
+}\end{quote}
+Remember that our general agenda is to match algebra and geometry; one way to express this idea is to take the
+category of rings and identify it with some category of geometric objects. However, we're going to reverse the
+arrows, and we'll get the category of affine schemes. These are some geometric spaces, with a contravariant functor
+from affine schemes to rings given by taking the ring of functions and a functor in the opposite direction called
+\(\Spec\).
+
+One potential issue is that spaces may not have enough functions, e.g.\ \(\C\P^1\) as a complex manifold only has
+constant functions; as such, we'll enlarge our category to a whole category of schemes, which will also have an
+algebraic interpretation. Another weird aspect is that functions may take values in varying fields.
+
+Schemes generalize geometry in three different directions: gluing spaces together to ensure we have enough
+functions is topology, like making manifolds; functions having varying codomains is useful for arithmetic and
+number theory; and allowing for rings with nilpotents feels a little like analysis.
+
+Last time, we defined \(\MSpec(R)\) for a ring \(R\), the set of maximal ideals. It turns out that topology is not
+sufficient to understand these spaces; for example, the class of \term{local rings} are those with only one maximal
+ideal. There are many such rings, e.g.\ \(\C[x]/(x^n)\), whose maximal ideal is \((x)\). In short, \(\MSpec\)
+doesn't see nilpotents.
+
+To any ring \(R\), one can attach the category \(\mathsf{Mod}_R\), whose objects are \(R\)-modules and morphisms
+are \(R\)-linear maps (those commuting with the action of \(R\)). This category is one of the more important things
+one studies in algebra, and we also want to express them in terms of geometric objects that are related somehow to
+\(\Spec R\). This should also help us understand the algebraic properties of \(R\)-modules too.
+\subsection*{Crash Course in Categories.}
+There's a lot of categorical notions in algebraic geometry; it does strike one as a painful way to start a course,
+but hopefully we can get it out of our systems and move on to geometry knowing what we need. This corresponds to
+chapters 1 and 2 in the book.
+
+We've seen several examples of categories: sets, groups, rings, etc. The next example is a useful class of
+categories.
+\begin{defn}
+A \term{poset} is a set \(\fS\) and a relation \(\le\) on \(\fS\) that is
+\begin{itemize}
+	\item \term{reflexive}, so \(x\le x\) for all \(x\in\fS\);
+	\item \term{transitive}, so if \(x\le y\) and \(y\le z\), then \(x\le z\); and
+	\item \term{antisymmetric}, so if \(x\le y\) and \(y\le x\), then \(x = y\).
+\end{itemize}
+\(\fS\) has the structure of a category: the objects are the elements of \(\fS\), and \(\Hom(x,y)\) is
+\(\set{\pt}\) if \(x\le y\) and is empty otherwise.
+\end{defn}
+Transitivity means that we have composition, and reflexivity gives us identity maps.
+
+This is an unusual example compared to things like ``the category of all (somethings),'' but is quite useful: a
+functor from the poset \(\bullet\to\bullet\) to another category \(\fC\) is a choice of \(A,B\in\fC\) and a map
+\(A\to B\); a functor from the poset \(\N\) is the same as an infinite sequence in \(\fC\), and a commutative
+diagram is the same as a functor out of the category
+\[\xymatrix{
+	\bullet\ar[r]\ar[d] & \bullet\ar[d]\\
+	\bullet\ar[r] & \bullet
+}\]
+into \(\fC\).
+\begin{exm}
+A particularly important example of this: if \(X\) is a topological space, then its open subsets form a poset under
+inclusion. Hence, they form a category, called \(\Top(X)\). This category is important for sheaf theory, which we
+will say more about later. For example, if \(A\) is an abelian group and \(U\subset X\) is open, then let
+\(\sO_A(U)\) denote the abelian group of \(A\)-valued functions on \(U\) (for example, \(A\) might be \(\C\), so
+\(\sO_A(U) = C^\infty(U)\)). If \(V\subset U\), then restriction of functions defines a map \(\res_U^V:
+\sO_A(U)\to\sO_A(V)\). Since restriction obeys composition, then we've defined a functor \(\sO_A:
+\Top(X)\op\to\mathsf{Ab}\) (or perhaps to \(\C\)-algebras, or another category); this is a \term{presheaf of
+abelian groups} (or \(\C\)-algebras, etc.).
+\end{exm}
+To be precise, a \term{presheaf} on \(X\) is a functor out of \(\Top(X)\op\). This is a way of organizing functions
+in a way that captures restriction; it will be very useful throughout this class.
+
+Returning to category theory, one of its greatest uses is to capture structure through universal properties, rather
+than using explicit details of a given category. We'll give a few universal properties here.
+\begin{defn}
+Let \(\fC\) be a category.
+\begin{itemize}
+	\item A \term{final} (or \term{terminal}) object in \(\fC\) is a \(*\in\fC\) such that for all \(X\in\fC\),
+	there's a unique map \(X\to*\).
+	\item An \term{initial} object is a \(*\in\fC\) such that for all \(X\in\fC\), there's a unique map \(*\to X\).
+\end{itemize}
+\end{defn}
+This is not the last time we'll have dual constructions produced by reversing the arrows.
+\begin{exm}
+If \(\fC\) is a poset, then a terminal object is exactly a maximum element, and an initial object is a minimum
+element. Thus, in particular, they do not necessarily exist.
+\end{exm}
+Nonetheless, if a final (or initial)  object exists, it's necessarily unique.
+\begin{prop}
+Let \(*\) and \(*'\) be terminal objects in \(\fC\); then, there's a unique isomorphism \(*\) to \(*'\).
+\end{prop}
+\begin{proof}
+There's a unique map \(*\to *\), which therefore must be the identity, and there are unique maps \(*\to *'\) and
+\(*'\to *\), so composing these, we must get the identity, so such an isomorphism exists, and it must be unique,
+since there's only one map \(*\to *'\).
+\end{proof}
+By reversing the arrows, the same thing is true for initial objects. Thus, if such an object exists, it's unique,
+so one often hears ``the'' initial or final object. These will be useful for constructing other universal
+properties.
+\begin{comp}{exm}{enumerate}
+	\item In the category of sets, or in the category of topological spaces, the final object is a single point:
+	everything maps to the point. The initial object is the empty set, since there's a unique (empty) map to any
+	set or space.
+	\item In \(\mathsf{Ab}\) or \(\mathsf{Vect}_k\) (abelian groups and vector spaces, respectively), \(0\) is both
+	initial and terminal: the unique map is the zero map. An object that is initial and final is called a
+	\term{zero object}; as in the case of sets, it may not exist.
+	\item In the category of rings, \(0\) is terminal, but not initial (since a map out of \(0\) must send \(0 =
+	1\) to \(0\) and \(1\)). \(\Z\) is initial, with the unique map determined by \(1\mapsto 1\).\footnote{That
+	rings and ring homomorphisms are unital is important for this to be true.}
+	\item Even though we don't really understand what an affine scheme is yet, we know that \(\Spec\Z\) has to be a
+	terminal object, and \(\Spec 0\) has to be the initial object. Since we want this to be geometric, then
+	\(\Spec\Z\) will play the role of a point. It might not look like a point, but categorically it behaves like
+	one.
+	\item The category of fields is also interesting: setting \(1 = 0\) isn't allowed, so there are neither initial
+	nor terminal objects! If we specialize to fields of a given characteristic, then we get a unique map out of
+	\(\Q\) or \(\F_p\), so the category of fields of a given characteristic is initial.
+	\item The poset \(\Top(X)\) has \(\varnothing\) initial and \(X\) terminal: it has top and bottom objects.
+\end{comp}
+The fact that initial and terminal objects are unique means that if you characterize an object in terms of initial
+or terminal objects, then you know they're unique as soon as they exist.
+\begin{defn}
+If \(R\) is a ring, we have the category \(\Alg_R\) of \(R\)-algebras (rings \(T\) with the extra structure of a
+map \(R\to T\); morphisms must commute with this map). This is an example of something more general, called an
+\term{undercategory}: if \(\fC\) is a category and \(X\in\fC\), then the undercategory \(X\downarrow \fC\) is the
+category whose objects are data of \(Y\in\fC\) with \(\fC\)-morphisms \(a_Y: X\to Y\) and whose morphisms are
+commutative diagrams
+\[\xymatrix@C=0.5cm{
+	Y_1\ar[rr]^\vp && Y_2\\
+	& X.\ar[ul]^{a_{Y_1}}\ar[ur]_{a_{Y_2}}
+}\]
+In the same way, the \term{overcategory} \(X\uparrow\fC\) is the same idea, but with maps to \(X\) rather than from
+\(X\) (e.g.\ spaces over a given space \(X\)).
+\end{defn}
+Thus, it's possible to concisely define \(\Alg_R = R\downarrow\mathsf{Ring}\). We will see other examples of this.
+\begin{exm}[Localization]
+Let \(R\) be a ring and \(S\subset R\) be a multiplicative subset. Then, the \term{localization at \(S\)} is
+\(S^{-1}R = \set{r/s\mid r\in R, s\in S: r/s = r/s'\text{ when } s''(rs' - r's) = 0\text{ for some } s''\in S}\).
+This is a construction we'll use a lot, so it will be useful to have a canonical characterization of them.
+
+Now, let \(\fC\) be the category of \(R\)-algebras \(T\) with maps \((\vp_T:R\to T\) such that (and this is
+a property, not structure) \(\vp_T(s)\) is invertible in \(T\) for all \(s\in S\).
+\begin{ex}
+Show that \(S^{-1}R\) is the initial object in \(\fC\).
+\end{ex}
+The naïve idea that localization is ``fractions in \(S\)'' is true if \(R\) is an integral domain, but if
+we have zero divisors, the \(R\)-algebra structure map \(R\to S^{-1}R\) need not be injective. But the point is
+that if \(T\) is an \(R\)-algebra where the elements of \(S\) become invertible, the map \(\vp_T\) factors through
+\(S^{-1}R\); this means that \(S^{-1}R\) is the element of \(\fC\) that's ``closest to \(R\).'' However, you still
+have to concretely build it to show that it exists; however, we know already that it's determined up to unique
+isomorphism, so we say ``the'' localization.
+\end{exm}
+Another very fundamental language for making constructions is that of limits and colimits. It may seem a little
+strange, but it's quite important.
+\begin{defn}
+Let \(I\) be a \term{small category} (so its objects form a set); in the context of limits, we will refer to it as
+an \term{index category}. Then, a functor \(A:I\to\fC\) is called a \term{\(I\)-shaped} (or \term{\(I\)-indexed})
+\term{diagram in \(\fC\)}.
+\end{defn}
+That is, if \(m:i\to j\) is a morphism in \(I\), then this diagram contains an arrow \(A(m): A_i\to A_j\).
+\begin{defn}
+Let \(A\) be an \(I\)-shaped diagram in \(\fC\). Then, a \term{cone} on \(A\) is the data of an object \(B\in\fC\)
+and maps \(A_i\to B\) for every \(i\in I\) commuting with the morphisms in \(I\).
+\begin{figure}[h!]
+\[\xymatrix{
+	A_1\ar[r]\ar[d]\ar@/_0.3cm/[drrr] & A_3\ar[drr]\\
+	A_2\ar[ur]\ar[rrr] &&& B
+}\]
+\caption{A cone on a diagram \(A\).}
+\end{figure}
+The cones on \(A\) form a category \(\mathsf{Cones}_A\), where the morphisms are maps \(B\to B'\) commuting with
+all the maps in the cone.
+\end{defn}
+We can also take the category of ``co-cones,'' which are data of maps from \(B\) \emph{into} the diagram. This is
+not quite the opposite category (since we want maps \(B\to B'\) commuting with the maps into the
+diagram).\footnote{Some people switch the definitions of cones and co-cones, but since we're not going to use these
+words very much, it doesn't matter all that much.}
+\begin{comp}{defn}{itemize}
+	\item The \term{colimit} \(\varinjlim_I A\) is the initial object in the category of cones of \(A\).
+	\item The \term{limit} \(\varprojlim_I A\) is the terminal object in the category of co-cones of \(A\).
+\end{comp}
+As before, colimits and limits may or may not exist, but if they do, they're unique up to unique isomorphism.
+
+Colimits act like a quotient, and it's easier to map out of them. Correspondingly, limits behave like a subobject,
+and it's easier to map into them.
+\begin{exm}[Products and Coproducts]
+Let \(I = \bullet\ \bullet\) be a two-element discrete set (no non-identity arrows). Thus, an \(I\)-shaped diagram
+is just a choice of two spaces \(A_1\) and \(A_2\), so a colimit \(C_1\) is the data of a unique map \(\vp_B\) for
+each \(B\in\fC\) fitting into the following diagram.
+\[\xymatrix@R=0.3cm{
+	A_1\ar[dr]\ar@/^0.4cm/[drr]\\
+	& C_1\ar[r]^{\vp_B} & B\\
+	A_2\ar[ur]\ar@/_0.4cm/[urr]
+}\]
+This is called the \term{coproduct} of \(A_1\) and \(A_2\), denoted \(A_1\sqcup A_2\) or \(A_1\amalg A_2\).
+
+Similarly, the limit of \(A\) is called the \term{product} of \(A_1\) and \(A_2\), is denoted \(A_1\times A_2\),
+and fits into the diagram
+\[\xymatrix@R=0.3cm{
+	&& A_1\\
+	B\ar[r]\ar[urr]\ar[drr] & A_1\times A_2\ar[ur]\ar[dr]\\
+	&& A_2
+}\]
+In the same way, if \(I\) is a larger discrete set, we get coproducts and products of objects in \(\fC\) indexed by
+\(I\), denoted \(\coprod_I A_i\) and \(\prod_I A_i\), respectively.
+
+In the category of sets, the product is Cartesian product, and the coproduct is disjoint union. The same is true in
+topological spaces.
+
+In the category of groups, the product is once again Cartesian product, but the coproduct is the free product
+(mapping out of it is the same as mapping out of the individual components, which is not true of the direct
+product). As underlying sets, this is distinct from the coproduct of sets.
+
+In linear categories, e.g.\ \(\mathsf{Ab}\), \(\mathsf{Mod}_R\), or \(\mathsf{Vect}_k\), \(V\oplus W\) is the
+product and coproduct, and the same is true over all finite \(I\). However, this is \emph{not} true when \(I\) is
+infinite: the coproduct is the direct sum, which takes finite sums of elements, and the product is the Cartesian
+product, which takes arbitrary sums of elements. It's worth working out why this is, and how it works.
+\end{exm}
+Many of these categories are ``sets with structure,'' e.g.\ groups, vector spaces, topological spaces, and so on.
+In these cases, there is a \term{forgetful functor} which forgets this structure: indeed, a group homomorphisms
+(continuous map, linear map) is a map of sets too.\footnote{If this seems vague, that's all right; it's possible to
+define and find forgetful functors more formally.}
+
+There's a useful principle here: \emph{forgetful functors preserve limits}: if \(F\) is a forgetful functor, then
+there is a canonical isomorphism \(F(\varprojlim A)\cong\varprojlim F(A)\). This is something that can be defined
+more rigorously and proven. But one important corollary is that if you know what the limit looks like for sets,
+it's the same in groups, rings, vector spaces, topological spaces, and so on. However, this is very false for
+coproducts, e.g.\ the coproduct on groups is not the same as the one on sets.
+
+This becomes a little cooler once we see limits that aren't just products.
+\begin{exm}
+Consider the diagram of rings
+\[\xymatrix{
+\dotsb\ar[r] & \Z/p^n\ar[r] & \dotsb\ar[r] & \Z/p^3\ar[r] & \Z/p^2\ar[r] & \Z/p,
+}\]
+where each map is given by modding out by \(p\). One can show that the limit exists, and it'll be the same as
+the limit of the underlying sets, a sequence of compatible elements; this limit is called the \term{\(p\)-adic
+integers}, denoted \(\Z_p\). More generally, the same thing works for \(\varprojlim R/I^n\) for an ideal \(I\subset
+R\), and defines the \term{\(I\)-adic completion} \(\widehat R_I\), which we'll revisit, since it has useful
+geometric meaning.
+\end{exm}

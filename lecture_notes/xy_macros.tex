@@ -31,9 +31,13 @@
 %   f
 % X => Y
 %   g
-\DeclareDocumentCommand{\dblarrow}{O{} O{} O{}}{
-	\ar@<0.4ex>[#1]^-{#2}\ar@<-0.4ex>[#1]_-{#3}
+% Since LaTeX is parsing a class file, we need to tell it that @ is not part of the
+% \ar command, or we get some opaque errors.
+\makeatother
+\DeclareDocumentCommand{\dblarrow}{O{} O{} O{}}{%
+	\ar@<0.4ex>[#1]^-{#2}\ar@<-0.4ex>[#1]_-{#3}%
 }
+\makeatletter
 % Note: it would be a useful exercise to figure out how to define this so it can
 % be used as \dblarrow[r]^f_g.
 

@@ -1,6 +1,7 @@
 % Mathematicians have lots of fancy fonts
 
 % \mathbb -- notable sets
+% TODO: would be nice to allow people to override \mathbb with \mathbf
 \newcommand{\A}{\mathbb A} % affine space
 \newcommand{\C}{\mathbb C} % complex numbers
 \newcommand{\D}{\mathbb D} % unit disc inside \C
@@ -62,25 +63,28 @@
 \newcommand{\sO}{\mathscr O} % ring of functions
 
 % \mathsf -- categories
-\newcommand{\fC}{\mathsf C}
-\newcommand{\fD}{\mathsf D}
 \newcommand{\cat}{\mathsf}
-\newcommand{\Set}{\cat{Set}} % sets
-\newcommand{\Grp}{\cat{Grp}} % groups
-\newcommand{\Gpd}{\cat{Gpd}} % groupoids
-\newcommand{\Ab}{\cat{Ab}} % abelian groups
-\newcommand{\Ring}{\cat{Ring}} % rings
-\newcommand{\Mod}{\cat{Mod}} % modules (over a ring)
-\newcommand{\Alg}{\cat{Alg}} % algebras (over a ring)
-\newcommand{\Vect}{\cat{Vect}} % vector spaces (over a field)
-\AtBeginDocument{ % sometimes already defined (e.g. in kpfonts)
-	\def\Top{\cat{Top}} % topological space
+% The user can redefine \cat to be something else (e.g. mathbf). However, I'd also
+% like them to be able to redefine things like Set, Grp, and so forth without having
+% to use AtBeginDocument.
+\AtBeginDocument{
+	\newcommand{\fC}{\cat C}
+	\newcommand{\fD}{\cat D}
+	\newcommand{\Set}{\cat{Set}} % sets
+	\newcommand{\Grp}{\cat{Grp}} % groups
+	\newcommand{\Gpd}{\cat{Gpd}} % groupoids
+	\newcommand{\Ab}{\cat{Ab}} % abelian groups
+	\newcommand{\Ring}{\cat{Ring}} % rings
+	\newcommand{\Mod}{\cat{Mod}} % modules (over a ring)
+	\newcommand{\Alg}{\cat{Alg}} % algebras (over a ring)
+	\newcommand{\Vect}{\cat{Vect}} % vector spaces (over a field)
+	\def\Top{\cat{Top}} % topological space (sometimes already defined, e.g. by kpfonts)
+	% TODO what other categories of topological/geometric objects do I need?
+	\newcommand{\LocRing}{\cat{LocRing}} % locally ringed spaces
+	\newcommand{\AffSch}{\cat{AffSch}} % affine schemes
+	\newcommand{\Sch}{\cat{Sch}} % schemes
+	\newcommand{\Man}{\cat{Man}} % manifolds
+	\newcommand{\Fun}{\cat{Fun}} % functor categories
 }
-% TODO what other categories of topological/geometric objects do I need?
-\newcommand{\LocRing}{\cat{LocRing}} % locally ringed spaces
-\newcommand{\AffSch}{\cat{AffSch}} % affine schemes
-\newcommand{\Sch}{\cat{Sch}} % schemes
-\newcommand{\Man}{\cat{Man}} % manifolds
-\newcommand{\Fun}{\cat{Fun}} % functor categories
 
 % to be continued

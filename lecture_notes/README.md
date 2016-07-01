@@ -28,6 +28,8 @@ Given this, I think I'll need the following layout:
 	- `theorems.tex` will contain all definitions of theorem environments.
 - A `notes_d` document class, which includes everything.
 - A `minnotes_d` document class which includes `macros.tex`.
+- A `lightnotes_d` document class which adds a few small personal style changes to `minnotes_d`.
+  So far I've been using it to take notes in seminars, whereas `notes_d` will be used for classes.
 
 ### Current Status
 

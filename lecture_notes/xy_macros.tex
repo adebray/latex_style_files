@@ -37,9 +37,19 @@
 \DeclareDocumentCommand{\dblarrow}{O{} O{} O{}}{%
 	\ar@<0.4ex>[#1]^-{#2}\ar@<-0.4ex>[#1]_-{#3}%
 }
-\makeatletter
 % Note: it would be a useful exercise to figure out how to define this so it can
 % be used as \dblarrow[r]^f_g.
+
+% Useful for morphisms in overcategories (aka slice categories), such as vector bundles,
+% covering spaces, field extensions, schemes over a base... or just commutative triangles
+% Usage: \overtriangle[f][\pi_1][\pi_2]{X_1}{X_2}{B}.
+% Note: the last argument is punctuation; if you don't want punctuation, pass it as {}
+\DeclareDocumentCommand{\overtriangle}{O{} O{} O{} mmmm}{
+\xymatrix@C=0.4cm{
+	{#4}\ar[rr]^{#1}\ar[dr]_{#2} && {#5}\ar[dl]^{#3}\\
+	& {#6 #7}
+}}
+\makeatletter
 
 % TODO: do I want these going in the other direction?
 % Source: http://tug.org/pipermail/xy-pic/2001-July/000015.html
@@ -47,4 +57,4 @@
 \newcommand{\pushoutcorner}[1][dr]{\save*!/#1-1.2pc/#1:(-1,1)@^{|-}\restore}
 
 
-% TODO more? Especially triangles and squares.
+% TODO more? Especially pullback or pushout squares.

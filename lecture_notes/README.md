@@ -29,9 +29,13 @@ Given this, I think I'll need the following layout:
 - A `notes_d` document class, which includes everything.
 - A `minnotes_d` document class which includes `macros.tex`.
 - A `lightnotes_d` document class which adds a few small personal style changes to `minnotes_d`.
-  So far I've been using it to take notes in seminars, whereas `notes_d` will be used for classes.
+  So far I've been using `lightnotes_d` to take notes in seminars, whereas `notes_d` will be used for classes.
 
 ### Current Status
 
-I've written most of the supporting files and `minnotes_d.cls`, then tested it with examples. I have
-not made progress on `notes_d.cls`.
+- I've used `minnotes_d` and `lightnotes_d` in a few seminars and they seem to be working well. There
+  are probably a few definitions that I'll need to wrap in `\AtBeginDocument`, depending on which font
+  packages I like redefine them, but overall I'm satisfied.
+- `notes_d` is partially tested, but I haven't used it for actual notetaking yet, so I'm sure it has
+  plenty of room to improve.
+- I will likely be updating my macros whenever I discover new useful ones.

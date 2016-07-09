@@ -3,9 +3,20 @@
 % styles (e.g. I would prefer to use a different style for lecture notes and other
 % notes that I write).
 
+% Current issues:
+%   1. This currently only supports article-based lecture notes (base class is amsart, and
+%      much of the title page formatting depends on that rather than amsbook). Someday, I
+%      would like to have both options.
+%   2. I still can't get fancyhdr to work the way I want it to.
+
 \RequirePackage{fancyhdr}
 \RequirePackage{titlesec}
+\RequirePackage{xcolor}
 \RequirePackage[dotinlabels]{titletoc}
+% after the font has been chosen
+\AtBeginDocument{
+	\usepackage{microtype}
+}
 
 % Set colors for hyperref
 \hypersetup{
@@ -22,21 +33,10 @@
   {\normalfont}
   {\filright
    \footnotesize
-   \enspace Episode \Roman{section}.\enspace}
+   \enspace Lecture \Roman{section}.\enspace}
   {8pt}
   {\Large\bfseries\filcenter}
 \titlecontents{section}[1.5em]{}{\contentslabel{2.3em}}{\hspace*{-2.3em}}{\hfill\contentspage}
-
-% Fancy headers
-% TODO this doesn't work like I want it to, and I don't know how to fix it.
-\renewcommand{\sectionmark}[1]{\markleft\thesection. #1}
-
-\fancyhf{}
-\fancyhead[RO,LE]{\small\thepage}
-\fancyhead[LO]{\small\slshape\nouppercase{\leftmark}}
-\fancyhead[RE]{\small\slshape M390C (Algebraic Geometry) Lecture Notes} % oops TODO
-\setlength{\headheight}{11.0pt}
-\pagestyle{fancy}
 
 % Ornament to divide different parts of a section without introducing a new subsection
 \newcommand{\orbreak}{
@@ -50,3 +50,67 @@
 \renewcommand{\vec}[1]{\boldsymbol{\mathbf{#1}}}
 \def\qedsymbol{{\small{\ensuremath{\boxtimes}}}}
 \renewcommand{\emptyset}{\varnothing}
+
+% The user should specify the following information:
+%	\institution: where the course was held, e.g. "UT Austin"
+%	\coursenum: course dept. and number, e.g. "M364C"
+%	\coursename: name of the course, e.g. "Galois Knot Theory"
+%	\semester: when the course happened, e.g. "Fall 2016"
+%	\teacher: who taught the course, e.g. "John Steinbeck"
+%	\author: who took notes, e.g. "Ted Geisel"
+%	\date: when these notes were last updated, e.g. \today (optional)
+%	\email: the author's email, e.g. "seuss_on_the_loose@hotmail.com"
+%	\thanks: an acknowledgement, e.g. "Thanks to Emily Dickinson for fixing a few typos" (optional)
+% Using the following commands, the user will be able to simply write
+% \institution{UT Austin}
+% \coursenum{M364C}
+% and so on.
+\newcommand*{\institution}[1]{\newcommand{\@institution}{#1}}
+\newcommand*{\coursenum}[1]{\newcommand{\@coursenum}{#1}}
+\newcommand*{\coursename}[1]{\newcommand{\@coursename}{#1}}
+\newcommand*{\semester}[1]{\newcommand{\@semester}{#1}}
+\newcommand*{\teacher}[1]{\newcommand{\@teacher}{#1}}
+\renewcommand*{\email}[1]{\newcommand{\@email}{#1}}
+\renewcommand{\@thanks}{\@empty}
+\renewcommand{\thanks}[1]{\renewcommand{\@thanks}{#1}}
+
+\let\@oldauthor\author
+\newcommand*{\d@e}{\@empty}
+\renewcommand*{\author}[1]{\renewcommand{\@author}{#1}}
+\renewcommand*{\date}[1]{\renewcommand{\d@e}{#1}}
+
+% These things should be defined after the user sets everything up in the preamble
+\AtBeginDocument{
+	% Email with a MAILTO: link
+	\newcommand{\linkedemail}{\href{mailto:\@email?subject=\@coursenum\%20Lecture\%20Notes}{\texttt{\@email}}}
+
+	% Front Stuff: standard blurb at the beginning of a document, ToC, etc.
+	% Once everything is set up, the user only needs to call \frontstuff.
+
+	% Format title based on amsart's own title command
+	\title{\@coursenum{} Notes: \MakeUppercase{\@coursename}}
+	\@oldauthor{\@author\\\@date}
+		
+	\newcommand{\@blurb}{
+		{\small These notes were taken in \@institution’s \@coursenum{} (\@coursename) class in \@semester, taught by
+		\@teacher. I live-\TeX{}ed them using \texttt{vim}, so there may be typos; please send questions, comments,
+		complaints, and corrections to \linkedemail. \@thanks}
+	}
+
+	\newcommand{\frontstuff}{
+		\maketitle
+		\@blurb
+		\tableofcontents
+	}
+
+	% Fancy headers
+	% TODO this doesn't work like I want it to, and I don't know how to fix it.
+	\renewcommand{\sectionmark}[1]{\markleft\thesection. #1}
+
+	\fancyhf{}
+	\fancyhead[RO,LE]{\small\thepage}
+	\fancyhead[LO]{\small\slshape\nouppercase{\leftmark}}
+	\fancyhead[RE]{\small\slshape \@coursenum (\@coursename) Lecture Notes}
+	\setlength{\headheight}{11.0pt}
+	\pagestyle{fancy}
+}

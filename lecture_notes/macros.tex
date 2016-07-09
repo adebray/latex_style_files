@@ -61,12 +61,10 @@
 \DeclarePairedDelimiter\set{\{}{\}}
 % Swap paren* and paren, etc., so that the normal version resizes by default.
 % Meanwhile, one can use \paren*[\Big]{...} to customize the size easily.
-\makeatletter
-	\let\oldparen\paren
-	\def\paren{\@ifstar{\oldparen}{\oldparen*}}
-	\let\oldbkt\bkt
-	\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
-\makeatother
+\let\oldparen\paren
+\def\paren{\@ifstar{\oldparen}{\oldparen*}}
+\let\oldbkt\bkt
+\def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
 
 % This allows a"1 as a shortcut for a^{(1)} and a"{10} as a shortcut for a^{(10)}.
 \AtBeginDocument{\catcode`\"=13}
@@ -86,7 +84,9 @@
 \DeclareMathOperator{\Frac}{Frac}
 \DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\Hom}{Hom}
-\renewcommand{\Im}{\operatorname{Im}} % also complex analysis
+\AtBeginDocument{ % some packages redefine this
+	\renewcommand{\Im}{\operatorname{Im}} % also complex analysis
+}
 %\DeclareMathOperator{\ker}{ker}
 \DeclareMathOperator{\Mat}{Mat}
 \newcommand{\op}{^{\cat{op}}} % for the opposite of a category

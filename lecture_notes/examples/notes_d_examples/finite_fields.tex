@@ -1,0 +1,66 @@
+We already have examples of finite fields in the form of $\F_p$ for every prime $p$. In this section, we will
+characterize all finite fields, including an existence statement, a uniqueness statement, and a statement about
+when one finite field embeds in another.
+
+Specifically, we will prove these statements.
+\begin{lem}
+\label{p^n}
+If $k$ is a finite field, then $\abs k = p^n$, where $p$ is prime and $n > 0$.
+\end{lem}
+\begin{thm}
+\label{ff_ex_un}
+For every prime $p$ and $n > 0$, there exists a finite field of order $p^n$, and it is unique up to isomorphism over
+$\F_p$.
+\end{thm}
+This is why one often hears ``\emph{the} finite field of order $p^n$.'' Typically, this is denoted $\F_{p^n}$, or
+sometimes $\operatorname{GF}(p^n)$ in computer science.
+\begin{thm}
+\label{ff_ext}
+Suppose $i:\F_{p^m}\inj\F_{q^n}$ is an embedding. Then, $p = q$ and $m\mid n$. Conversely, if $m\mid n$, there is
+an embedding $\F_{p^m}\inj\F_{p^n}$.
+\end{thm}
+Together, these results classify all finite fields and their finite extensions.
+\begin{proof}[Proof of Lemma~\ref{p^n}]
+First, $\chr(k) > 0$, because every characteristic $0$ field contains a copy of $\Q$, which is infinite. Thus,
+there is a prime $p$ such that $\chr(k) = p$, so $k$ is an extension of $\F_p$. Hence, $k$ is an $\F_p$-vector
+space and a finite set, so it must be a finite-dimensional vector space. If $n = \dim_{\F_p} k$, then as abelian
+groups, $k\cong(\F_p)^n$, and in particular $\abs k = p^n$.
+\end{proof}
+We'll need two more ingredients, important in their own right, to tackle the existence and uniqueness questions.
+\begin{prop}
+If $k$ is a field and $G\subseteq k^\times$ is a finite subgroup (so a finite group of nonzero elements
+of $k$, under multiplication), then $G$ is cyclic. In particular, if $k$ is a finite field, $k^\times$ is cyclic.
+\end{prop}
+\begin{proof}
+Let's induct on the order of $G$; all groups of order at most $3$ are cyclic, which is our base case.
+
+Now, suppose $G$ has order $n$. For any $m$, there are at most $m$ elements of $G$ of order dividing $m$, since
+such an $x\in G$ is a root of $x^m - 1\in k[x]$, which has at most $m$ roots.
+
+If $n = p^\ell$ for some prime $p$, then $G$ has at most $p^{\ell-1}$ elements of order dividing $p^{\ell-1}$.
+Thus, there's an $x\in G$ such that $\abs x\nmid p^{\ell-1}$, but since $\abs G = p^\ell$, then $\abs x = p^\ell$,
+so $G = \ang x$ is cyclic.
+
+The other option is for $n = ab$, where $a$ and $b$ are coprime. Since $G$ is abelian, $f:x\mapsto x^a$ defines a
+group homomorphism $G\to G$; let $A = \ker(f)$ and $B = \Im(f)$. There are at most $a$ elements of order dividing
+$a$, so $\abs A\le a$. If $x\in B$, then $x = y^a$, and $x^b = y^{ab} = 1$, so $\abs x\mid b$. There are at most
+$b$ elements whose order divides $b$, so $\abs B\le b$. By induction, $A$ and $B$ are cyclic, so if $x$ generates
+$A$ and $y$ generates $B$, then $\abs x = a$ and $\abs y = b$, so $\abs{xy} = ab = \abs G$; thus, $xy$ generates
+$G$, meaning $G$ is cyclic.
+\end{proof}
+\begin{ex}
+Show that if $A$ is a commutative ring with $\chr(A) = p$, then the assignment $\vp:A\to A$ sending $x\mapsto x^p$
+is a ring homomorphism. This $\vp$ is called the \term{Frobenius homomorphism} or \term{Frobenius endomorphism};
+the corollary $(a+b)^p = a^p + b^p$ is also called the \term{freshman's dream}.
+\end{ex}
+\begin{proof}[Proof of Theorem~\ref{ff_ex_un}]
+First, we prove existence; then
+
+
+\end{proof}
+\begin{proof}[Proof of Theorem~\ref{ff_ext}]
+
+\end{proof}
+\begin{ex}
+What is the underlying abelian group of the field $\F_{p^n}$?
+\end{ex}

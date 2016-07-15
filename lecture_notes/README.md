@@ -23,8 +23,8 @@ Given this, I think I'll need the following layout:
 - `packages.tex`, which includes packages that aren't style-focused, e.g. `inputenc`.
 - `macros.tex`, which contains shortcuts I define for ease of TeXing.
 	- `xy_macros.tex` for those macros specific to Xy.
-	- `letters.tex` will contain shortcuts for \mathbb, \mathcal, and \mathscr for letters I
-	  tend to use.
+	- `letters.tex` will contain shortcuts for commands I use involving \mathbb, \mathcal, \mathscr,
+	   etc.
 	- `theorems.tex` will contain all definitions of theorem environments.
 - A `notes_d` document class, which includes everything.
 - A `minnotes_d` document class which includes `macros.tex`.
@@ -36,6 +36,7 @@ Given this, I think I'll need the following layout:
 - I've used `minnotes_d` and `lightnotes_d` in a few seminars and they seem to be working well. There
   are probably a few definitions that I'll need to wrap in `\AtBeginDocument`, depending on which font
   packages I like redefine them, but overall I'm satisfied.
-- `notes_d` is partially tested, but I haven't used it for actual notetaking yet, so I'm sure it has
-  plenty of room to improve.
+- I've tested `notes_d` on an old set of lecture notes, and it seems to be working fairly well. There are
+  some small issues I would still like to fix, but none that yet stand in the way of using it for lecture
+  notes.
 - I will likely be updating my macros whenever I discover new useful ones.

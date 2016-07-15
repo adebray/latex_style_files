@@ -11,7 +11,7 @@
 
 \RequirePackage{fancyhdr}
 \RequirePackage{titlesec}
-\RequirePackage{xcolor}
+\RequirePackage[usenames, dvipsnames]{xcolor}
 \RequirePackage[dotinlabels]{titletoc}
 % after the font has been chosen
 \AtBeginDocument{
@@ -33,7 +33,7 @@
   {\normalfont}
   {\filright
    \footnotesize
-   \enspace Lecture \Roman{section}.\enspace}
+   \enspace Lecture \arabic{section}.\enspace}
   {8pt}
   {\Large\bfseries\filcenter}
 \titlecontents{section}[1.5em]{}{\contentslabel{2.3em}}{\hspace*{-2.3em}}{\hfill\contentspage}
@@ -89,7 +89,7 @@
 
 	% Format title based on amsart's own title command
 	\title{\@coursenum{} Notes: \MakeUppercase{\@coursename}}
-	\@oldauthor{\@author\\\@date}
+	\@oldauthor{\@author\\\d@e}
 		
 	\newcommand{\@blurb}{
 		{\small These notes were taken in \@institution’s \@coursenum{} (\@coursename) class in \@semester, taught by
@@ -109,8 +109,8 @@
 
 	\fancyhf{}
 	\fancyhead[RO,LE]{\small\thepage}
-	\fancyhead[LO]{\small\slshape\nouppercase{\leftmark}}
-	\fancyhead[RE]{\small\slshape \@coursenum (\@coursename) Lecture Notes}
+	\fancyhead[LO]{\small\itshape\nouppercase{\leftmark}}
+	\fancyhead[RE]{\small\itshape \@coursenum{} (\@coursename) Lecture Notes}
 	\setlength{\headheight}{11.0pt}
 	\pagestyle{fancy}
 }

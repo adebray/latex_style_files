@@ -18,10 +18,12 @@ tweak the style. Here's what exists now:
   are also various smaller TODOs scattered throughout the file. I would also like to provide some more examples:
   some minimal examples of how to use the class, and some richer examples of what problem sets look like in this
   template, including demonstrating various class options.
-- The `lecture_notes` directory contains some style files for lecture notes. This is still a work in progress, but
-  the end goal is to have something similar: a style file that's easy to use, with documented options and examples.
-  I have a customized lecture notes style, but I also want to have a more minimal one, which only includes the many
-  shortcuts I define for live-TeXing. Right now, there's a `minnotes_d` class that includes a lot of macros, but
-  few style changes; it has been tested with a few examples.
+- The `lecture_notes` directory contains some style files for lecture notes. Though I will still need to make
+  minor changes to these files, I believe the bulk of the work is done. There are three classes: a minimal class,
+  `minnotes_d`, which only includes the shortcuts I define for live-TeXing; `lightnotes_d`, which makes a very
+  small number of stylistic changes, and `notes_d`, which implements the full set of style changes that I use
+  when taking lecture notes. All of these classes have been tested: I expect minor fixes to be necessary, and I
+  will update my macros and notes style, but hopefully nothing major will be needed.
 - Right now, these two do not share any code. That is something I would like to fix, but first I should get
-  everything up and running.
+  everything up and running. Additionally, since class files cannot include relative path names, I will need a
+  way to build these class files in a way that makes them easier to set up on another computer.

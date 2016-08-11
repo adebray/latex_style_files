@@ -2,19 +2,14 @@
 #include "letters.tex"
 #include "theorems.tex"
 
-%\input{\@pwd/xy_macros}
-%\input{\@pwd/letters}
-%\input{\@pwd/theorems}
-% there will be more files here.
-
 \numberwithin{equation}{section}
-
+%
 % This could be considered a stylistic choice, but works much better with how I use
 % subsections as subject changes in a lecture.
 \setcounter{tocdepth}{1}
-
+%
 \newcommand{\term}{\emph}
-
+%
 % Often, I find myself making a theorem, definition, etc. that's purely a combination
 % of statements, either bulleted or numbered. In that case, using \hfill typesets each
 % item uniformly. It would probably be best to make this into a custom enumitem
@@ -31,7 +26,7 @@
 	\csname end#2\endcsname
 	\csname end#1\endcsname
 }
-
+%
 % other shortcuts I use for live-TeXing
 \newcommand{\vp}{\varphi}
 \newcommand{\e}{\varepsilon}
@@ -40,7 +35,7 @@
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\pt}{\mathrm{pt}}
 \newcommand{\many}[2][\dotsb]{#2 #1 #2} % optional argument for kind of dots
-
+%
 % Use \ud for things that need additional space, e.g. f(x) dx (in integrals or for
 % differential forms). \d is for things that don't (e.g. after a wedge, or just dx on
 % its own). I would be interested in unifying them.
@@ -53,7 +48,7 @@
 	\newcommand{\dfr}[3][]{\frac{\mathrm d^{#1} #2}{\mathrm d #3{}^{#1}}}
 	\newcommand{\pfr}[3][]{\frac{\partial^{#1} #2}{\partial #3{}^{#1}}}
 }
-
+%
 % This allows \paren{...} to replace \left(...\right) (and similarly for \bkt). For
 % \ang, \set, \abs, and \norm, I find myself using autoexpansion less often.
 % This code, along with some other shortcuts, is duplicated in my problem set template;
@@ -70,15 +65,15 @@
 \def\paren{\@ifstar{\oldparen}{\oldparen*}}
 \let\oldbkt\bkt
 \def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
-
+%
 % This allows a"1 as a shortcut for a^{(1)} and a"{10} as a shortcut for a^{(10)}.
 \AtBeginDocument{\catcode`\"=13}
 \catcode`\"=13
 \newcommand*{"}[1]{^{(#1)}}%
 \catcode`\"12
-
-% Now, for a bunch of field-specific commands. I may split these into separate files
-
+%
+% Now, for a bunch of field-specific commands.
+%
 % Algebra
 \DeclareMathOperator{\Ann}{Ann}
 \DeclareMathOperator{\Aut}{Aut}
@@ -104,23 +99,23 @@
 %\newcommand{\T}{^{\mathrm T}} % tranpose TODO where does the \! go?
 \DeclareMathOperator{\Tor}{Tor}
 \newcommand{\bl}{\text{--}}
-
+%
 % Algebraic Geometry
 \DeclareMathOperator{\Proj}{Proj}
 \DeclareMathOperator{\QCoh}{QCoh}
 \DeclareMathOperator{\res}{res} % also complex analysis
 \DeclareMathOperator{\Spec}{Spec}
-
+%
 % Algebraic Topology
 \newcommand{\Gr}{\mathrm{Gr}} % Grassmannian -- perhaps move to letters.tex
 \newcommand{\hdr}{H_{\text{\rm dR}}}
 \newcommand{\KO}{\mathit{KO}} % should I add reduced K and KO?
 \newcommand{\wH}{\widetilde H}
-
+%
 % Complex analysis
 % note: Re and Im changes are technically style changes, but almost everyone uses this notation
 \renewcommand{\Re}{\operatorname{Re}}
-
+%
 % Topology
 \DeclareMathOperator{\codim}{codim}
 \DeclareMathOperator{\crit}{crit}
@@ -128,5 +123,5 @@
 \renewcommand{\div}{\operatorname{div}}
 \DeclareMathOperator{\ind}{ind}
 \DeclareMathOperator{\supp}{supp}
-
+%
 % to be continued

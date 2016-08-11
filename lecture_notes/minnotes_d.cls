@@ -1,25 +1,24 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{minnotes_d}[2016/5/10 Arun Debray's minimal notes template]
-% TeX class files aren't usually split into several subfiles, so input and
-% include aren't relative to the current file path. Thus, I need to look
-% up the full path of the current file to include other .tex files in this
-% directory.
-% You will have to change this on your system to get this to work (and yes, I
-% know this is a temporary and inelegant solution).
-%\def\@pwd{/home/arun/Dropbox/Documents/LaTeX/style_files/lecture_notes}
+%
 % A template for lectures notes that makes few stylistic changes, but has lots of
 % macros predefied for ease of live-TeXing.
+%
 % Provides a way to check whether this class is being used
 \def\UsingMinNotesD{}
+%
 % Do I want any package options?
 % Possibilities:
 % 1. \mathbb vs. \mathbf for N, Z, Q, R, ...
 % 2. Roman or italic d in f(x) dx
+%
 % Other options can be handed off to the amsart class (e.g. fontsize)
 % TODO: for larger notes, I want to use amsbook instead. How should I efficiently unify
 % this with shorter notes, which use amsart?
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{amsart}}
+%
 \ProcessOptions\relax
+%
 \LoadClass{amsart}
 \RequirePackage[utf8]{inputenc}
 % Keeping this because, even for minimal notes, makes printing take up considerably less paper
@@ -33,10 +32,12 @@
 \RequirePackage[all]{xy}
 \RequirePackage{hyperref}
 \RequirePackage[all]{hypcap}
-% some shortcuts that simplify live-TeXing using XY.
+% Some shortcuts that simplify live-TeXing using XY.
+%
 % Forces all XY entries to be typeset with displaymath, which is much more
 % common for me
 \everyentry={\displaystyle}
+%
 % Short exact sequences: write
 % \shortexact[f][g]{A}{B}{C}, for:
 %
@@ -56,6 +57,7 @@
 \xymatrix{
  {#3}\ar[r]^-{#1} & #4\ar[r]^-{#2} & #5\ar[r] & 0#6
 }}
+%
 % Double right arrow, which I found myself writing a lot (e.g. equalizer, kernel,
 % or cokernel diagrams)
 % usage:
@@ -71,6 +73,7 @@
 }
 % Note: it would be a useful exercise to figure out how to define this so it can
 % be used as \dblarrow[r]^f_g.
+%
 % Useful for morphisms in overcategories (aka slice categories), such as vector bundles,
 % covering spaces, field extensions, schemes over a base... or just commutative triangles
 % Usage: \overtriangle[f][\pi_1][\pi_2]{X_1}{X_2}{B}.
@@ -81,10 +84,12 @@
  & {#6 #7}
 }}
 \makeatletter
+%
 % TODO: do I want these going in the other direction?
 % Source: http://tug.org/pipermail/xy-pic/2001-July/000015.html
 \newcommand{\pullbackcorner}[1][dr]{\save*!/#1+1.2pc/#1:(1,-1)@^{|-}\restore}
 \newcommand{\pushoutcorner}[1][dr]{\save*!/#1-1.2pc/#1:(-1,1)@^{|-}\restore}
+%
 % TODO more? Especially pullback or pushout squares.
 % Mathematicians have lots of fancy fonts
 % \mathbb -- notable sets
@@ -169,11 +174,12 @@
  \newcommand{\Man}{\cat{Man}} % manifolds
  \newcommand{\Fun}{\cat{Fun}} % functor categories
 }
-% to be continued
 % Setting up some theorem environments
+%
 % It's good practice to label everything in documents, so I've provisionally
 % made definitions numbered with everything else (so per section). I'm still
 % technically testing this, though.
+%
 \newtheorem{thm}[equation]{Theorem}
 \newtheorem{lem}[equation]{Lemma}
 \newtheorem{cor}[equation]{Corollary}
@@ -187,17 +193,17 @@
 \newtheorem*{rem}{Remark}
 \newtheorem*{fct}{Fact}
 \newtheorem*{note}{Note}
+%
 % Another possibility: "definition-theorems" as used in universal properties
 % I will probably also want starred theorems (propositions, subsections, etc.).
-%\input{\@pwd/xy_macros}
-%\input{\@pwd/letters}
-%\input{\@pwd/theorems}
-% there will be more files here.
 \numberwithin{equation}{section}
+%
 % This could be considered a stylistic choice, but works much better with how I use
 % subsections as subject changes in a lecture.
 \setcounter{tocdepth}{1}
+%
 \newcommand{\term}{\emph}
+%
 % Often, I find myself making a theorem, definition, etc. that's purely a combination
 % of statements, either bulleted or numbered. In that case, using \hfill typesets each
 % item uniformly. It would probably be best to make this into a custom enumitem
@@ -214,6 +220,7 @@
  \csname end#2\endcsname
  \csname end#1\endcsname
 }
+%
 % other shortcuts I use for live-TeXing
 \newcommand{\vp}{\varphi}
 \newcommand{\e}{\varepsilon}
@@ -222,6 +229,7 @@
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\pt}{\mathrm{pt}}
 \newcommand{\many}[2][\dotsb]{#2 #1 #2} % optional argument for kind of dots
+%
 % Use \ud for things that need additional space, e.g. f(x) dx (in integrals or for
 % differential forms). \d is for things that don't (e.g. after a wedge, or just dx on
 % its own). I would be interested in unifying them.
@@ -234,6 +242,7 @@
  \newcommand{\dfr}[3][]{\frac{\mathrm d^{#1} #2}{\mathrm d #3{}^{#1}}}
  \newcommand{\pfr}[3][]{\frac{\partial^{#1} #2}{\partial #3{}^{#1}}}
 }
+%
 % This allows \paren{...} to replace \left(...\right) (and similarly for \bkt). For
 % \ang, \set, \abs, and \norm, I find myself using autoexpansion less often.
 % This code, along with some other shortcuts, is duplicated in my problem set template;
@@ -250,12 +259,15 @@
 \def\paren{\@ifstar{\oldparen}{\oldparen*}}
 \let\oldbkt\bkt
 \def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
+%
 % This allows a"1 as a shortcut for a^{(1)} and a"{10} as a shortcut for a^{(10)}.
 \AtBeginDocument{\catcode`\"=13}
 \catcode`\"=13
 \newcommand*{"}[1]{^{(#1)}}%
 \catcode`\"12
-% Now, for a bunch of field-specific commands. I may split these into separate files
+%
+% Now, for a bunch of field-specific commands.
+%
 % Algebra
 \DeclareMathOperator{\Ann}{Ann}
 \DeclareMathOperator{\Aut}{Aut}
@@ -281,19 +293,23 @@
 %\newcommand{\T}{^{\mathrm T}} % tranpose TODO where does the \! go?
 \DeclareMathOperator{\Tor}{Tor}
 \newcommand{\bl}{\text{--}}
+%
 % Algebraic Geometry
 \DeclareMathOperator{\Proj}{Proj}
 \DeclareMathOperator{\QCoh}{QCoh}
 \DeclareMathOperator{\res}{res} % also complex analysis
 \DeclareMathOperator{\Spec}{Spec}
+%
 % Algebraic Topology
 \newcommand{\Gr}{\mathrm{Gr}} % Grassmannian -- perhaps move to letters.tex
 \newcommand{\hdr}{H_{\text{\rm dR}}}
 \newcommand{\KO}{\mathit{KO}} % should I add reduced K and KO?
 \newcommand{\wH}{\widetilde H}
+%
 % Complex analysis
 % note: Re and Im changes are technically style changes, but almost everyone uses this notation
 \renewcommand{\Re}{\operatorname{Re}}
+%
 % Topology
 \DeclareMathOperator{\codim}{codim}
 \DeclareMathOperator{\crit}{crit}
@@ -301,6 +317,5 @@
 \renewcommand{\div}{\operatorname{div}}
 \DeclareMathOperator{\ind}{ind}
 \DeclareMathOperator{\supp}{supp}
+%
 % to be continued
-%\input{\@pwd/packages}
-%\input{\@pwd/macros}

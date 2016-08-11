@@ -1,5 +1,5 @@
-This repo holds a collection of LaTeX style files that I use for lecture notes and problem sets.  I originally had
-a separate style file for each class, but this led to some code duplication.  Instead, collating these classes once
+This repo holds a collection of LaTeX style files that I use for lecture notes and problem sets. I originally had
+a separate style file for each class, but this led to some code duplication. Instead, collating these classes once
 and for all will allow me to customize LaTeX in a uniform way.
 
 This directory will contain a few different `.cls` files for problem sets, lecture notes (rich and minimal), and
@@ -25,5 +25,6 @@ tweak the style. Here's what exists now:
   when taking lecture notes. All of these classes have been tested: I expect minor fixes to be necessary, and I
   will update my macros and notes style, but hopefully nothing major will be needed.
 - Right now, these two do not share any code. That is something I would like to fix, but first I should get
-  everything up and running. Additionally, since class files cannot include relative path names, I will need a
-  way to build these class files in a way that makes them easier to set up on another computer.
+  everything up and running. Since class files cannot include relative path names, I have to use a workaround
+  to get them to share code: I'm using `cpp` to preprocess the files in the `lecture_notes` directory, which
+  seems to mostly work.

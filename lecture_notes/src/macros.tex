@@ -1,6 +1,10 @@
-\input{\@pwd/xy_macros}
-\input{\@pwd/letters}
-\input{\@pwd/theorems}
+#include "xy_macros.tex"
+#include "letters.tex"
+#include "theorems.tex"
+
+%\input{\@pwd/xy_macros}
+%\input{\@pwd/letters}
+%\input{\@pwd/theorems}
 % there will be more files here.
 
 \numberwithin{equation}{section}
@@ -35,18 +39,19 @@
 \newcommand{\surj}{\twoheadrightarrow}
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\pt}{\mathrm{pt}}
+\newcommand{\many}[2][\dotsb]{#2 #1 #2} % optional argument for kind of dots
 
 % Use \ud for things that need additional space, e.g. f(x) dx (in integrals or for
 % differential forms). \d is for things that don't (e.g. after a wedge, or just dx on
-% its own).
+% its own). I would be interested in unifying them.
 % Some packages that I use often (e.g. font packages) overwrite \d, and therefore this
 % class needs to define \d after it's overwritten, which is why I use \AtBeginDocument.
 \AtBeginDocument{
 	\newcommand{\ud}{\,\mathrm{d}}
-	\renewcommand{\d}{\mathrm d} % TODO \AtBeginDocument
-	% TODO accept optional argument for higher derivatives
-	\newcommand{\dfr}[2]{\frac{\mathrm d #1}{\mathrm d #2}}
-	\newcommand{\pfr}[2]{\frac{\partial #1}{\partial #2}}
+	\renewcommand{\d}{\mathrm d}
+	% accepts optional argument for higher derivatives
+	\newcommand{\dfr}[3][]{\frac{\mathrm d^{#1} #2}{\mathrm d #3{}^{#1}}}
+	\newcommand{\pfr}[3][]{\frac{\partial^{#1} #2}{\partial #3{}^{#1}}}
 }
 
 % This allows \paren{...} to replace \left(...\right) (and similarly for \bkt). For
@@ -124,4 +129,4 @@
 \DeclareMathOperator{\ind}{ind}
 \DeclareMathOperator{\supp}{supp}
 
-% TODO: to be continued
+% to be continued

@@ -16,7 +16,7 @@ nuanced: I have the following constraints/goals:
 	* It's OK if this one only supports a book-like base class.
 - I would like to avoid duplicating code.
 
-Given this, I think I'll need the following layout:
+Given this, I use the following layout:
 
 - `style.tex`, which includes packages and applies settings that produce the typical style of my
    lecture notes.
@@ -33,6 +33,8 @@ Given this, I think I'll need the following layout:
 
 ### Current Status
 
+- The class files in this directory can be used in your TeX documents; they were built out of the files in
+  the `src/` directory using the Makefile.
 - I've used `minnotes_d` and `lightnotes_d` in a few seminars and they seem to be working well. There
   are probably a few definitions that I'll need to wrap in `\AtBeginDocument`, depending on which font
   packages I like redefine them, but overall I'm satisfied.
@@ -40,3 +42,9 @@ Given this, I think I'll need the following layout:
   some small issues I would still like to fix, but none that yet stand in the way of using it for lecture
   notes.
 - I will likely be updating my macros whenever I discover new useful ones.
+- `.cls` files are not allowed to include files through relative class names, so in order to share code
+  between these classes, I used `cpp` to process these files into the finalized document classes. This
+  is obviously out of the intended scope of `cpp`, and so imposes a few quirky constraints on the TeX code,
+  but these are surmountable.
+- These classes aren't compatible with the `\VerbatimFootnotes` command from the `fancyvrb` command. I do not
+  know why this is, but I'll be debugging it.

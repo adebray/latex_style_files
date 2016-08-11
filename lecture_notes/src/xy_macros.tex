@@ -5,7 +5,7 @@
 \everyentry={\displaystyle}
 
 % Short exact sequences: write
-% \shortexact[f][g]{A}{B}{C} for:
+% \shortexact[f][g]{A}{B}{C}, for:
 %
 %		 f    g
 % 0 -> A -> B -> C -> 0,
@@ -21,7 +21,7 @@
 % ... and the same, for A -> B -> C -> 0
 \DeclareDocumentCommand{\rightexact}{O{} O{} mmmm}{
 \xymatrix{
-	#3\ar[r]^-{#1} & #4\ar[r]^-{#2} & #5\ar[r] & 0#6
+	{#3}\ar[r]^-{#1} & #4\ar[r]^-{#2} & #5\ar[r] & 0#6
 }}
 
 % Double right arrow, which I found myself writing a lot (e.g. equalizer, kernel,
@@ -46,7 +46,7 @@
 % Note: the last argument is punctuation; if you don't want punctuation, pass it as {}
 \DeclareDocumentCommand{\overtriangle}{O{} O{} O{} mmmm}{
 \xymatrix@C=0.4cm{
-	{#4}\ar[rr]^{#1}\ar[dr]_{#2} && {#5}\ar[dl]^{#3}\\
+	{#4}\ar[rr]^{#1}\ar[dr]_{#2} && {#5}\ar[dl]^{#3}\\ % comment for cpp. Don't delete
 	& {#6 #7}
 }}
 \makeatletter

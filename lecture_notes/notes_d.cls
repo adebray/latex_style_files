@@ -310,7 +310,9 @@
 %
 % Complex analysis
 % note: Re and Im changes are technically style changes, but almost everyone uses this notation
-\renewcommand{\Re}{\operatorname{Re}}
+\AtBeginDocument{
+ \renewcommand{\Re}{\operatorname{Re}}
+}
 %
 % Topology
 \DeclareMathOperator{\codim}{codim}
@@ -336,6 +338,7 @@
 \RequirePackage{titlesec}
 \RequirePackage[usenames, dvipsnames]{xcolor}
 \RequirePackage[dotinlabels]{titletoc}
+\RequirePackage{adforn}
 % after the font has been chosen
 \AtBeginDocument{
  \usepackage{microtype}

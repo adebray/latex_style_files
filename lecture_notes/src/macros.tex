@@ -114,7 +114,9 @@
 %
 % Complex analysis
 % note: Re and Im changes are technically style changes, but almost everyone uses this notation
-\renewcommand{\Re}{\operatorname{Re}}
+\AtBeginDocument{
+	\renewcommand{\Re}{\operatorname{Re}}
+}
 %
 % Topology
 \DeclareMathOperator{\codim}{codim}

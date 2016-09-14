@@ -229,6 +229,7 @@
 \newcommand{\id}{\mathrm{id}}
 \newcommand{\pt}{\mathrm{pt}}
 \newcommand{\many}[2][\dotsb]{#2 #1 #2} % optional argument for kind of dots
+\newcommand{\TFAE}{The following are equivalent}
 %
 % Use \ud for things that need additional space, e.g. f(x) dx (in integrals or for
 % differential forms). \d is for things that don't (e.g. after a wedge, or just dx on

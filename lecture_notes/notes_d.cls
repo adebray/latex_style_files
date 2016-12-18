@@ -93,6 +93,13 @@
 \newcommand{\pushoutcorner}[1][dr]{\save*!/#1-1.2pc/#1:(-1,1)@^{|-}\restore}
 %
 % TODO more? Especially pullback or pushout squares.
+%
+% An xymatrix environment wrapped in gathered to ensure its equation number is vertically centered
+\newcommand{\gathxy}[2][]{%
+\begin{gathered}
+\xymatrix#1{#2}
+\end{gathered}
+}
 % Mathematicians have lots of fancy fonts
 % \mathbb -- notable sets
 % TODO: would be nice to allow people to override \mathbb with \mathbf
@@ -157,6 +164,7 @@
 % like them to be able to redefine things like Set, Grp, and so forth without having
 % to use AtBeginDocument.
 % TODO: do I even need this AtBeginDocument here...?
+% TODO: add a \newcat{} command.
 \AtBeginDocument{
  \newcommand{\fC}{\cat C}
  \newcommand{\fD}{\cat D}
@@ -204,7 +212,9 @@
 % subsections as subject changes in a lecture.
 \setcounter{tocdepth}{1}
 %
-\newcommand{\term}{\emph}
+% These can be changed downstream
+\newcommand{\term}{\emph} % e.g. "The \term{trace} is defined to be..."
+\newcommand{\latin}{\textit} % e.g. \latin{per se}, \latin{mutatis mutandis}
 %
 % Often, I find myself making a theorem, definition, etc. that's purely a combination
 % of statements, either bulleted or numbered. In that case, using \hfill typesets each
@@ -233,6 +243,10 @@
 \newcommand{\many}[2][\dotsb]{#2 #1 #2} % optional argument for kind of dots
 \newcommand{\TFAE}{The following are equivalent}
 %
+% use a longer \mapsto in display math
+\let\shortmapsto\mapsto
+\renewcommand{\mapsto}{\mathchoice{\longmapsto}{\shortmapsto}{\shortmapsto}{\shortmapsto}}
+%
 % Use \ud for things that need additional space, e.g. f(x) dx (in integrals or for
 % differential forms). \d is for things that don't (e.g. after a wedge, or just dx on
 % its own). I would be interested in unifying them.
@@ -243,7 +257,10 @@
  \renewcommand{\d}{\mathrm d}
  % accepts optional argument for higher derivatives
  \newcommand{\dfr}[3][]{\frac{\mathrm d^{#1} #2}{\mathrm d #3{}^{#1}}}
- \newcommand{\pfr}[3][]{\frac{\partial^{#1} #2}{\partial #3{}^{#1}}}
+ \newcommand{\@dpfr}[3][]{\frac{\partial^{#1} #2}{\partial #3{}^{#1}}}
+ \newcommand{\@spfr}[3][]{\partial^{#1} #2 / \partial #3{}^{#1}}
+ \newcommand{\pfr}[3][]{\mathchoice{\@dpfr[#1]{#2}{#3}}{\@dpfr[#1]{#2}{#3}}
+  {\@spfr[#1]{#2}{#3}}{\@spfr[#1]{#2}{#3}}}
 }
 %
 % This allows \paren{...} to replace \left(...\right) (and similarly for \bkt). For
@@ -314,6 +331,7 @@
 \AtBeginDocument{
  \renewcommand{\Re}{\operatorname{Re}}
 }
+\newcommand{\delbar}{\overline\partial}
 %
 % Topology
 \DeclareMathOperator{\codim}{codim}

@@ -57,3 +57,10 @@
 \newcommand{\pushoutcorner}[1][dr]{\save*!/#1-1.2pc/#1:(-1,1)@^{|-}\restore}
 %
 % TODO more? Especially pullback or pushout squares.
+%
+% An xymatrix environment wrapped in gathered to ensure its equation number is vertically centered
+\newcommand{\gathxy}[2][]{%
+\begin{gathered}
+\xymatrix#1{#2}
+\end{gathered}
+}

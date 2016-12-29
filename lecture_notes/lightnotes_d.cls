@@ -337,7 +337,7 @@
 % to be continued
 % style changes
 \pagestyle{plain}
-\usepackage{xcolor}
+\usepackage[usenames, dvipsnames]{xcolor}
 \renewcommand{\qedsymbol}{\small{\ensuremath{\boxtimes}}}
 %
 \AtBeginDocument{

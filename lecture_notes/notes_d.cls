@@ -32,6 +32,7 @@
 \RequirePackage{xparse}
 \RequirePackage{mathrsfs}
 \RequirePackage[all]{xy}
+\RequirePackage{adforn}
 \RequirePackage{hyperref}
 \RequirePackage[all]{hypcap}
 % Some shortcuts that simplify live-TeXing using XY.
@@ -186,9 +187,10 @@
 }
 % Setting up some theorem environments
 %
-% It's good practice to label everything in documents, so I've provisionally
-% made definitions numbered with everything else (so per section). I'm still
-% technically testing this, though.
+% The "exampx" and similar provisional environments are in use so that I can
+% append a marker at the end of examples, remarks, claims, facts, and notes.
+% (Of course, it would be good for me to determine how to do this automatically.)
+% Source: http://tex.stackexchange.com/a/32394/
 %
 \newtheorem{thm}[equation]{Theorem}
 \newtheorem{lem}[equation]{Lemma}
@@ -196,13 +198,28 @@
 \newtheorem{prop}[equation]{Proposition}
 \theoremstyle{definition}
 \newtheorem{ex}[equation]{Exercise}
-\newtheorem{exm}[equation]{Example}
+\newtheorem{exampx}[equation]{Example}
 \newtheorem{defn}[equation]{Definition}
 \newtheorem*{claim}{Claim}
 \theoremstyle{remark}
-\newtheorem*{rem}{Remark}
-\newtheorem*{fct}{Fact}
-\newtheorem*{note}{Note}
+\newtheorem*{remx}{Remark}
+\newtheorem*{fctx}{Fact}
+\newtheorem*{notex}{Note}
+%
+%
+\newcommand{\exampleQED}{\smash\adfhalfleftarrowhead}
+\newenvironment{exm}
+  {\pushQED{\qed}\renewcommand{\qedsymbol}{\exampleQED}\exampx}
+  {\popQED\endexampx}
+\newenvironment{rem}
+  {\pushQED{\qed}\renewcommand{\qedsymbol}{\exampleQED}\remx}
+  {\popQED\endremx}
+\newenvironment{fct}
+  {\pushQED{\qed}\renewcommand{\qedsymbol}{\exampleQED}\fctx}
+  {\popQED\endfctx}
+\newenvironment{note}
+  {\pushQED{\qed}\renewcommand{\qedsymbol}{\exampleQED}\notex}
+  {\popQED\endnotex}
 %
 % Another possibility: "definition-theorems" as used in universal properties
 % I will probably also want starred theorems (propositions, subsections, etc.).
@@ -344,7 +361,7 @@
 \DeclareMathOperator{\ind}{ind}
 \DeclareMathOperator{\supp}{supp}
 %
-% to be continued
+% to be continued (e.g. a good argmin and argmax)
 % The personal style choices I make for my lecture notes
 % One tantalizing idea is to make multiple style files representing several different
 % styles (e.g. I would prefer to use a different style for lecture notes and other
@@ -360,7 +377,6 @@
 \RequirePackage{titlesec}
 \RequirePackage[usenames, dvipsnames]{xcolor}
 \RequirePackage[dotinlabels]{titletoc}
-\RequirePackage{adforn}
 % after the font has been chosen
 \AtBeginDocument{
  \usepackage{microtype}

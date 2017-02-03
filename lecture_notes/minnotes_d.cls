@@ -122,7 +122,9 @@
 \newcommand{\CP}{\mathbb{CP}} % complex projective space
 % \mathcal -- lots of different things
 \newcommand{\cA}{\mathcal A} % Steenrod algebra, etc.
+\newcommand{\cG}{\mathcal G} % groupoid
 \newcommand{\cM}{\mathcal M} % moduli space
+\newcommand{\cX}{\mathcal X} % vector fields, tangential structures
 % \mathfrak -- Lie algebras, open covers, prime ideals
 \newcommand{\p}{\mathfrak p} % prime ideal
 \newcommand{\q}{\mathfrak q} % another prime ideal
@@ -180,6 +182,7 @@
  \newcommand{\LocRing}{\cat{LocRing}} % locally ringed spaces
  \newcommand{\AffSch}{\cat{AffSch}} % affine schemes
  \newcommand{\Sch}{\cat{Sch}} % schemes
+ \newcommand{\sSet}{\cat{sSet}} % simplicial sets
  \newcommand{\Man}{\cat{Man}} % manifolds
  \newcommand{\Fun}{\cat{Fun}} % functor categories
 }
@@ -317,9 +320,9 @@
 \AtBeginDocument{ % some packages redefine this
  \renewcommand{\Im}{\operatorname{Im}} % also complex analysis
 }
-%\DeclareMathOperator{\ker}{ker}
 \DeclareMathOperator{\Mat}{Mat}
 \newcommand{\op}{^{\cat{op}}} % for the opposite of a category
+\DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\sign}{sign}
 \DeclareMathOperator{\spa}{span}
 \DeclareMathOperator{\Stab}{Stab}
@@ -355,6 +358,7 @@
 \DeclareMathOperator{\codim}{codim}
 \DeclareMathOperator{\crit}{crit}
 \DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\Diff}{Diff}
 \renewcommand{\div}{\operatorname{div}}
 \DeclareMathOperator{\ind}{ind}
 \DeclareMathOperator{\supp}{supp}

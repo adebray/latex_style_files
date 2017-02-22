@@ -253,6 +253,11 @@
  \csname end#1\endcsname
 }
 %
+% since I find myself using \renewcommand{...}{\operatorname{...}} a lot.
+% possible TODO: also define a starred version?
+% could also define \ProvideMathOperator but I wouldn't use that at all
+\newcommand{\RenewMathOperator}[2]{\renewcommand{#1}{\operatorname{#2}}}
+%
 % other shortcuts I use for live-TeXing
 \newcommand{\vp}{\varphi}
 \newcommand{\e}{\varepsilon}
@@ -272,6 +277,7 @@
 % its own). I would be interested in unifying them.
 % Some packages that I use often (e.g. font packages) overwrite \d, and therefore this
 % class needs to define \d after it's overwritten, which is why I use \AtBeginDocument.
+% TODO: I want a command for ∂^2f/∂x∂y
 \AtBeginDocument{
  \newcommand{\ud}{\,\mathrm{d}}
  \renewcommand{\d}{\mathrm d}
@@ -307,42 +313,46 @@
 \catcode`\"12
 %
 % Now, for a bunch of field-specific commands.
+% TODO: document
+% TODO: starred command, perhaps as http://tex.stackexchange.com/a/4388/
+\newcommand{\newoperator}[1]{\expandafter\DeclareMathOperator\csname #1\endcsname{\operatorname{#1}}}
 %
 % Algebra
-\DeclareMathOperator{\Ann}{Ann}
-\DeclareMathOperator{\Aut}{Aut}
-\DeclareMathOperator{\Cliff}{Cliff}
+\newoperator{Ann}
+\newoperator{Aut}
+\newoperator{Cliff}
 \DeclareMathOperator{\chr}{char}
-\DeclareMathOperator{\coker}{coker}
-\DeclareMathOperator{\End}{End}
-\DeclareMathOperator{\Ext}{Ext}
-\DeclareMathOperator{\Frac}{Frac}
-\DeclareMathOperator{\Gal}{Gal}
-\DeclareMathOperator{\Hom}{Hom}
+\newoperator{coker}
+\newoperator{End}
+\newoperator{Ext}
+\newoperator{Frac}
+\newoperator{Gal}
+\newoperator{Hom}
 \AtBeginDocument{ % some packages redefine this
- \renewcommand{\Im}{\operatorname{Im}} % also complex analysis
+ \RenewMathOperator{\Im}{Im} % also complex analysis
 }
-\DeclareMathOperator{\Mat}{Mat}
+\newoperator{Mat}
 \newcommand{\op}{^{\cat{op}}} % for the opposite of a category
-\DeclareMathOperator{\rank}{rank}
-\DeclareMathOperator{\sign}{sign}
+\newoperator{rank}
+\newoperator{sign}
 \DeclareMathOperator{\spa}{span}
-\DeclareMathOperator{\Stab}{Stab}
-\DeclareMathOperator{\Sym}{Sym}
+\newoperator{Stab}
+\newoperator{Sym}
 %TODO better name (conflicts w/ circle group)
 %\newcommand{\T}{^{\mathrm T}} % tranpose TODO where does the \! go?
-\DeclareMathOperator{\Tor}{Tor}
+\newoperator{Tor}
+\newoperator{tr}
 \newcommand{\bl}{\text{--}}
 %
 % Algebraic Geometry
-\DeclareMathOperator{\Proj}{Proj}
-\DeclareMathOperator{\QCoh}{QCoh}
-\DeclareMathOperator{\res}{res} % also complex analysis
-\DeclareMathOperator{\Spec}{Spec}
+\newoperator{Proj}
+\newoperator{QCoh}
+\newoperator{res} % also complex analysis
+\newoperator{Spec}
 %
 % Algebraic Topology
 \newcommand{\Gr}{\mathrm{Gr}} % Grassmannian -- perhaps move to letters.tex
-\newcommand{\hdr}{H_{\text{\rm dR}}}
+\newcommand{\hdr}{H_{\mathrm{dR}}}
 \newcommand{\KO}{\mathit{KO}} % should I add reduced K and KO?
 \newcommand{\wH}{\widetilde H}
 \DeclareMathOperator*{\colim}{colim} % colimit notation in homotopy theory
@@ -352,18 +362,18 @@
 % Complex analysis
 % note: Re and Im changes are technically style changes, but almost everyone uses this notation
 \AtBeginDocument{
- \renewcommand{\Re}{\operatorname{Re}}
+ \RenewMathOperator{\Re}{Re}
 }
 \newcommand{\delbar}{\overline\partial}
 %
 % Topology
-\DeclareMathOperator{\codim}{codim}
-\DeclareMathOperator{\crit}{crit}
-\DeclareMathOperator{\curl}{curl}
-\DeclareMathOperator{\Diff}{Diff}
-\renewcommand{\div}{\operatorname{div}}
-\DeclareMathOperator{\ind}{ind}
-\DeclareMathOperator{\supp}{supp}
+\newoperator{codim}
+\newoperator{crit}
+\newoperator{curl}
+\newoperator{Diff}
+\RenewMathOperator{\div}{div}
+\newoperator{ind}
+\newoperator{supp}
 %
 % to be continued (e.g. a good argmin and argmax)
 % The personal style choices I make for my lecture notes

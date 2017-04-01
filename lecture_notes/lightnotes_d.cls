@@ -379,7 +379,6 @@
 % to be continued (e.g. a good argmin and argmax)
 % style changes
 \pagestyle{plain}
-\usepackage[usenames, dvipsnames]{xcolor}
 \renewcommand{\qedsymbol}{\small{\ensuremath{\boxtimes}}}
 %
 \AtBeginDocument{

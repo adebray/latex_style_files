@@ -7,6 +7,11 @@
 % Provides a way to check whether this class is being used
 \def\UsingMinNotesD{}
 %
+% For now, this is a one-off that disables the " -> ^(...) feature.
+\DeclareOption{quotes}{\def\qu@es{YES}}
+\DeclareOption{no_quotes}{\def\noqu@es{}}
+\ExecuteOptions{quotes}
+%
 % Do I want any package options?
 % Possibilities:
 %	1. \mathbb vs. \mathbf for N, Z, Q, R, ...

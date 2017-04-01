@@ -6,6 +6,11 @@
 %
 % Provides a way to check whether this class is being used
 \def\UsingLightNotesD{}
+%
+% For now, this is a one-off that disables the " -> ^(...) feature.
+\DeclareOption{quotes}{\def\qu@es{YES}}
+\DeclareOption{no_quotes}{\def\noqu@es{}}
+\ExecuteOptions{quotes}
 % Other options can be handed off to the amsart class (e.g. fontsize)
 % I want to double-check that I am doing option-passing correctly.
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{amsart}}
@@ -15,6 +20,7 @@
 \RequirePackage[utf8]{inputenc}
 % Keeping this because, even for minimal notes, makes printing take up considerably less paper
 \RequirePackage[margin=1in]{geometry}
+\RequirePackage[usenames, dvipsnames]{xcolor}
 \RequirePackage{graphicx}
 \RequirePackage{mathtools}
 \RequirePackage{amssymb}
@@ -258,6 +264,7 @@
 \newcommand{\pt}{\mathrm{pt}}
 \newcommand{\many}[2][\dotsb]{#2 #1 #2} % optional argument for kind of dots
 \newcommand{\TFAE}{The following are equivalent}
+\newcommand{\TODO}{\textcolor{red}{TODO}}
 %
 % use a longer \mapsto in display math
 \let\shortmapsto\mapsto
@@ -298,10 +305,13 @@
 \def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
 %
 % This allows a"1 as a shortcut for a^{(1)} and a"{10} as a shortcut for a^{(10)}.
-\AtBeginDocument{\catcode`\"=13}
-\catcode`\"=13
-\newcommand*{"}[1]{^{(#1)}}%
-\catcode`\"12
+\ifdefined\noqu@es
+\else
+ \AtBeginDocument{\catcode`\"=13}
+ \catcode`\"=13
+ \newcommand*{"}[1]{^{(#1)}}%
+ \catcode`\"12
+\fi
 %
 % Now, for a bunch of field-specific commands.
 % TODO: document

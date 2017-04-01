@@ -6,6 +6,11 @@
 %
 % Provides a way to check whether this class is being used
 \def\UsingLightNotesD{}
+%
+% For now, this is a one-off that disables the " -> ^(...) feature.
+\DeclareOption{quotes}{\def\qu@es{YES}}
+\DeclareOption{no_quotes}{\def\noqu@es{}}
+\ExecuteOptions{quotes}
 % Other options can be handed off to the amsart class (e.g. fontsize)
 % I want to double-check that I am doing option-passing correctly.
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{amsart}}

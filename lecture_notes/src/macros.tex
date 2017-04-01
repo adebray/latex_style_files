@@ -43,6 +43,7 @@
 \newcommand{\pt}{\mathrm{pt}}
 \newcommand{\many}[2][\dotsb]{#2 #1 #2} % optional argument for kind of dots
 \newcommand{\TFAE}{The following are equivalent}
+\newcommand{\TODO}{\textcolor{red}{TODO}}
 %
 % use a longer \mapsto in display math
 \let\shortmapsto\mapsto
@@ -83,10 +84,13 @@
 \def\bkt{\@ifstar{\oldbkt}{\oldbkt*}}
 %
 % This allows a"1 as a shortcut for a^{(1)} and a"{10} as a shortcut for a^{(10)}.
-\AtBeginDocument{\catcode`\"=13}
-\catcode`\"=13
-\newcommand*{"}[1]{^{(#1)}}%
-\catcode`\"12
+\ifdefined\noqu@es
+\else
+	\AtBeginDocument{\catcode`\"=13}
+	\catcode`\"=13
+	\newcommand*{"}[1]{^{(#1)}}%
+	\catcode`\"12
+\fi
 %
 % Now, for a bunch of field-specific commands.
 % TODO: document

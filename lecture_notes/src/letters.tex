@@ -70,24 +70,24 @@
 % like them to be able to redefine things like Set, Grp, and so forth without having
 % to use AtBeginDocument.
 % TODO: do I even need this AtBeginDocument here...?
-% TODO: add a \newcat{} command.
+\newcommand{\newcat}[2]{\newcommand{#1}{\cat{#2}}}
 \AtBeginDocument{
-	\newcommand{\fC}{\cat C}
-	\newcommand{\fD}{\cat D}
-	\newcommand{\Set}{\cat{Set}} % sets
-	\newcommand{\Grp}{\cat{Grp}} % groups
-	\newcommand{\Gpd}{\cat{Gpd}} % groupoids
-	\newcommand{\Ab}{\cat{Ab}} % abelian groups
-	\newcommand{\Ring}{\cat{Ring}} % rings
-	\newcommand{\Mod}{\cat{Mod}} % modules (over a ring)
-	\newcommand{\Alg}{\cat{Alg}} % algebras (over a ring)
-	\newcommand{\Vect}{\cat{Vect}} % vector spaces (over a field)
+	\newcat{\fC}{C}
+	\newcat{\fD}{D}
+	\newcat{\Set}{Set} % sets
+	\newcat{\Grp}{Grp} % groups
+	\newcat{\Gpd}{Gpd} % groupoids
+	\newcat{\Ab}{Ab} % abelian groups
+	\newcat{\Ring}{Ring} % rings
+	\newcat{\Mod}{Mod} % modules (over a ring)
+	\newcat{\Alg}{Alg} % algebras (over a ring)
+	\newcat{\Vect}{Vect} % vector spaces (over a field)
 	\def\Top{\cat{Top}} % topological space (sometimes already defined, e.g. by kpfonts)
 	% TODO what other categories of topological/geometric objects do I need?
-	\newcommand{\LocRing}{\cat{LocRing}} % locally ringed spaces
-	\newcommand{\AffSch}{\cat{AffSch}} % affine schemes
-	\newcommand{\Sch}{\cat{Sch}} % schemes
-	\newcommand{\sSet}{\cat{sSet}} % simplicial sets
-	\newcommand{\Man}{\cat{Man}} % manifolds
-	\newcommand{\Fun}{\cat{Fun}} % functor categories
+	\newcat{\LocRing}{LocRing} % locally ringed spaces
+	\newcat{\AffSch}{AffSch} % affine schemes
+	\newcat{\Sch}{Sch} % schemes
+	\newcat{\sSet}{sSet} % simplicial sets
+	\newcat{\Man}{Man} % manifolds
+	\newcat{\Fun}{Fun} % functor categories
 }

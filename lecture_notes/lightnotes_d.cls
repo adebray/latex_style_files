@@ -164,26 +164,26 @@
 % like them to be able to redefine things like Set, Grp, and so forth without having
 % to use AtBeginDocument.
 % TODO: do I even need this AtBeginDocument here...?
-% TODO: add a \newcat{} command.
+\newcommand{\newcat}[2]{\newcommand{#1}{\cat{#2}}}
 \AtBeginDocument{
- \newcommand{\fC}{\cat C}
- \newcommand{\fD}{\cat D}
- \newcommand{\Set}{\cat{Set}} % sets
- \newcommand{\Grp}{\cat{Grp}} % groups
- \newcommand{\Gpd}{\cat{Gpd}} % groupoids
- \newcommand{\Ab}{\cat{Ab}} % abelian groups
- \newcommand{\Ring}{\cat{Ring}} % rings
- \newcommand{\Mod}{\cat{Mod}} % modules (over a ring)
- \newcommand{\Alg}{\cat{Alg}} % algebras (over a ring)
- \newcommand{\Vect}{\cat{Vect}} % vector spaces (over a field)
+ \newcat{\fC}{C}
+ \newcat{\fD}{D}
+ \newcat{\Set}{Set} % sets
+ \newcat{\Grp}{Grp} % groups
+ \newcat{\Gpd}{Gpd} % groupoids
+ \newcat{\Ab}{Ab} % abelian groups
+ \newcat{\Ring}{Ring} % rings
+ \newcat{\Mod}{Mod} % modules (over a ring)
+ \newcat{\Alg}{Alg} % algebras (over a ring)
+ \newcat{\Vect}{Vect} % vector spaces (over a field)
  \def\Top{\cat{Top}} % topological space (sometimes already defined, e.g. by kpfonts)
  % TODO what other categories of topological/geometric objects do I need?
- \newcommand{\LocRing}{\cat{LocRing}} % locally ringed spaces
- \newcommand{\AffSch}{\cat{AffSch}} % affine schemes
- \newcommand{\Sch}{\cat{Sch}} % schemes
- \newcommand{\sSet}{\cat{sSet}} % simplicial sets
- \newcommand{\Man}{\cat{Man}} % manifolds
- \newcommand{\Fun}{\cat{Fun}} % functor categories
+ \newcat{\LocRing}{LocRing} % locally ringed spaces
+ \newcat{\AffSch}{AffSch} % affine schemes
+ \newcat{\Sch}{Sch} % schemes
+ \newcat{\sSet}{sSet} % simplicial sets
+ \newcat{\Man}{Man} % manifolds
+ \newcat{\Fun}{Fun} % functor categories
 }
 % Setting up some theorem environments
 %
@@ -238,16 +238,20 @@
 % item uniformly. It would probably be best to make this into a custom enumitem
 % environment, especially if I want to refer to specific items (e.g. 12.2.1 inside
 % Theorem 12.2).
-% Usage: \begin{comp}{thm}{enumerate}
+% Usage: \begin{comp}[eggs]{thm}{enumerate}
 % \item
 % \end{comp}
-% sets up an enumerate environment inside a theorem.
-\NewDocumentEnvironment{comp}{mm}{%
- \csname #1\endcsname\hfill
- \csname #2\endcsname
+% sets up an enumerate environment inside a theorem, and labels it "eggs."
+\NewDocumentEnvironment{comp}{omm}{%
+ \csname #2\endcsname\hfill
+ % check for optional argument
+ \IfNoValueF{#1}{
+  \label{#1}
+ }
+ \csname #3\endcsname
 }{
+ \csname end#3\endcsname
  \csname end#2\endcsname
- \csname end#1\endcsname
 }
 %
 % since I find myself using \renewcommand{...}{\operatorname{...}} a lot.
@@ -275,7 +279,6 @@
 % its own). I would be interested in unifying them.
 % Some packages that I use often (e.g. font packages) overwrite \d, and therefore this
 % class needs to define \d after it's overwritten, which is why I use \AtBeginDocument.
-% TODO: I want a command for ∂^2f/∂x∂y
 \AtBeginDocument{
  \newcommand{\ud}{\,\mathrm{d}}
  \renewcommand{\d}{\mathrm d}
@@ -285,6 +288,7 @@
  \newcommand{\@spfr}[3][]{\partial^{#1} #2 / \partial #3{}^{#1}}
  \newcommand{\pfr}[3][]{\mathchoice{\@dpfr[#1]{#2}{#3}}{\@dpfr[#1]{#2}{#3}}
   {\@spfr[#1]{#2}{#3}}{\@spfr[#1]{#2}{#3}}}
+ \newcommand{\mixedpfr}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 }
 %
 % This allows \paren{...} to replace \left(...\right) (and similarly for \bkt). For
@@ -334,6 +338,7 @@
 }
 \newoperator{Mat}
 \newcommand{\op}{^{\cat{op}}} % for the opposite of a category
+\newcommand{\rop}{^{\mathrm{op}}} % for the opposite of an algebra or monoid
 \newoperator{rank}
 \newoperator{sign}
 \DeclareMathOperator{\spa}{span}
@@ -356,7 +361,7 @@
 \newcommand{\hdr}{H_{\mathrm{dR}}}
 \newcommand{\KO}{\mathit{KO}}
 \newcommand{\KU}{\mathit{KU}}
-\newcommand{\wH}{\widetilde H} % should I add ko, ku?
+\newcommand{\wH}{\widetilde H} % should I add ko, ku? Thom spectra?
 \DeclareMathOperator*{\colim}{colim} % colimit notation in homotopy theory
 \DeclareMathOperator*{\holim}{holim} % homotopy limit
 \DeclareMathOperator*{\hocolim}{hocolim} % homotopy colimit
@@ -380,7 +385,7 @@
 % TQFT
 \newcommand{\Bord}{\cat{Bord}}
 \newcommand{\TQFT}{\cat{TQFT}}
-\newcommand{\fr}{^{\mathrm{fr}}
+\newcommand{\fr}{^{\mathrm{fr}}}
 %
 % to be continued (e.g. a good argmin and argmax)
 % style changes

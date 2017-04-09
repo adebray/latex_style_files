@@ -362,8 +362,9 @@
 % Algebraic Topology
 \newcommand{\Gr}{\mathrm{Gr}} % Grassmannian -- perhaps move to letters.tex
 \newcommand{\hdr}{H_{\mathrm{dR}}}
-\newcommand{\KO}{\mathit{KO}} % should I add reduced K and KO?
-\newcommand{\wH}{\widetilde H}
+\newcommand{\KO}{\mathit{KO}}
+\newcommand{\KU}{\mathit{KU}}
+\newcommand{\wH}{\widetilde H} % should I add ko, ku?
 \DeclareMathOperator*{\colim}{colim} % colimit notation in homotopy theory
 \DeclareMathOperator*{\holim}{holim} % homotopy limit
 \DeclareMathOperator*{\hocolim}{hocolim} % homotopy colimit
@@ -383,5 +384,10 @@
 \RenewMathOperator{\div}{div}
 \newoperator{ind}
 \newoperator{supp}
+%
+% TQFT
+\newcommand{\Bord}{\cat{Bord}}
+\newcommand{\TQFT}{\cat{TQFT}}
+\newcommand{\fr}{^{\mathrm{fr}}
 %
 % to be continued (e.g. a good argmin and argmax)

@@ -16,7 +16,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{amsart}}
 \ProcessOptions\relax
 %
-\LoadClass[reqno]{amsart}
+\LoadClass{amsart}
 \RequirePackage[utf8]{inputenc}
 % Keeping this because, even for minimal notes, makes printing take up considerably less paper
 \RequirePackage[margin=1in]{geometry}

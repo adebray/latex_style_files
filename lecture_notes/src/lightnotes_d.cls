@@ -16,7 +16,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{amsart}}
 \ProcessOptions\relax
 %
-\LoadClass[reqno]{amsart}
+\LoadClass{amsart}
 
 #include "packages.tex"
 #include "macros.tex"

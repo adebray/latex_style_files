@@ -148,8 +148,12 @@
 \newcommand{\SU}{\mathrm{SU}} % special unitary
 \newcommand{\Sp}{\mathrm{Sp}} % symplectic
 \newcommand{\Spin}{\mathrm{Spin}} % spin
+\newcommand{\Pin}{\mathrm{Pin}} % pin
 \newcommand{\PGL}{\mathrm{PGL}} % projective general linear
 \newcommand{\PSL}{\mathrm{PSL}} % projective special linear
+% The same notation for Spin^c and Pin^c groups (math mode) and spin^c and pin^c structures (text mode)
+\newcommand{\Spinc}{\relax\ifmmode\mathrm{Spin}^c\else spin\textsuperscript{$c$}\fi}
+\newcommand{\Pinc}{\relax\ifmmode\mathrm{Pin}^c\else pin\textsuperscript{$c$}\fi}
 % \mathscr -- usually sheaves
 \newcommand{\sF}{\mathscr F} % sheaf
 \newcommand{\sG}{\mathscr G} % sheaf
@@ -361,7 +365,10 @@
 \newcommand{\hdr}{H_{\mathrm{dR}}}
 \newcommand{\KO}{\mathit{KO}}
 \newcommand{\KU}{\mathit{KU}}
-\newcommand{\wH}{\widetilde H} % should I add ko, ku? Thom spectra?
+\newcommand{\ko}{\mathit{ko}}
+\newcommand{\ku}{\mathit{ku}}
+\newcommand{\Sq}{\mathrm{Sq}}
+\newcommand{\wH}{\widetilde H} % should I add Thom spectra?
 \DeclareMathOperator*{\colim}{colim} % colimit notation in homotopy theory
 \DeclareMathOperator*{\holim}{holim} % homotopy limit
 \DeclareMathOperator*{\hocolim}{hocolim} % homotopy colimit

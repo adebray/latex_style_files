@@ -39,7 +39,7 @@
 \RequirePackage{mathrsfs}
 \RequirePackage[all]{xy}
 \RequirePackage{adforn}
-\RequirePackage{hyperref}
+\RequirePackage[backref=page]{hyperref}
 \RequirePackage[all]{hypcap}
 \RequirePackage[capitalize, noabbrev]{cleveref}
 % Some shortcuts that simplify live-TeXing using XY.

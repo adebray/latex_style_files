@@ -375,6 +375,7 @@
 \newcommand{\hdr}{H_{\mathrm{dR}}}
 \newcommand{\KO}{\mathit{KO}}
 \newcommand{\KU}{\mathit{KU}}
+\newcommand{\KR}{\mathit{KR}}
 \newcommand{\ko}{\mathit{ko}}
 \newcommand{\ku}{\mathit{ku}}
 \newcommand{\Sq}{\mathrm{Sq}}
@@ -382,6 +383,13 @@
 \DeclareMathOperator*{\colim}{colim} % colimit notation in homotopy theory
 \DeclareMathOperator*{\holim}{holim} % homotopy limit
 \DeclareMathOperator*{\hocolim}{hocolim} % homotopy colimit
+% some Thom spectra
+\newcommand{\MO}{\mathit{MO}}
+\newcommand{\MSO}{\mathit{MSO}}
+\newcommand{\MU}{\mathit{MU}}
+\newcommand{\MSpin}{\mathit{MSpin}}
+\newcommand{\MPin}{\mathit{MPin}}
+\newcommand{\MR}{\mathit{MR}}
 %
 % Complex analysis
 % note: Re and Im changes are technically style changes, but almost everyone uses this notation

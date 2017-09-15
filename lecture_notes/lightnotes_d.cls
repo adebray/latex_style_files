@@ -379,7 +379,7 @@
 \newcommand{\MU}{\mathit{MU}}
 \newcommand{\MSpin}{\mathit{MSpin}}
 \newcommand{\MPin}{\mathit{MPin}}
-\newcommand{\MR}{\mathit{MR}}
+%\newcommand{\MR}{\mathit{MR}}
 %
 % Complex analysis
 % note: Re and Im changes are technically style changes, but almost everyone uses this notation

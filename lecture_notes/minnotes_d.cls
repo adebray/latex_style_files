@@ -25,6 +25,9 @@
 \ProcessOptions\relax
 %
 \LoadClass{amsart}
+% This has to be put before cleveref for links to work correctly
+\numberwithin{equation}{section}
+%
 \RequirePackage[utf8]{inputenc}
 % Keeping this because, even for minimal notes, makes printing take up considerably less paper
 \RequirePackage[margin=1in]{geometry}
@@ -235,18 +238,9 @@
 %
 % Another possibility: "definition-theorems" as used in universal properties
 % I will probably also want starred theorems (propositions, subsections, etc.).
-% Fixes bug in interaction between cleveref, hyperref, and amsmath, see
-% https://tex.stackexchange.com/a/54784/55879
-% \newcounter{Hequation}
-% \renewcommand{\theHequation}{\thesection.\arabic{Hequation}}
-% \g@addto@macro\equation{\stepcounter{Hequation}}
-% \g@addto@macro\thm{\stepcounter{Hequation}}
-% \g@addto@macro\lem{\stepcounter{Hequation}}
-% \g@addto@macro\prop{\stepcounter{Hequation}}
-% \g@addto@macro\exm{\stepcounter{Hequation}}
-%
-%
-\numberwithin{equation}{section}
+% Unfortunately, this has to be placed before loading the cleveref package, so it's
+% in packages.tex.
+% \numberwithin{equation}{section}
 %
 % This could be considered a stylistic choice, but works much better with how I use
 % subsections as subject changes in a lecture.

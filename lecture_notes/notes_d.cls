@@ -39,6 +39,7 @@
 \RequirePackage{amssymb}
 \RequirePackage{amsthm}
 \RequirePackage{xparse}
+\RequirePackage{xspace}
 \RequirePackage{mathrsfs}
 \RequirePackage[all]{xy}
 \RequirePackage{adforn}
@@ -165,8 +166,8 @@
 \newcommand{\PGL}{\mathrm{PGL}} % projective general linear
 \newcommand{\PSL}{\mathrm{PSL}} % projective special linear
 % The same notation for Spin^c and Pin^c groups (math mode) and spin^c and pin^c structures (text mode)
-\newcommand{\Spinc}{\relax\ifmmode\mathrm{Spin}^c\else spin\textsuperscript{$c$}\fi}
-\newcommand{\Pinc}{\relax\ifmmode\mathrm{Pin}^c\else pin\textsuperscript{$c$}\fi}
+\newcommand{\Spinc}{\relax\ifmmode\mathrm{Spin}^c\else spin\textsuperscript{$c$}\xspace\fi}
+\newcommand{\Pinc}{\relax\ifmmode\mathrm{Pin}^c\else pin\textsuperscript{$c$}\xspace\fi}
 % \mathscr -- usually sheaves
 \newcommand{\sF}{\mathscr F} % sheaf
 \newcommand{\sG}{\mathscr G} % sheaf
@@ -217,9 +218,9 @@
 \newtheorem{ex}[equation]{Exercise}
 \newtheorem{exampx}[equation]{Example}
 \newtheorem{defn}[equation]{Definition}
-\newtheorem*{claim}{Claim}
+\newtheorem{claim}[equation]{Claim}
 \theoremstyle{remark}
-\newtheorem*{remx}{Remark}
+\newtheorem{remx}[equation]{Remark}
 \newtheorem*{fctx}{Fact}
 \newtheorem*{notex}{Note}
 %
@@ -384,16 +385,23 @@
 \newcommand{\ko}{\mathit{ko}}
 \newcommand{\ku}{\mathit{ku}}
 \newcommand{\Sq}{\mathrm{Sq}}
-\newcommand{\wH}{\widetilde H} % should I add Thom spectra?
+\newcommand{\wH}{\widetilde H}
 \DeclareMathOperator*{\colim}{colim} % colimit notation in homotopy theory
 \DeclareMathOperator*{\holim}{holim} % homotopy limit
 \DeclareMathOperator*{\hocolim}{hocolim} % homotopy colimit
 % some Thom spectra
-\newcommand{\MO}{\mathit{MO}}
-\newcommand{\MSO}{\mathit{MSO}}
-\newcommand{\MU}{\mathit{MU}}
-\newcommand{\MSpin}{\mathit{MSpin}}
-\newcommand{\MPin}{\mathit{MPin}}
+% TODO: maybe a command to define a whole bunch at once
+% or a command for Lie groups: define \G, \MG, \MTG
+% calling \NewThomSpectrum{G} defines \MG -> \mathit{MG}
+% calling \NewMTSpectrum{G} defines \MTG -> \mathit{MTG}
+\newcommand{\NewThomSpectrum}[1]{\expandafter\newcommand\csname M#1\endcsname{\mathit{M#1}}}
+\newcommand{\NewMTSpectrum}[1]{\expandafter\newcommand\csname MT#1\endcsname{\mathit{MT#1}}}
+\newcommand{\BothThomSpectra}[1]{\NewThomSpectrum{#1}\NewMTSpectrum{#1}}
+\BothThomSpectra{O}
+\BothThomSpectra{SO}
+\BothThomSpectra{Spin}
+\BothThomSpectra{Pin}
+\BothThomSpectra{U} % TODO: I haven't tested these
 %\newcommand{\MR}{\mathit{MR}}
 %
 % Complex analysis

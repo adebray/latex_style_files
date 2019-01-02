@@ -126,6 +126,7 @@
 % \mathcal -- lots of different things
 \newcommand{\cA}{\mathcal A} % Steenrod algebra, etc.
 \newcommand{\cG}{\mathcal G} % groupoid
+\newcommand{\cH}{\mathcal H} % Hilbert space
 \newcommand{\cM}{\mathcal M} % moduli space
 \newcommand{\cX}{\mathcal X} % vector fields, tangential structures
 % \mathfrak -- Lie algebras, open covers, prime ideals
@@ -155,9 +156,17 @@
 \newcommand{\Pin}{\mathrm{Pin}} % pin
 \newcommand{\PGL}{\mathrm{PGL}} % projective general linear
 \newcommand{\PSL}{\mathrm{PSL}} % projective special linear
-% The same notation for Spin^c and Pin^c groups (math mode) and spin^c and pin^c structures (text mode)
-\newcommand{\Spinc}{\relax\ifmmode\mathrm{Spin}^c\else spin\textsuperscript{$c$}\xspace\fi}
-\newcommand{\Pinc}{\relax\ifmmode\mathrm{Pin}^c\else pin\textsuperscript{$c$}\xspace\fi}
+% The uppercase version is for mathmode or the beginning of a sentence in textmode.
+% The lowercase version is for the middle of a sentence in textmode.
+% \Pinp for pin+, \Pinm for pin-
+\newcommand{\Spinc}{\relax\ifmmode\Spin^c\else Spin\textsuperscript{$c$}\xspace\fi}
+\newcommand{\spinc}{spin\textsuperscript{$c$}\xspace}
+\newcommand{\Pinc}{\relax\ifmmode\Pin^c\else Pin\textsuperscript{$c$}\xspace\fi}
+\newcommand{\pinc}{pin\textsuperscript{$c$}\xspace}
+\newcommand{\Pinp}{\relax\ifmmode\Pin^+\else Pin\textsuperscript{$+$}\xspace\fi}
+\newcommand{\pinp}{pin\textsuperscript{$+$}\xspace}
+\newcommand{\Pinm}{\relax\ifmmode\Pin^-\else Pin\textsuperscript{$-$}\xspace\fi}
+\newcommand{\pinm}{pin\textsuperscript{$-$}\xspace}
 % \mathscr -- usually sheaves
 \newcommand{\sF}{\mathscr F} % sheaf
 \newcommand{\sG}{\mathscr G} % sheaf
@@ -231,6 +240,18 @@
 %
 % Another possibility: "definition-theorems" as used in universal properties
 % I will probably also want starred theorems (propositions, subsections, etc.).
+% Crefnames, allowing me to reference multiple theorems at once
+\crefname{thm}{Theorem}{Theorems}
+\crefname{lem}{Lemma}{Lemmas}
+\crefname{cor}{Corollary}{Corollaries}
+\crefname{prop}{Proposition}{Propositions}
+\crefname{ex}{Exercise}{Exercises}
+\crefname{exampx}{Example}{Examples}
+\crefname{defn}{Definition}{Definitions}
+\crefname{claim}{Claim}{Claims}
+\crefname{remx}{Remark}{Remarks}
+\crefname{fctx}{Fact}{Facts}
+\crefname{notex}{Note}{Notes}
 % Unfortunately, this has to be placed before loading the cleveref package, so it's
 % in packages.tex.
 % \numberwithin{equation}{section}

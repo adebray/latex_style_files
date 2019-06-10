@@ -33,6 +33,12 @@
 \newenvironment{note}
   {\pushQED{\qed}\renewcommand{\qedsymbol}{\exampleQED}\notex}
   {\popQED\endnotex}
+% NOTE: if you try to use a proof inside an example, remark, or fact, the QED symbol will be wrong
+% you can restore it as follows
+% WARNING: this is currently a kludge. I would like this to be dealt with automatically, and also
+% only use boxtimes if I've turned on style
+\newcommand{\insideexample}{\renewcommand{\qedsymbol}{\small{\ensuremath\boxtimes}}}
+%
 %
 % Another possibility: "definition-theorems" as used in universal properties
 % I will probably also want starred theorems (propositions, subsections, etc.).

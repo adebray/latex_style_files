@@ -103,6 +103,7 @@
 \end{gathered}
 }
 % Mathematicians have lots of fancy fonts
+% TODO: Hood has a way to define a whole bunch of these at once
 % \mathbb -- notable sets
 % TODO: would be nice to allow people to override \mathbb with \mathbf
 \newcommand{\A}{\mathbb A} % affine space
@@ -112,6 +113,9 @@
 \newcommand{\F}{\mathbb F} % finite fields
 \newcommand{\G}{\mathbb G} % additive/multiplicative groups
 \AtBeginDocument{ % some fonts redefine this (e.g. charter)
+ % Note: if you want to write Erdős as Erd\H os, you'll have to use \oldH.
+ % If you use [utf8]{inputenc}, this can still be a problem.
+ \let\oldH\H
  \renewcommand{\H}{\mathbb H} % quaternions, upper half-plane
 }
 \newcommand{\N}{\mathbb N} % natural numbers
@@ -125,6 +129,7 @@
 \newcommand{\CP}{\mathbb{CP}} % complex projective space
 % \mathcal -- lots of different things
 \newcommand{\cA}{\mathcal A} % Steenrod algebra, etc.
+\newcommand{\cB}{\mathcal B} % bundles of frames
 \newcommand{\cG}{\mathcal G} % groupoid
 \newcommand{\cH}{\mathcal H} % Hilbert space
 \newcommand{\cM}{\mathcal M} % moduli space
@@ -159,6 +164,7 @@
 % The uppercase version is for mathmode or the beginning of a sentence in textmode.
 % The lowercase version is for the middle of a sentence in textmode.
 % \Pinp for pin+, \Pinm for pin-
+% TODO: it would be "fun" to make a macro for these kinds of definitions
 \newcommand{\Spinc}{\relax\ifmmode\Spin^c\else Spin\textsuperscript{$c$}\xspace\fi}
 \newcommand{\spinc}{spin\textsuperscript{$c$}\xspace}
 \newcommand{\Pinc}{\relax\ifmmode\Pin^c\else Pin\textsuperscript{$c$}\xspace\fi}
@@ -176,6 +182,7 @@
 \newcommand{\sM}{\mathscr M} % quasicoherent sheaf
 \newcommand{\sO}{\mathscr O} % ring of functions
 % \mathsf -- categories
+% TODO: at least provide a flag allowing for, e.g., categories with \mathcal
 \newcommand{\cat}{\mathsf}
 % The user can redefine \cat to be something else (e.g. mathbf). However, I'd also
 % like them to be able to redefine things like Set, Grp, and so forth without having
@@ -193,6 +200,7 @@
  \newcat{\Mod}{Mod} % modules (over a ring)
  \newcat{\Alg}{Alg} % algebras (over a ring)
  \newcat{\Vect}{Vect} % vector spaces (over a field)
+ \newcat{\sVect}{sVect} % super-vector-spaces
  \def\Top{\cat{Top}} % topological space (sometimes already defined, e.g. by kpfonts)
  % TODO what other categories of topological/geometric objects do I need?
  \newcat{\LocRing}{LocRing} % locally ringed spaces
@@ -201,6 +209,7 @@
  \newcat{\sSet}{sSet} % simplicial sets
  \newcat{\Man}{Man} % manifolds
  \newcat{\Fun}{Fun} % functor categories
+ \newcat{\Rep}{Rep} % representations
 }
 % Setting up some theorem environments
 %
@@ -237,6 +246,12 @@
 \newenvironment{note}
   {\pushQED{\qed}\renewcommand{\qedsymbol}{\exampleQED}\notex}
   {\popQED\endnotex}
+% NOTE: if you try to use a proof inside an example, remark, or fact, the QED symbol will be wrong
+% you can restore it as follows
+% WARNING: this is currently a kludge. I would like this to be dealt with automatically, and also
+% only use boxtimes if I've turned on style
+\newcommand{\insideexample}{\renewcommand{\qedsymbol}{\small{\ensuremath\boxtimes}}}
+%
 %
 % Another possibility: "definition-theorems" as used in universal properties
 % I will probably also want starred theorems (propositions, subsections, etc.).

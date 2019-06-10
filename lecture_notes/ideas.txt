@@ -1,0 +1,19 @@
+# goal: things that I might want to implement later can be written here
+
+- variants on = signs, e.g.
+	* =:
+	* \overset{?}{=}
+	* ``='' (inside \text)
+- a tensor product that behaves like \int\limits
+	* (or just do this in display mode automatically)
+- short exact sequence of groups (so 1 instead of 0)
+- fix QCoh (mathsf), add Coh
+- things I use often enough to add:
+	* Det
+	* Ad
+	* Cl
+	* tikzpt and other tikz shortcuts?
+	* \mathfrak t
+	* \modmod
+- allow the ability to define a bunch of mathcal, etc. letters quickly, e.g. via one command.
+	* possibly also "turn on all mathcal letters"

@@ -85,8 +85,23 @@
 \newcommand{\sO}{\mathscr O} % ring of functions
 
 % \mathsf -- categories
-% TODO: at least provide a flag allowing for, e.g., categories with \mathcal
-\newcommand{\cat}{\mathsf}
+% TODO: flag to switch with mathsf
+%\newcommand{\cat}{\mathsf}
+% playing around
+\RequirePackage[mathscr]{eucal}
+\def\instring#1#2{TT\fi\begingroup
+  \edef\x{\endgroup\noexpand\in@{#1}{#2}}\x\ifin@}
+%
+\def\isuppercase#1{%
+  \instring{#1}{ABCDEFGHIJKLMNOPQRSTUVWXYZ}%
+}%
+
+\newcommand{\C@lIfUpper}[1]{
+	\if\isuppercase{#1}\mathscr{#1}%
+	\else #1%
+	\fi
+}
+\newcommand{\cat}[1]{\mathit{\@tfor\next:=#1\do{\C@lIfUpper{\next}}}}
 % The user can redefine \cat to be something else (e.g. mathbf). However, I'd also
 % like them to be able to redefine things like Set, Grp, and so forth without having
 % to use AtBeginDocument.

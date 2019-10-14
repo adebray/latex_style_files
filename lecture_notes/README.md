@@ -35,12 +35,7 @@ Given this, I use the following layout:
 
 - The class files in this directory can be used in your TeX documents; they were built out of the files in
   the `src/` directory using the Makefile.
-- I've used `minnotes_d` and `lightnotes_d` in a few seminars and they seem to be working well. There
-  are probably a few definitions that I'll need to wrap in `\AtBeginDocument`, depending on which font
-  packages I like redefine them, but overall I'm satisfied.
-- I've tested `notes_d` on an old set of lecture notes, and it seems to be working fairly well. There are
-  some small issues I would still like to fix, but none that yet stand in the way of using it for lecture
-  notes.
+- I've used `minnotes_d`, `lightnotes_d`, and `notes_d` extensively and am pretty happy with them.
 - I will likely be updating my macros whenever I discover new useful ones.
 - `.cls` files are not allowed to include files through relative class names, so in order to share code
   between these classes, I used `cpp` to process these files into the finalized document classes. This
@@ -48,3 +43,9 @@ Given this, I use the following layout:
   but these are surmountable.
 - These classes aren't compatible with the `\VerbatimFootnotes` command from the `fancyvrb` command. I do not
   know why this is, but I'll be debugging it.
+- If you want to use Hood's [`spectralsequences`](https://github.com/hoodmane/spectralsequences) package, you should
+  enable the `no_quotes` option in these document classes, or you'll get difficult-to-Google errors.
+- If you need to use the double acute accent `\H{`-`}` (e.g. in the name "Erdős"), you will need to pass the
+  `no_redefine_H` option to these document classes. Confusingly, this is still true if you use the `inputenc`
+  package to avoid wriitng `\H`. Then you won't be able to use `\H` for the quaternions.
+

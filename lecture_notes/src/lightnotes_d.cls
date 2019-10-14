@@ -8,9 +8,16 @@
 \def\UsingLightNotesD{}
 %
 % For now, this is a one-off that disables the " -> ^(...) feature.
+% If you want to use Hood's spectralsequences package, you will encounter bizarre errors unless
+% you use the no_quotes option.
 \DeclareOption{quotes}{\def\qu@es{YES}}
 \DeclareOption{no_quotes}{\def\noqu@es{}}
 \ExecuteOptions{quotes}
+% Avoids redefining \H to be the quaterions, which causes a problem when writing double accute accents.
+% The most common example is "Erdős".
+\DeclareOption{redefine_H}{\def\redef@H{YES}}
+\DeclareOption{no_redefine_H}{\def\noredef@H}
+\ExecuteOptions{redefine_H}
 % Other options can be handed off to the amsart class (e.g. fontsize)
 % I want to double-check that I am doing option-passing correctly.
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{amsart}}

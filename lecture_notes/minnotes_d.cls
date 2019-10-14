@@ -12,6 +12,13 @@
 \DeclareOption{no_quotes}{\def\noqu@es{}}
 \ExecuteOptions{quotes}
 %
+% Avoids redefining \H to be the quaterions, which causes a problem when writing double accute accents.
+% The most common example is "Erdős".
+\DeclareOption{redefine_H}{\def\redef@H{YES}}
+\DeclareOption{no_redefine_H}{\def\noredef@H}
+\ExecuteOptions{redefine_H}
+%
+%
 % Do I want any package options?
 % Possibilities:
 % 1. \mathbb vs. \mathbf for N, Z, Q, R, ...
@@ -120,12 +127,13 @@
 \newcommand{\E}{\mathbb E} % expected value, family of operads
 \newcommand{\F}{\mathbb F} % finite fields
 \newcommand{\G}{\mathbb G} % additive/multiplicative groups
+\ifdefined\noredef@H
+\else
 \AtBeginDocument{ % some fonts redefine this (e.g. charter)
- % Note: if you want to write Erdős as Erd\H os, you'll have to use \oldH.
- % If you use [utf8]{inputenc}, this can still be a problem.
  \let\oldH\H
- \renewcommand{\H}{\mathbb H} % quaternions, upper half-plane
+ \renewcommand{\H}{\mathbb H}
 }
+\fi
 \newcommand{\N}{\mathbb N} % natural numbers
 \renewcommand{\P}{\mathbb P} % probability, projective space
 \newcommand{\Q}{\mathbb Q} % rational numbers
@@ -173,13 +181,13 @@
 % The lowercase version is for the middle of a sentence in textmode.
 % \Pinp for pin+, \Pinm for pin-
 % TODO: it would be "fun" to make a macro for these kinds of definitions
-\newcommand{\Spinc}{\relax\ifmmode\Spin^c\else Spin\textsuperscript{$c$}\xspace\fi}
+\newcommand{\Spinc}{\relax\ifmmode{\Spin^c}\else Spin\textsuperscript{$c$}\xspace\fi}
 \newcommand{\spinc}{spin\textsuperscript{$c$}\xspace}
-\newcommand{\Pinc}{\relax\ifmmode\Pin^c\else Pin\textsuperscript{$c$}\xspace\fi}
+\newcommand{\Pinc}{\relax\ifmmode{\Pin^c}\else Pin\textsuperscript{$c$}\xspace\fi}
 \newcommand{\pinc}{pin\textsuperscript{$c$}\xspace}
-\newcommand{\Pinp}{\relax\ifmmode\Pin^+\else Pin\textsuperscript{$+$}\xspace\fi}
+\newcommand{\Pinp}{\relax\ifmmode{\Pin^+}\else Pin\textsuperscript{$+$}\xspace\fi}
 \newcommand{\pinp}{pin\textsuperscript{$+$}\xspace}
-\newcommand{\Pinm}{\relax\ifmmode\Pin^-\else Pin\textsuperscript{$-$}\xspace\fi}
+\newcommand{\Pinm}{\relax\ifmmode{\Pin^-}\else Pin\textsuperscript{$-$}\xspace\fi}
 \newcommand{\pinm}{pin\textsuperscript{$-$}\xspace}
 % \mathscr -- usually sheaves
 \newcommand{\sF}{\mathscr F} % sheaf
@@ -190,7 +198,7 @@
 \newcommand{\sM}{\mathscr M} % quasicoherent sheaf
 \newcommand{\sO}{\mathscr O} % ring of functions
 % \mathsf -- categories
-% TODO: at least provide a flag allowing for, e.g., categories with \mathcal
+% TODO: flag to switch with mathsf
 %\newcommand{\cat}{\mathsf}
 % playing around
 \RequirePackage[mathscr]{eucal}

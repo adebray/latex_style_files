@@ -13,6 +13,11 @@
 \DeclareOption{quotes}{\def\qu@es{YES}}
 \DeclareOption{no_quotes}{\def\noqu@es{}}
 \ExecuteOptions{quotes}
+% Avoids redefining \H to be the quaterions, which causes a problem when writing double accute accents.
+% The most common example is "Erdős".
+\DeclareOption{redefine_H}{\def\redef@H{YES}}
+\DeclareOption{no_redefine_H}{\def\noredef@H}
+\ExecuteOptions{redefine_H}
 %
 % Do I want any package options?
 % Possibilities:

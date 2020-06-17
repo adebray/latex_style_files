@@ -9,9 +9,16 @@
 %
 %		 f    g
 % 0 -> A -> B -> C -> 0,
-\DeclareDocumentCommand{\shortexact}{O{} O{} mmmm}{
-\xymatrix{
-	0\ar[r] & #3\ar[r]^-{#1} & #4\ar[r]^-{#2} & #5\ar[r] & 0#6
+% (or 1 -> A -> B -> C -> 1 with a star)
+\DeclareDocumentCommand{\shortexact}{s O{} O{} mmmm}{
+\IfBooleanTF{#1}{ % if star
+	\xymatrix{
+		1\ar[r] & #4\ar[r]^-{#2} & #5\ar[r]^-{#3} & #6\ar[r] & 1#7
+	}
+}{ % no star
+	\xymatrix{
+		0\ar[r] & #4\ar[r]^-{#2} & #5\ar[r]^-{#3} & #6\ar[r] & 0#7
+	}
 }}
 % exactly the same, but for 0 -> A -> B -> C
 \DeclareDocumentCommand{\leftexact}{O{} O{} mmmm}{

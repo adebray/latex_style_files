@@ -36,6 +36,8 @@
 \numberwithin{equation}{section}
 %
 \RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc} % this and the next package needed to use ogoneks
+\RequirePackage{lmodern} % TODO: does this work with other fonts?
 % Keeping this because, even for minimal notes, makes printing take up considerably less paper
 \RequirePackage[margin=1in]{geometry}
 \RequirePackage[usenames, dvipsnames]{xcolor}
@@ -62,9 +64,16 @@
 %
 % f g
 % 0 -> A -> B -> C -> 0,
-\DeclareDocumentCommand{\shortexact}{O{} O{} mmmm}{
-\xymatrix{
- 0\ar[r] & #3\ar[r]^-{#1} & #4\ar[r]^-{#2} & #5\ar[r] & 0#6
+% (or 1 -> A -> B -> C -> 1 with a star)
+\DeclareDocumentCommand{\shortexact}{s O{} O{} mmmm}{
+\IfBooleanTF{#1}{ % if star
+ \xymatrix{
+  1\ar[r] & #4\ar[r]^-{#2} & #5\ar[r]^-{#3} & #6\ar[r] & 1#7
+ }
+}{ % no star
+ \xymatrix{
+  0\ar[r] & #4\ar[r]^-{#2} & #5\ar[r]^-{#3} & #6\ar[r] & 0#7
+ }
 }}
 % exactly the same, but for 0 -> A -> B -> C
 \DeclareDocumentCommand{\leftexact}{O{} O{} mmmm}{
@@ -257,6 +266,9 @@
 \newtheorem{exampx}[equation]{Example}
 \newtheorem{defn}[equation]{Definition}
 \newtheorem{claim}[equation]{Claim}
+% TODO: add ending mark for these?
+\newtheorem{conj}[equation]{Conjecture}
+\newtheorem{ques}[equation]{Question}
 \theoremstyle{remark}
 \newtheorem{remx}[equation]{Remark}
 \newtheorem*{fctx}{Fact}
@@ -377,6 +389,8 @@
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
 \DeclarePairedDelimiter\bkt{[}{]}
 \DeclarePairedDelimiter\set{\{}{\}}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
 % Swap paren* and paren, etc., so that the normal version resizes by default.
 % Meanwhile, one can use \paren*[\Big]{...} to customize the size easily.
 \let\oldparen\paren

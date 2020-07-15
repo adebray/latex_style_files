@@ -48,4 +48,6 @@ Given this, I use the following layout:
 - If you need to use the double acute accent `\H{`-`}` (e.g. in the name "Erdős"), you will need to pass the
   `no_redefine_H` option to these document classes. Confusingly, this is still true if you use the `inputenc`
   package to avoid wriitng `\H`. Then you won't be able to use `\H` for the quaternions.
-
+- I also added a package "adamsmacros" for collecting a bunch of TikZ shortcuts I find useful when typesetting
+  A(1)-resolutions, etc. Some of these macros are adapted from Agnès Beaudry and Jonathan Campbell's macros in the
+  source code of [this paper](https://arxiv.org/abs/1801.07530).

@@ -12,10 +12,9 @@
   \draw (#1,#2) .. controls (#1-1,#2+1) .. (#1,#2+2);
 }
 
-\def\sqtwoR (#1,#2) {
+\def\sqtwoR (#1,#2){
   \draw (#1,#2) .. controls (#1+1,#2+1) .. (#1,#2+2);
 }
-
 
 \def \sqtwoCR (#1,#2){
    \draw (#1,#2) .. controls (#1+0.75,#2+.5) and (#1+1.125,#2+2) .. (#1+1.5,#2+2);
@@ -39,6 +38,12 @@
     \draw[dashed] (#1, #2) .. controls (#1+1.25, #2+1.5) .. (#1, #2+3);
 }
 
+\def \sqfourR (#1,#2){
+	\draw (#1, #2) -- (#1 + 0.5, #2) -- (#1 + 0.5, #2 + 4) -- (#1, #2 + 4);
+}
+\def \sqfourL (#1,#2){
+	\draw (#1, #2) -- (#1 - 0.5, #2) -- (#1 - 0.5, #2 + 4) -- (#1, #2 + 4);
+}
 
 % x, y, text options/color
 \newcommand{\tikzpt}[4]{
@@ -106,14 +111,6 @@
     \sqone(#1, #2+2);
 }
 
-\newcommand{\SpanishQnMark}[3]{
-    \tikzpt{#1}{#2}{#3}{};
-    \tikzpt{#1}{#2+2}{}{};
-    \tikzpt{#1}{#2+3}{}{};
-    \sqtwoL(#1, #2);
-    \sqone(#1, #2+2);
-}
-
 % upside-down qn mark as an E(1)-module
 \newcommand{\EoneQnMark}[3]{
     \tikzpt{#1}{#2}{#3}{};
@@ -163,3 +160,5 @@
     \qoneL(#1, #2);
     \qoneR(#1, #2 + 1);
 }
+
+\ProcessOptions\relax
